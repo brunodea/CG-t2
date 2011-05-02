@@ -1,0 +1,8 @@
+#ifndef _BRUNODEA_CG_T2_MACROS_H_
+#define _BRUNODEA_CG_T2_MACROS_H_
+
+#define MATRIX_MAX_ROWS 4
+#define MATRIX_MAX_COLS 4
+
+
+#endif
