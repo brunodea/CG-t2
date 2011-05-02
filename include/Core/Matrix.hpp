@@ -3,6 +3,7 @@
 
 #include "macros.h"
 #include <iostream>
+#include <cassert>
 
 namespace Core
 {
@@ -92,6 +93,19 @@ namespace Core
                     set(val, i, j);
             }
         }
+
+        inline void print()
+        {
+            for(unsigned int i = 0; i < m_Rows; i++)
+            {
+                for(unsigned int j = 0; j < m_Cols; j++)
+                {
+                    T v = (*this)(i, j);
+                    std::cout << v << ' ';
+                }
+                std::cout << std::endl;
+            }
+        }
                
         inline int getRows() { return m_Rows; }
         inline int getCols() { return m_Cols; }
@@ -135,6 +149,8 @@ namespace Core
         unsigned int rows_1 = m1.getRows();
         unsigned int rows_2 = m2.getRows();
         unsigned int cols_2 = m2.getCols();
+
+        assert(m1.getCols() == rows_2, "Impossible to multiplicate this matrices.\nIncompatible sizes.\n");
 
         Matrix<T> *res = new Matrix<T>(rows_1, cols_2);
         for(unsigned int i = 0; i < rows_1; i++)
