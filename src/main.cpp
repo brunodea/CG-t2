@@ -19,7 +19,10 @@ int main()
         for(int j = 0; j < 4; j++)
             m2.set(2, i, j);
 
-    Core::Matrix<int> m3 = m * m2;
+    Core::Matrix<int> m3 = m;
+    m3 += m2;
+    m3 += m * m2;
+    m3 *= 2;
     for(int i = 0; i < 4; i++)
     {
        int v;
