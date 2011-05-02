@@ -40,6 +40,8 @@ namespace Core
 
         inline Matrix<T> &operator =(const Matrix<T> &m)
         {
+            m_Row = m.getRows();
+            m_Col = m.getCols();
             for(unsigned int i = 0; i < m_Rows; i++)
             {
                 for(unsigned int j = 0; j < m_Cols; j++)
@@ -105,6 +107,7 @@ namespace Core
                 }
                 std::cout << std::endl;
             }
+            std::cout << std::endl;
         }
                
         inline int getRows() { return m_Rows; }
@@ -123,7 +126,6 @@ namespace Core
             return true;
         }
     }; //end of class Matrix.
-
 
     template<class T>
     inline Matrix<T> operator +(Matrix<T> &m1, Matrix<T> &m2)
@@ -167,7 +169,7 @@ namespace Core
     }
 
     template<class T>
-    inline Matrix<T> operator*(Matrix<T> &m, T &val)
+    inline Matrix<T> operator*(Matrix<T> &m, T val)
     {
         Matrix<T> res = m;
         res *= val;
@@ -175,7 +177,7 @@ namespace Core
     }
 
     template<class T>
-    inline Matrix<T> operator/(Matrix<T> &m, T &val)
+    inline Matrix<T> operator/(Matrix<T> &m, T val)
     {
         Matrix<T> res = m;
         res /= val;

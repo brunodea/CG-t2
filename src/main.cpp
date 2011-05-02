@@ -4,35 +4,27 @@
 
 int main()
 {
-    Core::Matrix<int> m = Core::Matrix<int>(4, 4);
+    Core::Matrix<int> m = Core::Matrix<int>(2, 2);
 
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < m.getRows(); i++)
     {
-       for(int j = 0; j < 4; j++)
-           m.set(0, i, j);
+        for(int j = 0; j < m.getCols(); j++)
+            m.set(i*m.getCols() + j, i, j);
     }
-    
 
-    Core::Matrix<int> m2 = Core::Matrix<int>(2, 4);
+    Core::Matrix<int> m2 = Core::Matrix<int>(1, 2);
 
-    for(int i = 0; i < 4; i++)
-        for(int j = 0; j < 4; j++)
+    for(int i = 0; i < m2.getRows(); i++)
+        for(int j = 0; j < m2.getCols(); j++)
             m2.set(2, i, j);
 
-    Core::Matrix<int> m3 = m;
+    Core::Matrix<int> m3(m);
     m3 += m2;
-    m3 += m * m2;
+    m3 += (m2 * m);
     m3 *= 2;
-    for(int i = 0; i < 4; i++)
-    {
-       int v;
-       for(int j = 0; j < 4; j++)
-       {
-           v = m3(i, j);
-           std::cout << v << ' ';
-       }
-       std::cout << std::endl;
-    }
+    m3 += m - m2 + (m3*4) + (m2/3);
+
+    m3.print();
 
 
     system("pause");
