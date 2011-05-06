@@ -1,7 +1,7 @@
 #ifndef _BRUNODEA_CG_T2_VECTOR3_H_
 #define _BRUNODEA_CG_T2_VECTOR3_H_
 
-#include "Matrix.hpp"
+#include "Core/Matrix.hpp"
 
 namespace Core
 {
@@ -9,6 +9,10 @@ namespace Core
     struct Vector : public Matrix<T, M, 1>
     {
         Vector() : Matrix<T, M, 1>() {}
+        Vector(T val) : Matrix<T, M, 1>()
+        {
+            this->clear(val);
+        }
 
         inline T &operator [](unsigned int i)
         {
