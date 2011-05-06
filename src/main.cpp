@@ -1,4 +1,6 @@
 #include "Core/Matrix.hpp"
+#include "Core/Vector.hpp"
+#include "Core/matrix_functions.hpp"
 
 #include <cstdlib>
 
@@ -27,6 +29,16 @@ int main()
 
     m3.print();
 
+    Core::Matrix3 m4 = Core::identity<3>();
+    m4.print();
+
+    Core::Vector3 v;
+    v.clear(1);
+    v[0] = 2;
+    v[1] = 5;
+
+    Core::Matrix3 m5 = Core::translate<3>(v);
+    m5.print();
 
     system("pause");
 

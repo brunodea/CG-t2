@@ -68,7 +68,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\Core\Matrix.hpp" />
     <ClInclude Include="..\include\Core\matrix_functions.hpp" />
-    <ClInclude Include="..\include\Core\Vector3.hpp" />
+    <ClInclude Include="..\include\Core\Vector.hpp" />
     <ClInclude Include="..\include\macros.h" />
   </ItemGroup>
   <ItemGroup>

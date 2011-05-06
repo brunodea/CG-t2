@@ -27,7 +27,7 @@
     <ClInclude Include="..\include\Core\matrix_functions.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Core\Vector3.hpp">
+    <ClInclude Include="..\include\Core\Vector.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>

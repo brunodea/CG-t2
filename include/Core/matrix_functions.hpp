@@ -2,15 +2,16 @@
 #define _BRUNODEA_CG_T2_MATRIX_FUNCTIONS_HPP_
 
 #include "Core/Matrix.hpp"
+#include "Core/Vector.hpp"
 
 namespace Core
 {
-    typedef Matrix<float, 3, 1> Vector3;
+    typedef Vector<float, 3> Vector3;
     typedef Matrix<float, 3> Matrix3;
     typedef Matrix<float, 2> Matrix2;
 
     template<unsigned int M>
-    const Matrix<float, M> indentity()
+    const Matrix<float, M> identity()
     {
         Matrix<float, M> res;
         for(unsigned int i = 0; i < M; i++)
@@ -28,9 +29,9 @@ namespace Core
     }
 
     template<unsigned int M>
-    const Matrix<float, M> translate(const Matrix<float, M, 1> &vec)
+    const Matrix<float, M> translate(const Vector<float, M> &vec)
     {
-        Matrix<float, M> res = indentity<M>();
+        Matrix<float, M> res = identity<M>();
 
         for(unsigned int i = 0; i < M; i++)
             res.set(vec(i, 0), i, M-1);
