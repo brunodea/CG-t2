@@ -7,51 +7,44 @@
 
 namespace Core
 {
-    template<class T>
+    template<class T, unsigned int M, unsigned int N=M>
     class Matrix
     {
     public:
-        Matrix(const unsigned int rows, const unsigned int cols)
-            : m_Rows(rows), m_Cols(cols)
+        Matrix() : m_Rows(M), m_Cols(N)
         {
-            if(rows > MATRIX_MAX_ROWS)
-                m_Rows = MATRIX_MAX_ROWS;
-            if(cols > MATRIX_MAX_COLS)
-                m_Cols = MATRIX_MAX_COLS;
         }
         ~Matrix()
         {
         }
 
-        inline void set(const T &value, const unsigned int row, const unsigned int col)
+        inline void set(const T &value, unsigned int row, unsigned int col)
         {
-            m_Elements[row*MATRIX_MAX_COLS + col] = value;
+            m_Elements[row*N + col] = value;
         }
 
-        inline T &operator ()(const unsigned int i, const unsigned int j)
+        inline T &operator ()(unsigned int i, unsigned int j)
         {
-            return m_Elements[i*MATRIX_MAX_COLS + j];
+            return m_Elements[i*N + j];
         }
 
-        inline const T &operator ()(const unsigned int i, const unsigned int j) const
+        inline const T &operator ()(unsigned int i, unsigned int j) const
         {
-            return m_Elements[i*MATRIX_MAX_COLS + j];
+            return m_Elements[i*N + j];
         }
 
-        inline Matrix<T> &operator =(const Matrix<T> &m)
+        inline Matrix<T, M, N> &operator =(const Matrix &m)
         {
-            m_Row = m.getRows();
-            m_Col = m.getCols();
             for(unsigned int i = 0; i < m_Rows; i++)
             {
                 for(unsigned int j = 0; j < m_Cols; j++)
                     set(m(i,j), i, j);
             }
 
-            return *this;
+            return (*this);
         }
 
-        inline void operator +=(Matrix<T> &m)
+        inline void operator +=(const Matrix &m)
         {
             for(unsigned int i = 0; i < m_Rows; i++)
             {
@@ -60,7 +53,7 @@ namespace Core
             }
         }
 
-        inline void operator -=(Matrix<T> &m)
+        inline void operator -=(const Matrix &m)
         {
             for(unsigned int i = 0; i < m_Rows; i++)
             {
@@ -68,7 +61,7 @@ namespace Core
                     set((*this)(i,j)-m(i,j), i, j);
             }
         }
-        
+
         inline void operator *=(const T &val)
         {
             for(unsigned int i = 0; i < m_Rows; i++)
@@ -114,7 +107,7 @@ namespace Core
         inline int getCols() { return m_Cols; }
 
     private:
-        T m_Elements[MATRIX_MAX_ROWS*MATRIX_MAX_COLS];
+        T m_Elements[M*N];
         unsigned int m_Rows;
         unsigned int m_Cols;
 
@@ -127,16 +120,16 @@ namespace Core
         }
     }; //end of class Matrix.
 
-    template<class T>
-    inline Matrix<T> operator +(Matrix<T> &m1, Matrix<T> &m2)
+    template<class T, unsigned int M, unsigned int N>
+    inline Matrix<T, M, N> operator +(const Matrix<T, M, N> &m1, const Matrix<T, M, N> &m2)
     {
-        Matrix<T> res = m1;
+        Matrix<T, M, N> res = m1;
         res += m2;
 
         return res;
     }
-
-    template<class T>
+    /*
+    template<class T, unsigned int M, unsigned int N>
     inline Matrix<T> operator -(Matrix<T> &m1, Matrix<T> &m2)
     {
         Matrix<T> res = m1;
@@ -182,7 +175,7 @@ namespace Core
         Matrix<T> res = m;
         res /= val;
         return res;
-    }
+    }*/
 
 } //end of namespace Core.
 

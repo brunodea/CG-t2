@@ -1,3 +1,5 @@
+
+/*
 #ifndef _BRUNODEA_CG_T2_VECTOR_3_H_
 #define _BRUNODAE_CG_T2_VECTOR_3_H_
 
@@ -18,3 +20,4 @@ namespace Core
 } //end of namespace Core.
 
 #endif
+*/
