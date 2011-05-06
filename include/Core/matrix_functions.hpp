@@ -1,21 +1,21 @@
-
-/*
 #ifndef _BRUNODEA_CG_T2_MATRIX_FUNCTIONS_HPP_
 #define _BRUNODEA_CG_T2_MATRIX_FUNCTIONS_HPP_
 
 #include "Core/Matrix.hpp"
-#include "Core/Vector3.hpp"
 
 namespace Core
 {
-    typedef Matrix<float> MatrixF;
+    typedef Matrix<float, 3, 1> Vector3;
+    typedef Matrix<float, 3> Matrix3;
+    typedef Matrix<float, 2> Matrix2;
 
-    inline MatrixF indentity(unsigned int mat_rows, unsigned int mat_cols)
+    template<unsigned int M>
+    const Matrix<float, M> indentity()
     {
-        MatrixF res(mat_rows, mat_cols);
-        for(unsigned int i = 0; i < mat_rows, i++)
+        Matrix<float, M> res;
+        for(unsigned int i = 0; i < M; i++)
         {
-            for(unsigned int j = 0; j < mat_cols; j++)
+            for(unsigned int j = 0; j < M; j++)
             {
                 if(i == j)
                     res.set(1.f, i, j);
@@ -27,16 +27,17 @@ namespace Core
         return res;
     }
 
-    inline MatrixF translate(const Vector3 &v, unsigned int mat_rows)
+    template<unsigned int M>
+    const Matrix<float, M> translate(const Matrix<float, M, 1> &vec)
     {
-        MatrixF res = identity(mat_rows, v.getCols());
+        Matrix<float, M> res = indentity<M>();
 
-        res.set(v(0,0), 0, 0);
-
+        for(unsigned int i = 0; i < M; i++)
+            res.set(vec(i, 0), i, M-1);
 
         return res;
     }
 
 } //end of namespace Core.
 
-#endif */
+#endif
