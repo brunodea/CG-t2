@@ -14,10 +14,11 @@ namespace Game
     public:
         enum Type
         {
-            ENEMY = 0,
-            PLAYER,
-            OBJECT,
-            SHOT
+            ENEMY = 0x00000000,
+            PLAYER = 0x00000001,
+            OBJECT = 0x00000010,
+            SHOT = 0x00000100,
+            SHIP = 0x00001000
         }; //end of enum Type.
 
     public:

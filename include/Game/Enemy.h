@@ -52,7 +52,7 @@ namespace Game
                 }
             glEnd();
         
-            m_MultiShape.onRender(); //comentado ja que nada é desenhado mesmo.
+            //m_MultiShape.onRender();
         }
 
         virtual void onUpdate()
