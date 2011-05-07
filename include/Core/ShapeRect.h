@@ -9,20 +9,20 @@ namespace Core
     class ShapeRect : public Shape
     {
     public:
-        ShapeRect(Vector2 &pos, int width, int height);
+        ShapeRect(Vector2 &pos, float width, float height);
 
         bool collides(Vector2 &dot);
 
         void onRender();
 
-        inline int getWidth() { return m_iWidth; }
-        inline int getHeight() { return m_iHeight; }
+        inline float getWidth() { return m_fWidth; }
+        inline float getHeight() { return m_fHeight; }
 
         Shape &operator=(Shape &shape);
 
     private:
-        int m_iWidth;
-        int m_iHeight;
+        float m_fWidth;
+        float m_fHeight;
     }; //ShapeRect
 } //Core
 

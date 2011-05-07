@@ -4,6 +4,8 @@
 #include "Core/matrix_functions.hpp"
 #include "Core/MultiShape.h"
 
+#include <vector>
+
 namespace Game
 {
     class GameObject
@@ -11,9 +13,10 @@ namespace Game
     public:
         enum Type
         {
-            ENEMY,
+            ENEMY = 0,
             PLAYER,
-            OBJECT
+            OBJECT,
+            SHOT
         }; //end of enum Type.
 
     public:
@@ -22,11 +25,7 @@ namespace Game
             m_Type = OBJECT;
             init();
         }
-
-        GameObject(Type type) : m_Type(type) 
-        {
-            init();
-        }
+        GameObject(Type type) : m_Type(type) { init(); }
 
         GameObject(const Core::Vector3 &dir, const Core::Vector3 &speed, const Core::Vector3 &pos, Type type)
             : m_vDirection3(dir), m_vSpeed3(speed), m_vPosition3(pos), m_Type(type)
@@ -44,7 +43,6 @@ namespace Game
         virtual void onCollision(GameObject *obj) = 0;
         virtual void onKeyEvent(int key, int state) {/**/}
 
-
         /*************************
          *  Setters & Getters    *
          *************************/
@@ -59,17 +57,32 @@ namespace Game
         inline Core::Vector3 &getPos() { return m_vPosition3; }
 
         inline void setLifes(unsigned int lifes) { m_iLifes = lifes; }
+        inline int getLifes() { return m_iLifes; }
 
-    private:
+        inline Core::MultiShape &getMultiShape() { return m_MultiShape; }
+
+        inline void setVertices(std::vector<Core::Vector3> &vertices) { m_vVertices = vertices; }
+        inline std::vector<Core::Vector3> &getVertices() { return m_vVertices; }
+
+    protected:        
         Core::Vector3 m_vDirection3;
         Core::Vector3 m_vSpeed3;
         Core::Vector3 m_vPosition3;
+
+        std::vector<Core::Vector3> m_vVertices;
 
         Type m_Type;
 
         unsigned int m_iLifes;
 
         Core::MultiShape m_MultiShape;
+        
+    protected:
+        virtual void initMultiShape() = 0;
+
+        inline void move()
+        {
+        }
 
     private:
         inline void init()
@@ -81,8 +94,8 @@ namespace Game
             setPos(v_init);
 
             m_iLifes = 1;
+            m_MultiShape.setRelPos(m_vPosition3);
         }
-
     }; //end of class GameObject.
 } //end of namespace Game.
 

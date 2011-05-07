@@ -26,15 +26,15 @@ namespace Core
         void onRender();
 
         inline std::vector<Shape *> *getShapeList() { return m_pShapeList; }
-        inline void setRelPos(Vector2 &relPos){ m_RelPos = relPos; }
-        inline Vector2 &getRelPos() { return m_RelPos; }
+        inline void setRelPos(Vector3 &relPos){ m_RelPos = relPos; }
+        inline Vector3 &getRelPos() { return m_RelPos; }
 
     private:
         void init();
 
     private:
         std::vector<Shape *> *m_pShapeList;
-        Vector2 m_RelPos; //position where the shapes are relative to.
+        Vector3 m_RelPos; //position where the shapes are relative to.
     }; //ShapeCol
 } //Core
 

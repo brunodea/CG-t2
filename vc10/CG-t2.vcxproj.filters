@@ -75,6 +75,9 @@
     <ClInclude Include="..\include\Core\shape_functions.h">
       <Filter>Header Files\Core\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Game\Ship.hpp">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

@@ -82,6 +82,7 @@
     <ClInclude Include="..\include\Game\Enemy.h" />
     <ClInclude Include="..\include\Game\GameController.h" />
     <ClInclude Include="..\include\Game\GameObject.hpp" />
+    <ClInclude Include="..\include\Game\Ship.hpp" />
     <ClInclude Include="..\include\Game\Shot.hpp" />
     <ClInclude Include="..\include\macros.h" />
   </ItemGroup>
