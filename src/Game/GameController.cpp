@@ -1,6 +1,7 @@
 #include "Game/GameController.h"
 #include "glfw.h"
 
+#include "FPS.h"
 #include "macros.h"
 
 #include <string>
@@ -35,16 +36,32 @@ GameController &GameController::instance()
     return *m_sInstance;
 }
 
+
+//Game Loop.
 void GameController::run()
 {
     double start_time = glfwGetTime();
     double current_time = 0;
-    double wait_time = (double)1/60;
+    double interpolation = 0;
     double diff_time = 0;
     int frames = 0;
     while(m_iIsRunning)
-    {        
+    {
         update();
+        /*
+        frames = 0;
+        current_time = glfwGetTime();
+        while(current_time > start_time && frames < MAX_FRAMESKIP)
+        {
+            update();
+
+            start_time += SKIP_TICKS;
+            frames++;
+        }
+
+        interpolation = float(glfwGetTime() + SKIP_TICKS - start_time)/float(SKIP_TICKS);
+        GAME_FPS->setFPS(interpolation);
+        */
 
         current_time = glfwGetTime();
         diff_time = current_time - start_time;
@@ -57,6 +74,8 @@ void GameController::run()
             frames = 0;
             start_time = glfwGetTime();
         }
+            
+        GAME_FPS->setFPS(diff_time);
         
         frames++;
         render();

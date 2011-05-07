@@ -4,6 +4,8 @@
 #include "Core/Matrix.hpp"
 #include "Core/Vector.hpp"
 
+#include <cmath>
+
 namespace Core
 {
     typedef Vector<float, 4> Vector4;
@@ -39,6 +41,25 @@ namespace Core
         for(unsigned int i = 0; i < M; i++)
             res.set(vec(i, 0), i, M-1);
 
+        return res;
+    }
+
+    template<unsigned int M>
+    const float norm(const Vector<float, M> &vec)
+    {
+        float sum = 0.f;
+        for(unsigned int i = 0; i < M; i++)
+            sum += (vec(i,0)*vec(i,0));
+        return sqrt(sum);
+    }
+
+    template<unsigned int M>
+    const Core::Vector<float, M>unitary(const Vector<float, M> &vec)
+    {
+        Core::Vector<float, M> res;
+        float n = norm(vec);
+        for(unsigned int i = 0; i < M; i++)
+            res.set(vec(i,0)/n, i, 0);
         return res;
     }
 

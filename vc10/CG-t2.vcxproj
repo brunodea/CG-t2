@@ -79,6 +79,7 @@
     <ClInclude Include="..\include\Core\ShapeRect.h" />
     <ClInclude Include="..\include\Core\shape_functions.h" />
     <ClInclude Include="..\include\Core\Vector.hpp" />
+    <ClInclude Include="..\include\FPS.h" />
     <ClInclude Include="..\include\Game\Enemy.h" />
     <ClInclude Include="..\include\Game\GameController.h" />
     <ClInclude Include="..\include\Game\GameObject.hpp" />
@@ -92,6 +93,7 @@
     <ClCompile Include="..\src\Core\ShapeCirc.cpp" />
     <ClCompile Include="..\src\Core\ShapeRect.cpp" />
     <ClCompile Include="..\src\Core\shape_functions.cpp" />
+    <ClCompile Include="..\src\FPS.cpp" />
     <ClCompile Include="..\src\Game\GameController.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

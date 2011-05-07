@@ -21,8 +21,11 @@ namespace Game
 
             initVertices();
             initMultiShape();
-            setSpeed(.00003f);
-            setDirection(Core::Vector3(1));
+            setSpeed(.00002f);
+            Core::Vector3 dir(1);
+            dir[0] = 1;
+            dir[1] = 1;
+            setDirection(dir);
         }
         Enemy(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos) 
             : GameObject(dir, speed, pos, GameObject::ENEMY)
@@ -37,6 +40,7 @@ namespace Game
 
         virtual void onRender()
         {
+
             glColor3f(0.f, 0.5f, 0.f);
             glBegin(GL_QUADS); //quadrado
                 for(unsigned int i = 0; i < m_vVertices.size(); i++)
@@ -48,20 +52,19 @@ namespace Game
                 }
             glEnd();
         
-            //m_MultiShape.onRender(); //comentado ja que nada é desenhado mesmo.
+            m_MultiShape.onRender(); //comentado ja que nada é desenhado mesmo.
         }
 
         virtual void onUpdate()
         {
             move();
-            m_MultiShape.setRelPos(m_vPosition3);
         }
         virtual void onCollision(GameObject *obj) {/**/};
     private:
 
         virtual void initVertices()
         {
-            float width = .3f;
+            float width = .1f;
             float height = width;
             Core::Vector3 v1(1);
             v1[0] = -width;
@@ -90,7 +93,7 @@ namespace Game
 
         virtual void initMultiShape()
         {
-            Core::ShapeRect *rect = new Core::ShapeRect(Core::Vector2(0), .3f, .3f);
+            Core::ShapeRect *rect = new Core::ShapeRect(Core::Vector2(0), .1f, .1f);
             m_MultiShape.addShape(rect);
         }
 

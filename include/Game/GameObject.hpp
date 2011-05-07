@@ -4,6 +4,7 @@
 #include "Core/matrix_functions.hpp"
 #include "Core/MultiShape.h"
 
+#include "FPS.h"
 #include <vector>
 
 namespace Game
@@ -33,6 +34,7 @@ namespace Game
             m_iLifes = 1;
         }
 
+        inline bool isAlive() { return m_iLifes > 0; }
 
         /***********************
          *  Virtual Functions  *
@@ -47,7 +49,7 @@ namespace Game
          *  Setters & Getters    *
          *************************/
 
-        inline void setDirection(const Core::Vector3 &dir) { m_vDirection3 = dir; }
+        inline void setDirection(const Core::Vector3 &dir) { m_vDirection3 = Core::unitary(dir); }
         inline Core::Vector3 &getDirection() { return m_vDirection3; }
         
         inline void setSpeed(float speed) { m_fSpeed = speed; }
@@ -82,9 +84,12 @@ namespace Game
 
         inline void move()
         {
-            Core::Vector3 pos = toVector(m_vDirection3*m_fSpeed);
+            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed*GAME_FPS->getFPS()));
             m_vPosition3 += pos;
             adjustVertices();
+            Core::Vector3 v = m_MultiShape.getRelPos();
+            v += m_vPosition3;
+            m_MultiShape.setRelPos(v);
         }
 
         inline void adjustVertices(Core::Matrix3 &mat)

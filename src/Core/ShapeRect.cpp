@@ -22,7 +22,6 @@ bool ShapeRect::collides(Vector2 &dot)
 
 void ShapeRect::onRender()
 {
-    /*
     glColor3f(1.f, 0.f, 0.f);
     glBegin(GL_QUADS);
         glVertex2f(m_Pos[0]-m_fWidth, m_Pos[1]-m_fHeight);
@@ -30,7 +29,6 @@ void ShapeRect::onRender()
         glVertex2f(m_Pos[0]+m_fWidth, m_Pos[1]+m_fHeight);
         glVertex2f(m_Pos[0]+m_fWidth, m_Pos[1]-m_fHeight);
     glEnd();
-    */
 }
 
 Shape &ShapeRect::operator=(Shape &shape)

@@ -4,6 +4,11 @@
 #include "macros.h"
 #include "Game/GameController.h"
 
+void GLFWCALL handleResize(int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
 int main()
 {
     if(!glfwInit())
@@ -18,7 +23,12 @@ int main()
     }
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     glClearColor(1.f, 1.f, 1.f, 1.f);
+
+    glfwSetWindowSizeCallback(handleResize);
+
     GAME.run();
+    delete GAME_FPS;
+
 
     glfwTerminate();
     exit(EXIT_SUCCESS);

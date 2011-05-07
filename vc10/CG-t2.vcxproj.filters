@@ -78,6 +78,9 @@
     <ClInclude Include="..\include\Game\Ship.hpp">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\FPS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -100,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Core\shape_functions.cpp">
       <Filter>Source Files\Core\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\FPS.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
