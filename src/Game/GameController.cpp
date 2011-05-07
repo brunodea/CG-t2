@@ -1,6 +1,10 @@
 #include "Game/GameController.h"
 #include "glfw.h"
 
+#include "macros.h"
+
+#include <string>
+#include <sstream>
 #include <iostream>
 
 using namespace Game;
@@ -30,12 +34,35 @@ GameController &GameController::instance()
 
 void GameController::run()
 {
+    double start_time = glfwGetTime();
+    double current_time = 0;
+    double wait_time = 0;
+    double diff_time = 0;
+    int frames = 0;
     while(m_iIsRunning)
-    {
-        render();
+    {        
+        update();
+
+        current_time = glfwGetTime();
+        diff_time = current_time - start_time;
+        if(diff_time >= 1 || frames == 0) //1segundo.
+        {
+            std::stringstream ss;
+            ss << "CG - t2. FPS: " << frames;
+            glfwSetWindowTitle(ss.str().c_str());
+            
+            frames = 0;
+            start_time = glfwGetTime();
+        }
         
-        m_iIsRunning = glfwGetWindowParam(GLFW_OPENED);
+        frames++;
+        render();
     }
+}
+
+void GameController::update()
+{
+    m_iIsRunning = glfwGetWindowParam(GLFW_OPENED);
 }
 
 void GameController::render()
@@ -52,7 +79,7 @@ void GameController::keyEvent(int key, int state)
 
 void GameController::mousePosEvent(int x, int y)
 {
-    std::cout << x << ',' << y << std::endl;
+    //std::cout << x << ',' << y << std::endl;
 }
 
 /*

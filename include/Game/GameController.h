@@ -20,6 +20,8 @@ namespace Game
         GameController();
 
         void render();
+        void update();
+
         void mousePosEvent(int x, int y);
         void keyEvent(int key, int state);
 
