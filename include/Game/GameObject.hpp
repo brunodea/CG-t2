@@ -16,7 +16,23 @@ namespace Game
         }; //end of enum Type.
 
     public:
-        GameObject(Type type) : m_Type(type) {}
+        GameObject()
+        {
+            m_Type = OBJECT;
+            init();
+        }
+
+        GameObject(Type type) : m_Type(type) 
+        {
+            init();
+        }
+
+        GameObject(const Core::Vector3 &dir, const Core::Vector3 &speed, const Core::Vector3 &pos, Type type)
+            : m_vDirection3(dir), m_vSpeed3(speed), m_vPosition3(pos), m_Type(type)
+        {
+            m_iLifes = 1;
+        }
+
 
         /***********************
          *  Virtual Functions  *
@@ -41,11 +57,29 @@ namespace Game
         inline void setPos(const Core::Vector3 &pos) { m_vPosition3 = pos; }
         inline Core::Vector3 &getPos() { return m_vPosition3; }
 
+        inline void setLifes(unsigned int lifes) { m_iLifes = lifes; }
+
     private:
-        Type m_Type;
         Core::Vector3 m_vDirection3;
         Core::Vector3 m_vSpeed3;
         Core::Vector3 m_vPosition3;
+
+        Type m_Type;
+
+        unsigned int m_iLifes;
+
+    private:
+        inline void init()
+        {
+            Core::Vector3 v_init;
+            v_init.clear(0.f);
+
+            setDirection(v_init);
+            setSpeed(v_init);
+            setPos(v_init);
+
+            m_iLifes = 1;
+        }
 
     }; //end of class GameObject.
 } //end of namespace Game.

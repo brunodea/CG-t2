@@ -75,6 +75,7 @@
     <ClInclude Include="..\include\Core\matrix_functions.hpp" />
     <ClInclude Include="..\include\Core\Vector.hpp" />
     <ClInclude Include="..\include\Game\GameController.h" />
+    <ClInclude Include="..\include\Game\GameObject.hpp" />
     <ClInclude Include="..\include\macros.h" />
   </ItemGroup>
   <ItemGroup>
