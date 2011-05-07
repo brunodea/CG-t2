@@ -2,6 +2,7 @@
 #include <cstdlib>
 
 #include "macros.h"
+#include "Game/GameController.h"
 
 int main()
 {
@@ -16,14 +17,8 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    int running = GL_TRUE;
-    while(running)
-    {
-        glClear(GL_COLOR_BUFFER_BIT);
-        glfwSwapBuffers();
-
-        running = !glfwGetKey(GLFW_KEY_ESC);
-    }
+    Game::GameController game;
+    game.run();
 
     glfwTerminate();
     exit(EXIT_SUCCESS);

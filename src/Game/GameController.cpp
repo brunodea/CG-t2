@@ -4,18 +4,17 @@
 using namespace Game;
 
 GameController::GameController()
-    : isRunning(GL_TRUE)
+    : m_iIsRunning(GL_TRUE)
 {
 }
 
-int GameController::run()
+void GameController::run()
 {
-    while(isRunning)
+    while(m_iIsRunning)
     {
         render();
+        keyEvent();
     }
-
-    return 0; //tudo certo.
 }
 
 void GameController::render()
@@ -24,3 +23,7 @@ void GameController::render()
     glfwSwapBuffers();
 }
 
+void GameController::keyEvent()
+{
+    m_iIsRunning = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
+}

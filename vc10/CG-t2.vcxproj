@@ -74,9 +74,11 @@
     <ClInclude Include="..\include\Core\Matrix.hpp" />
     <ClInclude Include="..\include\Core\matrix_functions.hpp" />
     <ClInclude Include="..\include\Core\Vector.hpp" />
+    <ClInclude Include="..\include\Game\GameController.h" />
     <ClInclude Include="..\include\macros.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Game\GameController.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

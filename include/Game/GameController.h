@@ -9,12 +9,13 @@ namespace Game
     public:
         GameController();
 
-        int run();
+        void run();
     private:
-        int isRunning;
+        int m_iIsRunning;
 
     private:
         void render();
+        void keyEvent();
     }; //end of class GameController.
 
 } //end of namespace Game.
