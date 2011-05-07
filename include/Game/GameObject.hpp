@@ -2,6 +2,7 @@
 #define _BRUNODEA_CG_T2_GAME_OBJECT_HPP_
 
 #include "Core/matrix_functions.hpp"
+#include "Core/MultiShape.h"
 
 namespace Game
 {
@@ -67,6 +68,8 @@ namespace Game
         Type m_Type;
 
         unsigned int m_iLifes;
+
+        Core::MultiShape m_MultiShape;
 
     private:
         inline void init()

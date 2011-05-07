@@ -25,6 +25,15 @@
     <Filter Include="Header Files\Game\Enemies">
       <UniqueIdentifier>{1fda5c1f-50d1-4c6b-8e71-eea06833b885}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Shapes">
+      <UniqueIdentifier>{5c297ef4-99df-4628-be21-5e8b1ad3cb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{1da69a6b-4a87-4aa8-a6b9-970e112bcce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Shapes">
+      <UniqueIdentifier>{89f964e6-3877-4d97-9d4b-e61d3e2322ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Core\Matrix.hpp">
@@ -51,6 +60,21 @@
     <ClInclude Include="..\include\Game\Shot.hpp">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Core\MultiShape.h">
+      <Filter>Header Files\Core\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Core\Shape.h">
+      <Filter>Header Files\Core\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Core\ShapeCirc.h">
+      <Filter>Header Files\Core\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Core\ShapeRect.h">
+      <Filter>Header Files\Core\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Core\shape_functions.h">
+      <Filter>Header Files\Core\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,6 +82,21 @@
     </ClCompile>
     <ClCompile Include="..\src\Game\GameController.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\MultiShape.cpp">
+      <Filter>Source Files\Core\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\Shape.cpp">
+      <Filter>Source Files\Core\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\ShapeCirc.cpp">
+      <Filter>Source Files\Core\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\ShapeRect.cpp">
+      <Filter>Source Files\Core\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\shape_functions.cpp">
+      <Filter>Source Files\Core\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

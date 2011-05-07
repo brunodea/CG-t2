@@ -59,8 +59,8 @@ bool rectToRectCol(ShapeRect *rectA, ShapeRect *rectB)
     bottomRight[0] = pos_a[0] + rectA->getWidth();
     bottomRight[1] = pos_a[1] + rectA->getHeight();
 
-    if(rectB->collides(&topLeft) || rectB->collides(&topRight) ||
-       rectB->collides(&bottomLeft) || rectB->collides(&bottomRight))
+    if(rectB->collides(topLeft) || rectB->collides(topRight) ||
+       rectB->collides(bottomLeft) || rectB->collides(bottomRight))
         return true;
 
     return false;
@@ -102,10 +102,10 @@ bool rectToCircCol(ShapeRect *rect, ShapeCirc *circ)
     return true;
 }
 
-float pointsDistance(const Vector2 &dotA, const Vector2 &dotB)
+float pointsDistance(Vector2 &dotA, Vector2 &dotB)
 {
-    float diff_x = dotB[0] - dotA[0];
-    float diff_y = dotB[1] - dotA[1];
+    float diff_x = dotB(0,0) - dotA(0,0);
+    float diff_y = dotB(1,0) - dotA(1,0);
     float delta = (diff_x*diff_x) + (diff_y*diff_y);
     return sqrt(delta);
 }
