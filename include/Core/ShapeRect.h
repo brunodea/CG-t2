@@ -26,4 +26,4 @@ namespace Core
     }; //ShapeRect
 } //Core
 
-#endif // _AZoMe_SHAPERECT_H
+#endif

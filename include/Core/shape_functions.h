@@ -17,4 +17,4 @@ bool circToCircCol(Core::ShapeCirc *circA, Core::ShapeCirc *circB);
 
 float pointsDistance(Core::Vector2 &dotA, Core::Vector2 &dotB);
 
-#endif // _BRUNODEA_CG_T2_SHAPE_FUNCTIONS_H_
+#endif

@@ -23,4 +23,4 @@ namespace Core
     }; //ShapeCirc.
 } //Core.
 
-#endif // _AZoMe_SHAPECIRC_H_
+#endif

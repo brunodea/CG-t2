@@ -45,4 +45,4 @@ namespace Core
         Vector4 m_Color;
     }; //Shape
 } //Core
-#endif // _AZoMe_SHAPE_H_
+#endif

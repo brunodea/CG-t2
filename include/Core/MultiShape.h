@@ -38,4 +38,4 @@ namespace Core
     }; //ShapeCol
 } //Core
 
-#endif // _AZoMe_MULTISHAPE_H_
+#endif
