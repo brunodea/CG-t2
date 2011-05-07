@@ -42,6 +42,26 @@ namespace Core
         return res;
     }
 
+    template<unsigned int M>
+    const Matrix<float, M, 1> toMatrix(const Vector<float, M> &vec)
+    {
+        Matrix<float, M, 1> res;
+        for(unsigned int i = 0; i < M; i++)
+            res.set(vec[i], i, 0);
+
+        return res;
+    }
+
+    template<unsigned int M>
+    const Vector<float, M> toVector(const Matrix<float, M, 1> &mat)
+    {
+        Vector<float, M> res;
+        for(unsigned int i = 0; i < M; i++)
+            res[i] = mat(i, 0);
+        return res;
+    }
+
 } //end of namespace Core.
+
 
 #endif

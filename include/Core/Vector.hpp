@@ -18,7 +18,16 @@ namespace Core
         {
             return (*this)(i, 0);
         }
+
+        inline Vector<T, M> &operator =(Matrix<T, M, 1> &mat)
+        {
+            for(unsigned int i = 0; i < M; i++)
+                set(mat(i, 0), i, 0);
+            return (*this);
+        }
+
     }; //end of struct Vector.
+    
 } //end of namespace Core.
 
 #endif

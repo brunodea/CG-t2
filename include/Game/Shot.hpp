@@ -13,9 +13,11 @@ namespace Game
         Shot(unsigned int damage) : GameObject(GameObject::SHOT), m_iDamage(damage) {}
 
         virtual void onRender() = 0;
-        virtual void onUpdate();
-        virtual void onCollision(GameObject *obj);
-
+        virtual void onUpdate() 
+        {
+        }
+        virtual void onCollision(GameObject *obj) {/**/}
+        
     private:
         unsigned int m_iDamage;
 

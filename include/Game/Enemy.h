@@ -21,8 +21,10 @@ namespace Game
 
             initVertices();
             initMultiShape();
+            setSpeed(.00003f);
+            setDirection(Core::Vector3(1));
         }
-        Enemy(const Core::Vector3 &dir, const Core::Vector3 &speed, const Core::Vector3 &pos) 
+        Enemy(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos) 
             : GameObject(dir, speed, pos, GameObject::ENEMY)
         {
             initVertices();
@@ -46,11 +48,12 @@ namespace Game
                 }
             glEnd();
         
-            m_MultiShape.onRender();
+            //m_MultiShape.onRender(); //comentado ja que nada é desenhado mesmo.
         }
 
         virtual void onUpdate()
         {
+            move();
             m_MultiShape.setRelPos(m_vPosition3);
         }
         virtual void onCollision(GameObject *obj) {/**/};

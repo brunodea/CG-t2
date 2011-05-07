@@ -61,14 +61,15 @@ void GameController::run()
         frames++;
         render();
 
-        if(diff_time < wait_time)
-            glfwSleep(wait_time - diff_time);
+        //if(diff_time < wait_time)
+        //    glfwSleep(wait_time - diff_time);
     }
 }
 
 void GameController::update()
 {
     m_iIsRunning = glfwGetWindowParam(GLFW_OPENED);
+    m_pTestEnemy->onUpdate();
 }
 
 void GameController::render()

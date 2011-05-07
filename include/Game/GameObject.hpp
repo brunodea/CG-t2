@@ -27,8 +27,8 @@ namespace Game
         }
         GameObject(Type type) : m_Type(type) { init(); }
 
-        GameObject(const Core::Vector3 &dir, const Core::Vector3 &speed, const Core::Vector3 &pos, Type type)
-            : m_vDirection3(dir), m_vSpeed3(speed), m_vPosition3(pos), m_Type(type)
+        GameObject(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, Type type)
+            : m_vDirection3(dir), m_fSpeed(speed), m_vPosition3(pos), m_Type(type)
         {
             m_iLifes = 1;
         }
@@ -50,8 +50,8 @@ namespace Game
         inline void setDirection(const Core::Vector3 &dir) { m_vDirection3 = dir; }
         inline Core::Vector3 &getDirection() { return m_vDirection3; }
         
-        inline void setSpeed(const Core::Vector3 &speed) { m_vSpeed3 = speed; }
-        inline Core::Vector3 &getSpeed() { return m_vSpeed3; } 
+        inline void setSpeed(float speed) { m_fSpeed = speed; }
+        inline float getSpeed() { return m_fSpeed; } 
 
         inline void setPos(const Core::Vector3 &pos) { m_vPosition3 = pos; }
         inline Core::Vector3 &getPos() { return m_vPosition3; }
@@ -66,8 +66,8 @@ namespace Game
 
     protected:        
         Core::Vector3 m_vDirection3;
-        Core::Vector3 m_vSpeed3;
         Core::Vector3 m_vPosition3;
+        float m_fSpeed;
 
         std::vector<Core::Vector3> m_vVertices;
 
@@ -82,6 +82,27 @@ namespace Game
 
         inline void move()
         {
+            Core::Vector3 pos = toVector(m_vDirection3*m_fSpeed);
+            m_vPosition3 += pos;
+            adjustVertices();
+        }
+
+        inline void adjustVertices(Core::Matrix3 &mat)
+        {
+            for(unsigned int i = 0; i < m_vVertices.size(); i++)
+            {
+                Core::Vector3 *vertex = &m_vVertices.at(i);
+                *vertex = mat*(*vertex);
+            }
+        }
+
+        inline void adjustVertices()
+        {
+            for(unsigned int i = 0; i < m_vVertices.size(); i++)
+            {
+                Core::Vector3 *vertex = &m_vVertices.at(i);
+                *vertex += m_vPosition3;
+            }
         }
 
     private:
@@ -90,7 +111,7 @@ namespace Game
             Core::Vector3 v_init(0);
 
             setDirection(v_init);
-            setSpeed(v_init);
+            setSpeed(0);
             setPos(v_init);
 
             m_iLifes = 1;
