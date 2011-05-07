@@ -36,7 +36,7 @@ void GameController::run()
 {
     double start_time = glfwGetTime();
     double current_time = 0;
-    double wait_time = 0;
+    double wait_time = (double)1/60;
     double diff_time = 0;
     int frames = 0;
     while(m_iIsRunning)
@@ -57,6 +57,9 @@ void GameController::run()
         
         frames++;
         render();
+
+        if(diff_time < wait_time)
+            glfwSleep(wait_time - diff_time);
     }
 }
 
