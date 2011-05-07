@@ -4,4 +4,6 @@
 #define WINDOW_WIDTH 600
 #define WINDOW_HEIGHT 480
 
+#define GAME Game::GameController::instance()
+
 #endif

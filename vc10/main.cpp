@@ -16,9 +16,9 @@ int main()
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
+    glfwSetWindowTitle("CG - t2: Bruno Romero de Azevedo");
 
-    Game::GameController game;
-    game.run();
+    GAME.run();
 
     glfwTerminate();
     exit(EXIT_SUCCESS);

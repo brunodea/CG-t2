@@ -3,9 +3,24 @@
 
 using namespace Game;
 
+GameController *GameController::m_sInstance = NULL;
+
 GameController::GameController()
     : m_iIsRunning(GL_TRUE)
 {
+    //glfwSetKeyCallback(keyEvent);
+}
+
+GameController::~GameController()
+{
+    glfwSetKeyCallback(NULL);
+}
+
+GameController &GameController::instance()
+{
+    if(m_sInstance == NULL)
+        m_sInstance = new GameController();
+    return *m_sInstance;
 }
 
 void GameController::run()
@@ -13,7 +28,7 @@ void GameController::run()
     while(m_iIsRunning)
     {
         render();
-        keyEvent();
+        keyEvent(0,0);
     }
 }
 
@@ -23,7 +38,9 @@ void GameController::render()
     glfwSwapBuffers();
 }
 
-void GameController::keyEvent()
+void GLFWCALL GameController::keyEvent(int key, int key_state)
 {
+    //if(key == GLFW_KEY_ESC)
+    //    m_iIsRunning = GL_FALSE;
     m_iIsRunning = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
 }
