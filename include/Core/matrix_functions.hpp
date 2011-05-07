@@ -6,7 +6,10 @@
 
 namespace Core
 {
+    typedef Vector<float, 4> Vector4;
     typedef Vector<float, 3> Vector3;
+    typedef Vector<float, 2> Vector2;
+
     typedef Matrix<float, 3> Matrix3;
     typedef Matrix<float, 2> Matrix2;
 

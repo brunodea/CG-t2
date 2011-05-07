@@ -16,11 +16,14 @@ GameController::GameController()
 {
     glfwSetKeyCallback(keyEventCallback);
     glfwSetMousePosCallback(mousePosCallback);
+
+    m_pTestEnemy = new Enemy();
 }
 
 GameController::~GameController()
 {
     glfwSetKeyCallback(NULL);
+    delete m_pTestEnemy;
 }
 
 GameController &GameController::instance()
@@ -70,7 +73,13 @@ void GameController::update()
 
 void GameController::render()
 {
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
+
+    m_pTestEnemy->onRender();
+
+    glFlush();
     glfwSwapBuffers();
 }
 

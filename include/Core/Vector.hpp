@@ -18,7 +18,6 @@ namespace Core
         {
             return (*this)(i, 0);
         }
-
     }; //end of struct Vector.
 } //end of namespace Core.
 

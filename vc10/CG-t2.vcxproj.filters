@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{fc84ba46-53e7-4c3b-ab94-89b7126ee33e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Enemies">
+      <UniqueIdentifier>{1fda5c1f-50d1-4c6b-8e71-eea06833b885}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Core\Matrix.hpp">
@@ -40,6 +43,12 @@
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Game\GameObject.hpp">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Game\Enemy.h">
+      <Filter>Header Files\Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Game\Shot.hpp">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

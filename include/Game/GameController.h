@@ -1,6 +1,8 @@
 #ifndef _BRUNODEA_CG_T2_GAME_H_
 #define _BRUNODEA_CG_T2_GAME_H_
 
+#include "Game/Enemy.h"
+
 namespace Game
 {
     class GameController
@@ -27,6 +29,9 @@ namespace Game
 
         static void keyEventCallback(int key, int state);
         static void mousePosCallback(int x, int y);
+
+        Enemy *m_pTestEnemy;
+
     }; //end of class GameController.
 
 } //end of namespace Game.

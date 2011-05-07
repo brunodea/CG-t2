@@ -16,7 +16,8 @@ int main()
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
-
+    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    glClearColor(1.f, 1.f, 1.f, 1.f);
     GAME.run();
 
     glfwTerminate();

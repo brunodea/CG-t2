@@ -71,8 +71,7 @@ namespace Game
     private:
         inline void init()
         {
-            Core::Vector3 v_init;
-            v_init.clear(0.f);
+            Core::Vector3 v_init(0);
 
             setDirection(v_init);
             setSpeed(v_init);
