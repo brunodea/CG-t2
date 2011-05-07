@@ -1,6 +1,8 @@
 #include "Game/GameController.h"
 #include "glfw.h"
 
+#include <iostream>
+
 using namespace Game;
 
 GameController *GameController::m_sInstance = NULL;
@@ -8,7 +10,8 @@ GameController *GameController::m_sInstance = NULL;
 GameController::GameController()
     : m_iIsRunning(GL_TRUE)
 {
-    //glfwSetKeyCallback(keyEvent);
+    glfwSetKeyCallback(keyEventCallback);
+    glfwSetMousePosCallback(mousePosCallback);
 }
 
 GameController::~GameController()
@@ -19,7 +22,9 @@ GameController::~GameController()
 GameController &GameController::instance()
 {
     if(m_sInstance == NULL)
+    {
         m_sInstance = new GameController();
+    }
     return *m_sInstance;
 }
 
@@ -28,7 +33,8 @@ void GameController::run()
     while(m_iIsRunning)
     {
         render();
-        keyEvent(0,0);
+        
+        m_iIsRunning = glfwGetWindowParam(GLFW_OPENED);
     }
 }
 
@@ -38,9 +44,26 @@ void GameController::render()
     glfwSwapBuffers();
 }
 
-void GLFWCALL GameController::keyEvent(int key, int key_state)
+void GameController::keyEvent(int key, int state)
 {
-    //if(key == GLFW_KEY_ESC)
-    //    m_iIsRunning = GL_FALSE;
-    m_iIsRunning = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
+    if(key == GLFW_KEY_ESC)
+        m_iIsRunning = GL_FALSE;
+}
+
+void GameController::mousePosEvent(int x, int y)
+{
+    std::cout << x << ',' << y << std::endl;
+}
+
+/*
+ * Callback functions
+ */
+void GLFWCALL GameController::keyEventCallback(int key, int state)
+{
+    m_sInstance->keyEvent(key, state);
+}
+
+void GLFWCALL GameController::mousePosCallback(int x, int y)
+{
+    m_sInstance->mousePosEvent(x, y);
 }

@@ -20,8 +20,11 @@ namespace Game
         GameController();
 
         void render();
-        void keyEvent(int key, int key_state);
-        void mouseEvent();
+        void mousePosEvent(int x, int y);
+        void keyEvent(int key, int state);
+
+        static void keyEventCallback(int key, int state);
+        static void mousePosCallback(int x, int y);
     }; //end of class GameController.
 
 } //end of namespace Game.
