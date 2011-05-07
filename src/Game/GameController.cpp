@@ -18,13 +18,15 @@ GameController::GameController()
     glfwSetKeyCallback(keyEventCallback);
     glfwSetMousePosCallback(mousePosCallback);
 
-    m_pTestEnemy = new Enemy();
+    m_pTestEnemy = NULL;//new Enemy();
+    m_pPlayer = new Player();
 }
 
 GameController::~GameController()
 {
     glfwSetKeyCallback(NULL);
     delete m_pTestEnemy;
+    delete m_pPlayer;
 }
 
 GameController &GameController::instance()
@@ -88,7 +90,8 @@ void GameController::run()
 void GameController::update()
 {
     m_iIsRunning = glfwGetWindowParam(GLFW_OPENED);
-    m_pTestEnemy->onUpdate();
+    //m_pTestEnemy->onUpdate();
+    m_pPlayer->onUpdate();
 }
 
 void GameController::render()
@@ -97,7 +100,8 @@ void GameController::render()
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
 
-    m_pTestEnemy->onRender();
+    //m_pTestEnemy->onRender();
+    m_pPlayer->onRender();
 
     glFlush();
     glfwSwapBuffers();
@@ -107,6 +111,7 @@ void GameController::keyEvent(int key, int state)
 {
     if(key == GLFW_KEY_ESC)
         m_iIsRunning = GL_FALSE;
+    m_pPlayer->onKeyEvent(key, state);
 }
 
 void GameController::mousePosEvent(int x, int y)

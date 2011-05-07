@@ -74,7 +74,7 @@ namespace Game
 
         std::vector<Core::Vector3> m_vVertices;
 
-        Type m_Type;
+        int m_Type;
 
         unsigned int m_iLifes;
 

@@ -83,6 +83,7 @@
     <ClInclude Include="..\include\Game\Enemy.h" />
     <ClInclude Include="..\include\Game\GameController.h" />
     <ClInclude Include="..\include\Game\GameObject.hpp" />
+    <ClInclude Include="..\include\Game\Player.h" />
     <ClInclude Include="..\include\Game\Ship.hpp" />
     <ClInclude Include="..\include\Game\Shot.hpp" />
     <ClInclude Include="..\include\macros.h" />
@@ -95,6 +96,7 @@
     <ClCompile Include="..\src\Core\shape_functions.cpp" />
     <ClCompile Include="..\src\FPS.cpp" />
     <ClCompile Include="..\src\Game\GameController.cpp" />
+    <ClCompile Include="..\src\Game\Player.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

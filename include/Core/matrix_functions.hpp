@@ -34,12 +34,23 @@ namespace Core
     }
 
     template<unsigned int M>
-    const Matrix<float, M> translate(const Vector<float, M> &vec)
+    Matrix<float, M> translate(const Vector<float, M> &vec)
     {
         Matrix<float, M> res = identity<M>();
 
         for(unsigned int i = 0; i < M; i++)
             res.set(vec(i, 0), i, M-1);
+
+        return res;
+    }
+
+    inline Matrix3 rotate(float ang)
+    {
+        Matrix3 res = identity<3>();
+        res.set(cos(ang), 0, 0);
+        res.set(sin(ang), 1, 0);
+        res.set(-sin(ang), 0, 1);
+        res.set(cos(ang), 1, 1);
 
         return res;
     }

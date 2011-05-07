@@ -10,9 +10,9 @@ namespace Game
     class Ship : public GameObject
     {
     public:
-        Ship() : GameObject(GameObject::SHIP) : m_Shot(0) {}
+        Ship() : GameObject(GameObject::SHIP), m_Shot(0), m_fAcceleration(0) {}
         Ship(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos) 
-            : GameObject(dir, speed, pos, GameObject::SHIP), m_Shot(0) 
+            : GameObject(dir, speed, pos, GameObject::SHIP), m_Shot(0), m_fAcceleration(0)
         {}
 
         ~Ship()
@@ -27,8 +27,18 @@ namespace Game
         virtual void onUpdate() = 0;
         virtual void onCollision(GameObject *obj) = 0;
         virtual void onKeyEvent(int key, int state) {/**/}
-    private:
+
+        /* Setters & Getters */
+        inline float getAcceleration() { return m_fAcceleration; }
+        inline void setAcceleration(float acc) { m_fAcceleration = acc; }
+
+        inline float getMaxSpeed() { return m_fMaxSpeed; }
+        inline void setMaxSpeed(float max) { m_fMaxSpeed = max; }
+
+    protected:
         Shot *m_Shot;
+        float m_fAcceleration;
+        float m_fMaxSpeed;
 
     }; //end of class Ship.
 

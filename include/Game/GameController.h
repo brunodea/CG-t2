@@ -2,6 +2,7 @@
 #define _BRUNODEA_CG_T2_GAME_H_
 
 #include "Game/Enemy.h"
+#include "Game/Player.h"
 
 namespace Game
 {
@@ -31,6 +32,7 @@ namespace Game
         static void mousePosCallback(int x, int y);
 
         Enemy *m_pTestEnemy;
+        Player *m_pPlayer;
 
     }; //end of class GameController.
 
