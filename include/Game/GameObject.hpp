@@ -124,6 +124,33 @@ namespace Game
         GLuint m_iImage;
 
     protected:
+        void initVertices(float width, float height)
+        {
+            Core::Vector3 v1(1);
+            v1[0] = -width;
+            v1[1] = -height;
+
+            Core::Vector3 v2(1);
+            v2[0] = -width;
+            v2[1] = height;
+
+            Core::Vector3 v3(1);
+            v3[0] = width;
+            v3[1] = height;
+
+            Core::Vector3 v4(1);
+            v4[0] = width;
+            v4[1] = -height;
+    
+            std::vector<Core::Vector3> *vec = new std::vector<Core::Vector3>();
+            vec->push_back(v1);
+            vec->push_back(v2);
+            vec->push_back(v3);
+            vec->push_back(v4);
+
+            setVertices(*vec);
+        }
+
         inline void move()
         {
             Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed/**GAME_FPS->getFPS()*/));

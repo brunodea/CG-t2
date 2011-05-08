@@ -15,7 +15,6 @@ namespace Game
         void onCollision(GameObject *obj);
         void onKeyEvent(int key, int state);
     private:
-        void initVertices();
         void init();
 
     }; //end of class Player.
