@@ -1,6 +1,4 @@
 #include "Game/Player.h"
-#include "Core/Multishape.h"
-#include "Core/ShapeRect.h"
 #include "glfw.h"
 #include "Core/matrix_functions.hpp"
 

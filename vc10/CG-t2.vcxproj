@@ -71,12 +71,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Core\ColShape.h" />
     <ClInclude Include="..\include\Core\Matrix.hpp" />
     <ClInclude Include="..\include\Core\matrix_functions.hpp" />
-    <ClInclude Include="..\include\Core\MultiShape.h" />
-    <ClInclude Include="..\include\Core\Shape.h" />
-    <ClInclude Include="..\include\Core\ShapeCirc.h" />
-    <ClInclude Include="..\include\Core\ShapeRect.h" />
     <ClInclude Include="..\include\Core\shape_functions.h" />
     <ClInclude Include="..\include\Core\Vector.hpp" />
     <ClInclude Include="..\include\FPS.h" />
@@ -89,10 +86,6 @@
     <ClInclude Include="..\include\macros.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Core\MultiShape.cpp" />
-    <ClCompile Include="..\src\Core\Shape.cpp" />
-    <ClCompile Include="..\src\Core\ShapeCirc.cpp" />
-    <ClCompile Include="..\src\Core\ShapeRect.cpp" />
     <ClCompile Include="..\src\Core\shape_functions.cpp" />
     <ClCompile Include="..\src\FPS.cpp" />
     <ClCompile Include="..\src\Game\GameController.cpp" />

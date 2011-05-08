@@ -2,7 +2,6 @@
 #define _BRUNODEA_CG_T2_GAME_OBJECT_HPP_
 
 #include "Core/matrix_functions.hpp"
-#include "Core/MultiShape.h"
 #include "glfw.h"
 
 #include "FPS.h"
@@ -59,7 +58,6 @@ namespace Game
                     glVertex2f(vec[0], vec[1]);
                 }
             glEnd();
-            //m_MultiShape.onRender();
         }
 
         virtual void onUpdate() = 0;
@@ -99,8 +97,6 @@ namespace Game
         unsigned int m_iLifes;
         
     protected:
-        virtual void initMultiShape() = 0;
-
         inline void move()
         {
             Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed*GAME_FPS->getFPS()));

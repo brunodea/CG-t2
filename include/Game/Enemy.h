@@ -3,7 +3,6 @@
 
 #include "glfw.h"
 #include "Game/Ship.hpp"
-#include "Core/ShapeRect.h"
 
 #include <iostream>
 
