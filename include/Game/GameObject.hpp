@@ -39,6 +39,7 @@ namespace Game
             m_vColor4[3] = 1.f;
             
             m_iImage = -1;
+            m_bVisible = true;
         }
 
         ~GameObject()
@@ -55,6 +56,9 @@ namespace Game
 
         void onRender()
         {
+            if(!isVisible())
+                return;
+
             //glColor4f(m_vColor4[0], m_vColor4[1], m_vColor4[2], m_vColor4[3]);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -108,6 +112,8 @@ namespace Game
         inline void setVertices(std::vector<Core::Vector3> &vertices) { m_vVertices = vertices; }
         inline std::vector<Core::Vector3> &getVertices() { return m_vVertices; }
 
+        inline bool isVisible() { return m_bVisible; }
+        inline bool setVisible(bool visible) { m_bVisible = visible; }
     protected:
         Core::Vector3 m_vDirection3;
         Core::Vector3 m_vPosition3;
@@ -118,7 +124,7 @@ namespace Game
         std::vector<Core::Vector3> m_vVertices;
 
         int m_iType;
-
+        bool m_bVisible;
         unsigned int m_iLifes;
         
         GLuint m_iImage;
@@ -201,6 +207,7 @@ namespace Game
             m_vColor4[3] = 1.f;
             
             m_iImage = -1;
+            m_bVisible = true;
         }
     }; //end of class GameObject.
 } //end of namespace Game.
