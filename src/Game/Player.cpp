@@ -9,22 +9,21 @@
 using namespace Game;
 
 Player::Player()
-    : Ship()
+    : Ship(GameObject::PLAYER)
 {
     init();
 }
 
 Player::Player(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos)
-    : Ship(dir, speed, pos)
+    : Ship(dir, speed, pos, GameObject::PLAYER)
 {
     init();
 }
 
 void Player::init()
 {
-    m_Type = m_Type & GameObject::PLAYER;
-    m_fAcceleration = 0.000003f;
-    m_fMaxSpeed = .007f;
+    m_fAcceleration = 0.003f;
+    m_fMaxSpeed = .01f;
     Core::Vector3 v(1);
     v[0] = 0.f;
     v[1] = 1.f;
@@ -82,7 +81,7 @@ void Player::initVertices()
     setVertices(*vec);
 }
 
-/*
+
 void Player::onRender()
 {
     glColor3f(0.f, 0.5f, 0.f);
@@ -97,57 +96,61 @@ void Player::onRender()
     glEnd();
     //m_MultiShape.onRender();
 }
-*/
+
 void Player::onCollision(GameObject *obj)
 {
 }
 
 void Player::onUpdate()
 {
-    //if(m_fSpeed > 0.f)
+    int toRotate = 0;
+    float intertia = 0.f;
+    if(glfwGetKey(GLFW_KEY_RIGHT))
+        toRotate = -1;
+    else if(glfwGetKey(GLFW_KEY_LEFT))
+        toRotate = 1;
+    if(glfwGetKey(GLFW_KEY_UP))
     {
-        int toRotate = 0;
-        if(glfwGetKey(GLFW_KEY_RIGHT))
-            toRotate = -1;
-        else if(glfwGetKey(GLFW_KEY_LEFT))
-            toRotate = 1;
-
-        if(toRotate != 0)
-        {
-            /*
-            float angle;
-
-            Core::Vector3 v = m_vDirection3;
-            if(m_fSpeed != 0)
-                v *= m_fSpeed;
-
-            Core::Vector3 v2(1);
-            v2[1] = 0.f;
-            angle = Core::angle(v, v2); 
-            */
-
-            rotate(toRotate*.03f);
-        }
-
-        move();
-        //setSpeed(getSpeed() - getAcceleration()); //inércia?
+        setSpeed(getSpeed() + getAcceleration());
+        if(getSpeed() > getMaxSpeed())
+            setSpeed(getMaxSpeed());
     }
-    //else
-    //   m_fSpeed = 0.f;
+    else
+        intertia = getSpeed() / 50.f;
+
+
+    if(toRotate != 0)
+    {
+        float angle = .03f;
+
+        /*Core::Vector3 v = m_vDirection3;
+        if(m_fSpeed != 0)
+            v *= m_fSpeed;
+
+        Core::Vector3 v2(1);
+        v2[1] = 0.f;
+
+        float ang_2 = Core::angle(v, v2);
+        v2 = Core::rotate(toRotate*ang_2)*v2;
+
+        Core::Vector3 v3 = v;
+        v3 += v2;
+
+        angle = Core::angle(v, v3); */
+
+        rotate(toRotate*angle);
+    }
+
+    if(m_fSpeed > 0.f)
+    {
+        move();
+        setSpeed(getSpeed() - intertia); //inércia?
+    }
+    else
+       m_fSpeed = 0.f;
 }
 
 void Player::onKeyEvent(int key, int state)
 {
-    if(state == GLFW_PRESS)
-    {
-        if(key == GLFW_KEY_UP)
-        {
-            setSpeed(getMaxSpeed());
-            //if(getSpeed() > getMaxSpeed())
-            //    setSpeed(getMaxSpeed());
-        }
-        else if(key == GLFW_KEY_DOWN)
-            setSpeed(0.f);
-    }
 }
 

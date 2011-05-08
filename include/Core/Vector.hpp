@@ -23,6 +23,16 @@ namespace Core
             return res;
         }
 
+        inline Vector<T, 3> crossProduct(Vector<T, 3> &vec)
+        {
+            Vector<T, 3> res;
+            res[0] = ((*this)(1,0)*vec(2,0)) - ((*this)(2,0)*vec(1,0));
+            res[1] = ((*this)(2,0)*vec(0,0)) - ((*this)(0,0)*vec(2,0));
+            res[2] = ((*this)(0,0)*vec(1,0)) - ((*this)(1,0)*vec(0,0));
+
+            return res;
+        }
+
         inline T &operator [](unsigned int i)
         {
             return (*this)(i, 0);

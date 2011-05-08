@@ -31,7 +31,6 @@ namespace Game
         static void keyEventCallback(int key, int state);
         static void mousePosCallback(int x, int y);
 
-        Enemy *m_pTestEnemy;
         Player *m_pPlayer;
 
     }; //end of class GameController.

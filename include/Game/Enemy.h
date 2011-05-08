@@ -2,19 +2,19 @@
 #define _BRUNODEA_CG_T2_ENEMY_H_
 
 #include "glfw.h"
-#include "Game/GameObject.hpp"
+#include "Game/Ship.hpp"
 #include "Core/ShapeRect.h"
 
 #include <iostream>
 
 namespace Game
 {
-    class Enemy : public GameObject
+    class Enemy : public Ship
     {
     public:
-        Enemy() : GameObject(GameObject::ENEMY) 
+        Enemy() : Ship(GameObject::ENEMY) 
         {
-            Core::Vector3 pos;
+            /*Core::Vector3 pos;
             pos[0] = 0.f;
             pos[1] = 0.f;
             setPos(pos);
@@ -25,13 +25,13 @@ namespace Game
             Core::Vector3 dir(1);
             dir[0] = 1;
             dir[1] = 1;
-            setDirection(dir);
+            setDirection(dir);*/
         }
         Enemy(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos) 
-            : GameObject(dir, speed, pos, GameObject::ENEMY)
+            : Ship(dir, speed, pos, GameObject::ENEMY)
         {
-            initVertices();
-            initMultiShape();
+            /*initVertices();
+            initMultiShape();*/
         }
 
         /***********************
@@ -40,7 +40,6 @@ namespace Game
 
         virtual void onRender()
         {
-
             glColor3f(0.f, 0.5f, 0.f);
             glBegin(GL_QUADS); //quadrado
                 for(unsigned int i = 0; i < m_vVertices.size(); i++)
@@ -55,47 +54,13 @@ namespace Game
             //m_MultiShape.onRender();
         }
 
-        virtual void onUpdate()
-        {
-            move();
-        }
-        virtual void onCollision(GameObject *obj) {/**/};
+        virtual void onUpdate() { move(); }
+        virtual void onCollision(GameObject *obj) = 0;
+
     private:
-
-        virtual void initVertices()
-        {
-            float width = .1f;
-            float height = width;
-            Core::Vector3 v1(1);
-            v1[0] = -width;
-            v1[1] = -height;
-
-            Core::Vector3 v2(1);
-            v2[0] = -width;
-            v2[1] = height;
-
-            Core::Vector3 v3(1);
-            v3[0] = width;
-            v3[1] = height;
-
-            Core::Vector3 v4(1);
-            v4[0] = width;
-            v4[1] = -height;
-
-            std::vector<Core::Vector3> *vec = new std::vector<Core::Vector3>();
-            vec->push_back(v1);
-            vec->push_back(v2);
-            vec->push_back(v3);
-            vec->push_back(v4);
-
-            setVertices(*vec);
-        }
-
-        virtual void initMultiShape()
-        {
-            Core::ShapeRect *rect = new Core::ShapeRect(Core::Vector2(0), .1f, .1f);
-            m_MultiShape.addShape(rect);
-        }
+        virtual void initMultiShape() = 0;
+        virtual void initVertices() = 0;
+        virtual void init() = 0;
 
     }; //end of class Enemy.
 } //end of namespace Game.

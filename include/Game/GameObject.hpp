@@ -28,9 +28,9 @@ namespace Game
             m_Type = OBJECT;
             init();
         }
-        GameObject(Type type) : m_Type(type) { init(); }
+        GameObject(int type) : m_Type(type) { init(); }
 
-        GameObject(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, Type type)
+        GameObject(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, int type)
             : m_vDirection3(dir), m_fSpeed(speed), m_vPosition3(pos), m_Type(type)
         {
             m_iLifes = 1;
