@@ -13,11 +13,11 @@ namespace Game
     {
     public:
         Ship(Type type) 
-            : GameObject(GameObject::SHIP | type), m_dLastShot(0), m_fAcceleration(0), m_fMaxSpeed(0)
+            : GameObject(GameObject::SHIP | type), m_dLastShot(0), m_fAcceleration(0), m_fMaxSpeed(0), m_iShotsPerSecond(2)
         {
         }
         Ship(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, Type type)
-            : GameObject(dir, speed, pos, GameObject::SHIP & type), m_dLastShot(0), m_fAcceleration(0), m_fMaxSpeed(0)
+            : GameObject(dir, speed, pos, GameObject::SHIP & type), m_dLastShot(0), m_fAcceleration(0), m_fMaxSpeed(0), m_iShotsPerSecond(2)
         {
         }
 
@@ -69,7 +69,7 @@ namespace Game
         inline bool shoot(Shot &s) 
         { 
             double time = glfwGetTime();
-            if(time - m_dLastShot > .5f) //2tiros por segundo no máximo.
+            if(time - m_dLastShot > 1.f/m_iShotsPerSecond) //2tiros por segundo no máximo.
             {
                 m_dLastShot = time;
 
@@ -87,9 +87,11 @@ namespace Game
         inline float getMaxSpeed() { return m_fMaxSpeed; }
         inline void setMaxSpeed(float max_speed) { m_fMaxSpeed = max_speed; }
 
+        inline void setShotsPerSecond(unsigned int sps) { m_iShotsPerSecond = sps; }
     protected:
         std::vector<Shot> m_vpShots;
         double m_dLastShot;
+        unsigned int m_iShotsPerSecond; //numero máximo de tiros por segundo.
 
         float m_fAcceleration;
         float m_fMaxSpeed;

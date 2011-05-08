@@ -16,6 +16,9 @@ namespace Game
         void onCollision(GameObject *obj);
         void onKeyEvent(int key, int state);
     private:
+        Core::Vector3 m_vShotPos3; //lugar de onde o tiro vai sair.
+
+    private:
         void init();
 
     }; //end of class Player.

@@ -32,7 +32,11 @@ void Player::init()
 
     m_iImage = loadTexture("resources/aircraft.tga");
 
-    initVertices(.71f/5, .46f/5);
+    float w = .71f/5;
+    float h = .46f/5;
+    initVertices(w, h);
+    m_vShotPos3[0] = m_vPosition3[0];
+    m_vShotPos3[1] = m_vPosition3[1] + h;
 }
 
 void Player::onCollision(GameObject *obj)
@@ -76,6 +80,7 @@ void Player::update()
         angle = Core::angle(v, v3); */
 
         rotate(toRotate*angle);
+        m_vShotPos3 = Core::rotate(toRotate*angle)*m_vShotPos3;
     }
 
     if(m_fSpeed > 0.f)
@@ -94,12 +99,13 @@ void Player::onKeyEvent(int key, int state)
         if(state == GLFW_PRESS)
         {
             NormalShot *s = new NormalShot();
-            Core::Vector3 v = m_vPosition3;
-            v[1] += .46f/5;
+            Core::Vector3 v = m_vShotPos3;
+            v += m_vPosition3;
             s->setPos(v);
             s->setDirection(m_vDirection3);
             s->setSpeed(.03f);
-            //s.adjustVerticesAngle();
+            s->adjustVerticesAngle();
+            setShotsPerSecond(5);
             if(!shoot(*s))
                 delete s;
         }

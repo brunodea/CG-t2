@@ -21,11 +21,6 @@ namespace Game
         {
             setVisible(false);
         }
-        
-        ~Shot()
-        {
-            std::cout << "shot destructor called.\n";
-        }
 
         virtual void onUpdate() 
         {

@@ -13,11 +13,11 @@ inline GLuint loadTexture(const char *path)
     {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-        std::cout << "Image " << path << " successfully loaded." << std::endl;
+        //std::cout << "Image " << path << " successfully loaded." << std::endl;
         return texture;
     }
         
-    std::cout << "Image " << path << " couldn't be loaded." << std::endl;
+    //std::cout << "Image " << path << " couldn't be loaded." << std::endl;
     return -1;
 }
 
