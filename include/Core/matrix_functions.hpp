@@ -38,7 +38,7 @@ namespace Core
     {
         Matrix<float, M> res = identity<M>();
 
-        for(unsigned int i = 0; i < M; i++)
+        for(unsigned int i = 0; i < M-1; i++)
             res.set(vec(i, 0), i, M-1);
 
         return res;

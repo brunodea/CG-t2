@@ -23,8 +23,12 @@ Player::Player(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos)
 void Player::init()
 {
     m_Type = m_Type & GameObject::PLAYER;
-    m_fAcceleration = 0.0003f;
-    m_fMaxSpeed = .0003f;
+    m_fAcceleration = 0.000003f;
+    m_fMaxSpeed = .003f;
+    Core::Vector3 v(1);
+    v[0] = 0.f;
+    v[1] = 1.f;
+    setDirection(v);
 
     initMultiShape();
     initVertices();
@@ -57,18 +61,23 @@ void Player::initVertices()
     v2[1] = height;
 
     Core::Vector3 v3(1);
-    v3[0] = width;
-    v3[1] = height;
+    v3[0] = m_vPosition3[0];
+    v3[1] = height + 0.06f;
 
     Core::Vector3 v4(1);
     v4[0] = width;
-    v4[1] = -height;
+    v4[1] = height;
 
+    Core::Vector3 v5(1);
+    v5[0] = width;
+    v5[1] = -height;
+    
     std::vector<Core::Vector3> *vec = new std::vector<Core::Vector3>();
     vec->push_back(v1);
     vec->push_back(v2);
     vec->push_back(v3);
     vec->push_back(v4);
+    vec->push_back(v5);
 
     setVertices(*vec);
 }
@@ -76,7 +85,7 @@ void Player::initVertices()
 void Player::onRender()
 {
     glColor3f(0.f, 0.5f, 0.f);
-    glBegin(GL_QUADS); //quadrado
+    glBegin(GL_POLYGON); //quadrado
         for(unsigned int i = 0; i < m_vVertices.size(); i++)
         {
             Core::Vector3 vec(1);
@@ -94,29 +103,60 @@ void Player::onCollision(GameObject *obj)
 
 void Player::onUpdate()
 {
-    /*
-    if(m_fSpeed > 0.f)
-        m_fSpeed -= m_fAcceleration; //inércia?
-    else
-        m_fSpeed = 0.f;
-    */
+    //if(m_fSpeed > 0.f)
+    {
+        move();
+        //setSpeed(getSpeed() - getAcceleration()); //inércia?
+    }
+    //else
+    //   m_fSpeed = 0.f;
 }
 
 void Player::onKeyEvent(int key, int state)
 {
-    /*
-    if(key == GLFW_KEY_UP)
+    float angle = 0.f;
+    if(state == GLFW_PRESS)
     {
-        m_fSpeed += m_fAcceleration;
-        if(m_fSpeed > m_fMaxSpeed)
-            m_fSpeed = m_fMaxSpeed;
-    }
-    */
-    if(key == GLFW_KEY_RIGHT && state == GLFW_PRESS)
-    {
-        Core::Vector3 pos = m_vPosition3;
-        Core::Matrix3 mat = Core::translate(pos)*Core::rotate(1.f)*Core::translate(Core::Vector3(0));
-        adjustVertices(mat);
+        if(key == GLFW_KEY_RIGHT)
+            angle = -0.3f;
+        else if(key == GLFW_KEY_LEFT)
+            angle = 0.3f;
+        else if(key == GLFW_KEY_UP)
+        {
+            setSpeed(getMaxSpeed());
+            //if(getSpeed() > getMaxSpeed())
+            //    setSpeed(getMaxSpeed());
+        }
+        else if(key == GLFW_KEY_DOWN)
+        {
+            Core::Vector3 orig;
+            orig[0] = -m_vPosition3[0];
+            orig[1] = -m_vPosition3[1];
+            orig[2] = 1.f;
+            //setSpeed(0.f);
+            
+            Core::Matrix3 mat = Core::translate(orig);
+            adjustVertices(mat);
+            m_vPosition3 = orig;
+        }
+
+        //rotacionar
+        if(angle != 0)
+        {
+            Core::Vector3 orig;
+            orig[0] = -m_vPosition3[0];
+            orig[1] = -m_vPosition3[1];
+            orig[2] = 1.f;
+
+            Core::Matrix3 rot = Core::rotate(angle);
+
+            Core::Vector3 n_dir = m_vDirection3;
+            n_dir = rot*n_dir;
+            setDirection(n_dir);
+            
+            Core::Matrix3 mat = rot; //Como os vertices ja estao em relação à origem, não precisa transladar para a origem e depois para o lugar certo.
+            adjustVertices(mat);
+        }
     }
 }
 

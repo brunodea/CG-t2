@@ -85,9 +85,8 @@ namespace Game
 
         inline void move()
         {
-            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed*GAME_FPS->getFPS()));
+            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed/**GAME_FPS->getFPS()*/));
             m_vPosition3 += pos;
-            adjustVertices();
             Core::Vector3 v = m_MultiShape.getRelPos();
             v += m_vPosition3;
             m_MultiShape.setRelPos(v);
@@ -99,15 +98,6 @@ namespace Game
             {
                 Core::Vector3 *vertex = &m_vVertices.at(i);
                 *vertex = mat*(*vertex);
-            }
-        }
-
-        inline void adjustVertices()
-        {
-            for(unsigned int i = 0; i < m_vVertices.size(); i++)
-            {
-                Core::Vector3 *vertex = &m_vVertices.at(i);
-                *vertex += m_vPosition3;
             }
         }
 
