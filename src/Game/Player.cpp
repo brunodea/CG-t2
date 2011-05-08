@@ -28,38 +28,9 @@ void Player::init()
     v[1] = 1.f;
     setDirection(v);
 
-    char *c = "resources/aircraft.tga";
-    m_iImage = loadTexture(c);
-    initVertices();
-}
+    m_iImage = loadTexture("resources/aircraft.tga");
 
-void Player::initVertices()
-{
-    float width = .71f/5;
-    float height = .46f/5;
-    Core::Vector3 v1(1);
-    v1[0] = -width;
-    v1[1] = -height;
-
-    Core::Vector3 v2(1);
-    v2[0] = -width;
-    v2[1] = height;
-
-    Core::Vector3 v3(1);
-    v3[0] = width;
-    v3[1] = height;
-
-    Core::Vector3 v4(1);
-    v4[0] = width;
-    v4[1] = -height;
-    
-    std::vector<Core::Vector3> *vec = new std::vector<Core::Vector3>();
-    vec->push_back(v1);
-    vec->push_back(v2);
-    vec->push_back(v3);
-    vec->push_back(v4);
-
-    setVertices(*vec);
+    initVertices(.71f/5, .46/5);
 }
 
 void Player::onCollision(GameObject *obj)

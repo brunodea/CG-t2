@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Core\Shapes">
       <UniqueIdentifier>{89f964e6-3877-4d97-9d4b-e61d3e2322ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Shots">
+      <UniqueIdentifier>{42b0c5f2-82fd-4363-960e-1d8eb051f251}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Core\Matrix.hpp">
@@ -57,9 +60,6 @@
     <ClInclude Include="..\include\Game\Enemy.h">
       <Filter>Header Files\Game\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Game\Shot.hpp">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Core\shape_functions.h">
       <Filter>Header Files\Core\Shapes</Filter>
     </ClInclude>
@@ -77,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="..\include\functions.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Game\Shot.hpp">
+      <Filter>Header Files\Game\Shots</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

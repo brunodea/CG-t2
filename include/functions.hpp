@@ -3,7 +3,7 @@
 
 #include "glfw.h"
 
-GLuint loadTexture(const char *path)
+inline GLuint loadTexture(const char *path)
 {
     GLuint texture;
     glGenTextures(1, &texture);
