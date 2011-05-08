@@ -17,7 +17,7 @@ namespace Game
         {
             ENEMY = 0x00000000,
             PLAYER = 0x00000001,
-            OBJECT = 0x00000010,
+            NONE = 0x00000010,
             SHOT = 0x00000100,
             SHIP = 0x00001000
         }; //end of enum Type.
@@ -25,13 +25,13 @@ namespace Game
     public:
         GameObject()
         {
-            m_Type = OBJECT;
+            m_iType = NONE;
             init();
         }
-        GameObject(int type) : m_Type(type) { init(); }
+        GameObject(int type) : m_iType(type) { init(); }
 
         GameObject(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, int type)
-            : m_vDirection3(dir), m_fSpeed(speed), m_vPosition3(pos), m_Type(type)
+            : m_vDirection3(dir), m_fSpeed(speed), m_vPosition3(pos), m_iType(type)
         {
             m_iLifes = 1;
 
@@ -82,8 +82,6 @@ namespace Game
         inline void setLifes(unsigned int lifes) { m_iLifes = lifes; }
         inline int getLifes() { return m_iLifes; }
 
-        inline Core::MultiShape &getMultiShape() { return m_MultiShape; }
-
         inline void setVertices(std::vector<Core::Vector3> &vertices) { m_vVertices = vertices; }
         inline std::vector<Core::Vector3> &getVertices() { return m_vVertices; }
 
@@ -96,22 +94,17 @@ namespace Game
 
         std::vector<Core::Vector3> m_vVertices;
 
-        int m_Type;
+        int m_iType;
 
         unsigned int m_iLifes;
-
-        Core::MultiShape m_MultiShape;
         
     protected:
         virtual void initMultiShape() = 0;
 
         inline void move()
         {
-            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed/**GAME_FPS->getFPS()*/));
+            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed*GAME_FPS->getFPS()));
             m_vPosition3 += pos;
-            Core::Vector3 v = m_MultiShape.getRelPos();
-            v += m_vPosition3;
-            m_MultiShape.setRelPos(v);
         }
 
         inline void adjustVertices(Core::Matrix3 &mat)
@@ -152,7 +145,6 @@ namespace Game
             setPos(v_init);
 
             m_iLifes = 1;
-            m_MultiShape.setRelPos(m_vPosition3);
             m_vColor4[0] = 1.f;
             m_vColor4[1] = 0.f;
             m_vColor4[2] = 0.f;

@@ -17,7 +17,6 @@ namespace Game
         void onKeyEvent(int key, int state);
 
     private:
-        void initMultiShape();
         void initVertices();
         void init();
 

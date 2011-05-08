@@ -29,22 +29,7 @@ void Player::init()
     v[1] = 1.f;
     setDirection(v);
 
-    initMultiShape();
     initVertices();
-}
-
-void Player::initMultiShape()
-{
-    Core::Vector2 pos(0);
-    pos[1] = 0.3f;
-    Core::ShapeRect *shape = new Core::ShapeRect(pos, .1f, .1f);
-
-    pos[0] = .05f; //.1/2
-    pos[1] = 0.f;
-    Core::ShapeRect *cannon = new Core::ShapeRect(pos, .0125f, .0125f);
-
-    m_MultiShape.addShape(shape);
-    m_MultiShape.addShape(cannon);
 }
 
 void Player::initVertices()

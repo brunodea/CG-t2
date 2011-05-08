@@ -12,16 +12,10 @@ namespace Game
     public:
         Ship(Type type) : GameObject(GameObject::SHIP & type), m_Shot(0), m_fAcceleration(0) 
         {
-            initMultiShape();
-            initVertices();
-            init();
         }
         Ship(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, Type type) 
             : GameObject(dir, speed, pos, GameObject::SHIP & type), m_Shot(0), m_fAcceleration(0)
         {
-            initMultiShape();
-            initVertices();
-            init();
         }
 
         ~Ship()
@@ -48,10 +42,6 @@ namespace Game
         Shot *m_Shot;
         float m_fAcceleration;
         float m_fMaxSpeed;
-    private:
-        virtual void initMultiShape() = 0;
-        virtual void initVertices() = 0;
-        virtual void init() = 0;
 
     }; //end of class Ship.
 

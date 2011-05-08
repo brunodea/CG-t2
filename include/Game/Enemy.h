@@ -56,12 +56,7 @@ namespace Game
 
         virtual void onUpdate() { move(); }
         virtual void onCollision(GameObject *obj) = 0;
-
-    private:
-        virtual void initMultiShape() = 0;
-        virtual void initVertices() = 0;
-        virtual void init() = 0;
-
+        
     }; //end of class Enemy.
 } //end of namespace Game.
 
