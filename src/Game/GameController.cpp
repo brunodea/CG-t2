@@ -97,7 +97,7 @@ void GameController::render()
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
 
-    m_pPlayer->onRender();
+    m_pPlayer->render();
 
     glFlush();
     glfwSwapBuffers();

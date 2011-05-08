@@ -21,15 +21,21 @@ namespace Game
         {
             setVisible(false);
         }
+        
+        ~Shot()
+        {
+            std::cout << "shot destructor called.\n";
+        }
 
         virtual void onUpdate() 
         {
             if(isVisible())
             {
-                if(!isAlive())
-                    m_fSpeed = 0;
-                if(m_vPosition3[0] < 0 || m_vPosition3[0] >= WINDOW_WIDTH || m_vPosition3[1] < 0 || m_vPosition3[1] >= WINDOW_HEIGHT)
+                float f = 1.f;
+                if(m_vPosition3[0] < -f || m_vPosition3[0] >= f ||
+                   m_vPosition3[1] < -f || m_vPosition3[1] >= f)
                     setLifes(0);
+                move();
             }
         }
         virtual void onCollision(GameObject *obj) 
@@ -40,20 +46,30 @@ namespace Game
                 setLifes(0);
             }
         }
+
+        void adjustVerticesAngle()
+        {
+            Core::Vector3 v(1);
+            v[0] = 0.f;
+
+            Core::Matrix3 mat = Core::rotate(Core::angle(m_vDirection3, v));
+            //mat.print();
+            adjustVertices(mat);
+        }
     private:
         unsigned int m_iDamage;
     }; //end of class Shot.
 
-    
     struct NormalShot : public Shot
     {
         NormalShot() : Shot(1, Shot::NORMAL) 
         { 
             m_iImage = loadTexture("resources/shot_laser.tga");
+
             initVertices(.04f/5, .39f/5);
         }
-    }; //end of struct NormalShot.
 
+    }; //end of struct NormalShot.
 } //end of namespace Game.
 
 #endif

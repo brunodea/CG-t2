@@ -2,6 +2,7 @@
 #include "glfw.h"
 #include "Core/matrix_functions.hpp"
 #include "functions.hpp"
+#include "Game/Shot.hpp"
 
 #include <iostream>
 
@@ -21,6 +22,7 @@ Player::Player(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos)
 
 void Player::init()
 {
+    setVisible(true);
     m_fAcceleration = 0.003f;
     m_fMaxSpeed = .01f;
     Core::Vector3 v(1);
@@ -30,14 +32,14 @@ void Player::init()
 
     m_iImage = loadTexture("resources/aircraft.tga");
 
-    initVertices(.71f/5, .46/5);
+    initVertices(.71f/5, .46f/5);
 }
 
 void Player::onCollision(GameObject *obj)
 {
 }
 
-void Player::onUpdate()
+void Player::update()
 {
     int toRotate = 0;
     float intertia = 0.f;
@@ -53,7 +55,6 @@ void Player::onUpdate()
     }
     else
         intertia = getSpeed() / 50.f;
-
 
     if(toRotate != 0)
     {
@@ -88,5 +89,20 @@ void Player::onUpdate()
 
 void Player::onKeyEvent(int key, int state)
 {
+    if(key == GLFW_KEY_SPACE)
+    {
+        if(state == GLFW_PRESS)
+        {
+            NormalShot *s = new NormalShot();
+            Core::Vector3 v = m_vPosition3;
+            v[1] += .46f/5;
+            s->setPos(v);
+            s->setDirection(m_vDirection3);
+            s->setSpeed(.03f);
+            //s.adjustVerticesAngle();
+            if(!shoot(*s))
+                delete s;
+        }
+    }
 }
 

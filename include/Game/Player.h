@@ -11,7 +11,8 @@ namespace Game
         Player();
         Player(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos);
 
-        void onUpdate();
+        /* função chamada após o update básico de Ship. */
+        void update();
         void onCollision(GameObject *obj);
         void onKeyEvent(int key, int state);
     private:

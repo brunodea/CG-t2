@@ -3,6 +3,7 @@
 
 #include "macros.h"
 #include "Game/GameController.h"
+#include "Game/Shot.hpp"
 
 void GLFWCALL handleResize(int width, int height)
 {

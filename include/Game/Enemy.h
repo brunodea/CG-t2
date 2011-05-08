@@ -23,7 +23,7 @@ namespace Game
          *  Virtual Functions  *
          ***********************/
 
-        virtual void onUpdate() { move(); }
+        virtual void update() { move(); }
         virtual void onCollision(GameObject *obj) = 0;
         
     }; //end of class Enemy.

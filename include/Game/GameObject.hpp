@@ -50,11 +50,7 @@ namespace Game
 
         inline bool isAlive() { return m_iLifes > 0; }
 
-        /***********************
-         *  Virtual Functions  *
-         ***********************/
-
-        void onRender()
+        void render()
         {
             if(!isVisible())
                 return;
@@ -87,8 +83,20 @@ namespace Game
                     glVertex2f(vec[0], vec[1]);
                 }
             glEnd();
+
+            onRender();
         }
 
+        inline void move()
+        {
+            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed/**GAME_FPS->getFPS()*/));
+            m_vPosition3 += pos;
+        }
+
+        /***********************
+         *  Virtual Functions  *
+         ***********************/
+        virtual void onRender() {/**/}
         virtual void onUpdate() = 0;
         virtual void onCollision(GameObject *obj) = 0;
         virtual void onKeyEvent(int key, int state) {/**/}
@@ -113,7 +121,7 @@ namespace Game
         inline std::vector<Core::Vector3> &getVertices() { return m_vVertices; }
 
         inline bool isVisible() { return m_bVisible; }
-        inline bool setVisible(bool visible) { m_bVisible = visible; }
+        inline void setVisible(bool visible) { m_bVisible = visible; }
     protected:
         Core::Vector3 m_vDirection3;
         Core::Vector3 m_vPosition3;
@@ -155,12 +163,6 @@ namespace Game
             vec->push_back(v4);
 
             setVertices(*vec);
-        }
-
-        inline void move()
-        {
-            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed/**GAME_FPS->getFPS()*/));
-            m_vPosition3 += pos;
         }
 
         inline void adjustVertices(Core::Matrix3 &mat)
