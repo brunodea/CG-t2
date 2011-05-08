@@ -9,9 +9,14 @@ namespace Game
     class Shot : public GameObject
     {
     public:
-        Shot(unsigned int damage) : GameObject(GameObject::SHOT), m_iDamage(damage) {}
+        enum Type
+        {
+            NORMAL = 0
+        }; //end of enum Type.
 
-        virtual void onRender() = 0;
+    public:
+        Shot(unsigned int damage, Type type) : GameObject(GameObject::SHOT | type), m_iDamage(damage) {}
+
         virtual void onUpdate() 
         {
             if(!isAlive())

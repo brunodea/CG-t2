@@ -11,11 +11,9 @@ namespace Game
         Player();
         Player(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos);
 
-        void onRender();
         void onUpdate();
         void onCollision(GameObject *obj);
         void onKeyEvent(int key, int state);
-
     private:
         void initVertices();
         void init();

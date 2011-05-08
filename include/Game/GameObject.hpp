@@ -53,15 +53,33 @@ namespace Game
          *  Virtual Functions  *
          ***********************/
 
-        virtual void onRender()
+        void onRender()
         {
-            glColor4f(m_vColor4[0], m_vColor4[1], m_vColor4[2], m_vColor4[3]);
-            glBegin(GL_POLYGON); //quadrado
+            //glColor4f(m_vColor4[0], m_vColor4[1], m_vColor4[2], m_vColor4[3]);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+            glColor4f(1.f, 1.f, 1.f, 1.f);
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, m_iImage);
+            glBegin(GL_QUADS); //quadrado
                 for(unsigned int i = 0; i < m_vVertices.size(); i++)
                 {
                     Core::Vector3 vec(1);
                     vec[0] = (m_vVertices.at(i)+m_vPosition3)(0,0);
                     vec[1] = (m_vVertices.at(i)+m_vPosition3)(1,0);
+            
+                    if(m_iImage >= 0)
+                    {
+                        if(i == 0)
+                            glTexCoord2f(0.f, 0.f);
+                        else if(i == 1)
+                            glTexCoord2f(0.f, 1.f);
+                        else if(i == 2)
+                            glTexCoord2f(1.f, 1.f);
+                        else if(i == 3)
+                            glTexCoord2f(1.f, 0.f);
+                    }
                     glVertex2f(vec[0], vec[1]);
                 }
             glEnd();
