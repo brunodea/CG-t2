@@ -10,7 +10,7 @@ namespace Game
     class Ship : public GameObject
     {
     public:
-        Ship(Type type) : GameObject(GameObject::SHIP & type), m_Shot(0), m_fAcceleration(0) 
+        Ship(Type type) : GameObject(GameObject::SHIP | type), m_Shot(0), m_fAcceleration(0) 
         {
         }
         Ship(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, Type type) 

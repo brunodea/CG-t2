@@ -30,17 +30,13 @@ void Player::init()
 
     char *c = "resources/aircraft.tga";
     m_iImage = loadTexture(c);
-    if(m_iImage < 0)
-        std::cout << "Image " << c << " couldn't be loaded." << std::endl;
-    else
-        std::cout << "Image " << c << " successfully loaded." << std::endl;
     initVertices();
 }
 
 void Player::initVertices()
 {
-    float width = .071f;
-    float height = .046f;
+    float width = .71f/5;
+    float height = .46f/5;
     Core::Vector3 v1(1);
     v1[0] = -width;
     v1[1] = -height;
@@ -74,8 +70,10 @@ void Player::initVertices()
 
 void Player::onRender()
 {
-    glColor3f(1.f, 1.f, 1.f);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    glColor4f(1.f, 1.f, 1.f, 1.f);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, m_iImage);
     glBegin(GL_QUADS); //quadrado
