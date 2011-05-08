@@ -1,6 +1,7 @@
 #include "Game/Player.h"
 #include "glfw.h"
 #include "Core/matrix_functions.hpp"
+#include "functions.hpp"
 
 #include <iostream>
 
@@ -27,13 +28,19 @@ void Player::init()
     v[1] = 1.f;
     setDirection(v);
 
+    char *c = "resources/aircraft.tga";
+    m_iImage = loadTexture(c);
+    if(m_iImage < 0)
+        std::cout << "Image " << c << " couldn't be loaded." << std::endl;
+    else
+        std::cout << "Image " << c << " successfully loaded." << std::endl;
     initVertices();
 }
 
 void Player::initVertices()
 {
-    float width = .1f;
-    float height = width;
+    float width = .071f;
+    float height = .046f;
     Core::Vector3 v1(1);
     v1[0] = -width;
     v1[1] = -height;
@@ -42,9 +49,9 @@ void Player::initVertices()
     v2[0] = -width;
     v2[1] = height;
 
-    Core::Vector3 v3(1);
-    v3[0] = m_vPosition3[0];
-    v3[1] = height + 0.06f;
+    //Core::Vector3 v3(1);
+    //v3[0] = m_vPosition3[0];
+    //v3[1] = height + 0.06f;
 
     Core::Vector3 v4(1);
     v4[0] = width;
@@ -57,7 +64,7 @@ void Player::initVertices()
     std::vector<Core::Vector3> *vec = new std::vector<Core::Vector3>();
     vec->push_back(v1);
     vec->push_back(v2);
-    vec->push_back(v3);
+    //vec->push_back(v3);
     vec->push_back(v4);
     vec->push_back(v5);
 
@@ -67,13 +74,28 @@ void Player::initVertices()
 
 void Player::onRender()
 {
-    glColor3f(0.f, 0.5f, 0.f);
-    glBegin(GL_POLYGON); //quadrado
+    glColor3f(1.f, 1.f, 1.f);
+
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, m_iImage);
+    glBegin(GL_QUADS); //quadrado
         for(unsigned int i = 0; i < m_vVertices.size(); i++)
         {
             Core::Vector3 vec(1);
             vec[0] = (m_vVertices.at(i)+m_vPosition3)(0,0);
             vec[1] = (m_vVertices.at(i)+m_vPosition3)(1,0);
+            
+            if(m_iImage >= 0)
+            {
+                if(i == 0)
+                    glTexCoord2f(0.f, 0.f);
+                else if(i == 1)
+                    glTexCoord2f(0.f, 1.f);
+                else if(i == 2)
+                    glTexCoord2f(1.f, 1.f);
+                else if(i == 3)
+                    glTexCoord2f(1.f, 0.f);
+            }
             glVertex2f(vec[0], vec[1]);
         }
     glEnd();

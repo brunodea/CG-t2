@@ -6,7 +6,6 @@
 
 #include "FPS.h"
 #include <vector>
-
 namespace Game
 {
     class GameObject
@@ -38,6 +37,14 @@ namespace Game
             m_vColor4[1] = 0.f;
             m_vColor4[2] = 0.f;
             m_vColor4[3] = 1.f;
+            
+            m_iImage = -1;
+        }
+
+        ~GameObject()
+        {
+            if(m_iImage > -1)
+                glDeleteTextures(1, &m_iImage);
         }
 
         inline bool isAlive() { return m_iLifes > 0; }
@@ -83,7 +90,7 @@ namespace Game
         inline void setVertices(std::vector<Core::Vector3> &vertices) { m_vVertices = vertices; }
         inline std::vector<Core::Vector3> &getVertices() { return m_vVertices; }
 
-    protected:        
+    protected:
         Core::Vector3 m_vDirection3;
         Core::Vector3 m_vPosition3;
         float m_fSpeed;
@@ -96,10 +103,12 @@ namespace Game
 
         unsigned int m_iLifes;
         
+        GLuint m_iImage;
+
     protected:
         inline void move()
         {
-            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed*GAME_FPS->getFPS()));
+            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed/**GAME_FPS->getFPS()*/));
             m_vPosition3 += pos;
         }
 
@@ -145,6 +154,8 @@ namespace Game
             m_vColor4[1] = 0.f;
             m_vColor4[2] = 0.f;
             m_vColor4[3] = 1.f;
+            
+            m_iImage = -1;
         }
     }; //end of class GameObject.
 } //end of namespace Game.

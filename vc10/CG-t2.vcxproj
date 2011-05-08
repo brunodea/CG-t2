@@ -77,6 +77,7 @@
     <ClInclude Include="..\include\Core\shape_functions.h" />
     <ClInclude Include="..\include\Core\Vector.hpp" />
     <ClInclude Include="..\include\FPS.h" />
+    <ClInclude Include="..\include\functions.hpp" />
     <ClInclude Include="..\include\Game\Enemy.h" />
     <ClInclude Include="..\include\Game\GameController.h" />
     <ClInclude Include="..\include\Game\GameObject.hpp" />

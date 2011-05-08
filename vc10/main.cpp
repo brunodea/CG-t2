@@ -22,13 +22,12 @@ int main()
         exit(EXIT_FAILURE);
     }
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-    glClearColor(1.f, 1.f, 1.f, 1.f);
+    glClearColor(0.f, 0.f, 0.f, 1.f);
 
     glfwSetWindowSizeCallback(handleResize);
 
     GAME.run();
     delete GAME_FPS;
-
 
     glfwTerminate();
     exit(EXIT_SUCCESS);

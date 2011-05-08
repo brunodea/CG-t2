@@ -75,6 +75,9 @@
     <ClInclude Include="..\include\Core\ColShape.h">
       <Filter>Header Files\Core\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\functions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
