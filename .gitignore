@@ -5,3 +5,4 @@ vc10/Debug/*
 vc10/ipch/*
 bin/*
 *.jpg
+*.png
