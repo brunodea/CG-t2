@@ -14,6 +14,15 @@ namespace Core
             this->clear(val);
         }
 
+        inline float dotProduct(Vector<T, M> &vec)
+        {
+            float res = 0.f;
+            for(unsigned int i = 0; i < M; i++)
+                res += ((*this)(i, 0)*vec(i, 0));
+
+            return res;
+        }
+
         inline T &operator [](unsigned int i)
         {
             return (*this)(i, 0);

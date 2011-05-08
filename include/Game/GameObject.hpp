@@ -3,6 +3,7 @@
 
 #include "Core/matrix_functions.hpp"
 #include "Core/MultiShape.h"
+#include "glfw.h"
 
 #include "FPS.h"
 #include <vector>
@@ -33,6 +34,11 @@ namespace Game
             : m_vDirection3(dir), m_fSpeed(speed), m_vPosition3(pos), m_Type(type)
         {
             m_iLifes = 1;
+
+            m_vColor4[0] = 1.f;
+            m_vColor4[1] = 0.f;
+            m_vColor4[2] = 0.f;
+            m_vColor4[3] = 1.f;
         }
 
         inline bool isAlive() { return m_iLifes > 0; }
@@ -41,7 +47,21 @@ namespace Game
          *  Virtual Functions  *
          ***********************/
 
-        virtual void onRender() = 0;
+        virtual void onRender()
+        {
+            glColor4f(m_vColor4[0], m_vColor4[1], m_vColor4[2], m_vColor4[3]);
+            glBegin(GL_POLYGON); //quadrado
+                for(unsigned int i = 0; i < m_vVertices.size(); i++)
+                {
+                    Core::Vector3 vec(1);
+                    vec[0] = (m_vVertices.at(i)+m_vPosition3)(0,0);
+                    vec[1] = (m_vVertices.at(i)+m_vPosition3)(1,0);
+                    glVertex2f(vec[0], vec[1]);
+                }
+            glEnd();
+            //m_MultiShape.onRender();
+        }
+
         virtual void onUpdate() = 0;
         virtual void onCollision(GameObject *obj) = 0;
         virtual void onKeyEvent(int key, int state) {/**/}
@@ -72,6 +92,8 @@ namespace Game
         Core::Vector3 m_vPosition3;
         float m_fSpeed;
 
+        Core::Vector4 m_vColor4;
+
         std::vector<Core::Vector3> m_vVertices;
 
         int m_Type;
@@ -101,6 +123,25 @@ namespace Game
             }
         }
 
+        void rotate(float angle)
+        {
+            if(angle == 0)
+                return;
+            Core::Vector3 orig;
+            orig[0] = -m_vPosition3[0];
+            orig[1] = -m_vPosition3[1];
+            orig[2] = 1.f;
+
+            Core::Matrix3 rot = Core::rotate(angle);
+
+            Core::Vector3 n_dir = m_vDirection3;
+            n_dir = rot*n_dir;
+            setDirection(n_dir);
+            
+            Core::Matrix3 mat = rot; //Como os vertices ja estao em relação à origem, não precisa transladar para a origem e depois para o lugar certo.
+            adjustVertices(mat);
+        }
+
     private:
         inline void init()
         {
@@ -112,6 +153,10 @@ namespace Game
 
             m_iLifes = 1;
             m_MultiShape.setRelPos(m_vPosition3);
+            m_vColor4[0] = 1.f;
+            m_vColor4[1] = 0.f;
+            m_vColor4[2] = 0.f;
+            m_vColor4[3] = 1.f;
         }
     }; //end of class GameObject.
 } //end of namespace Game.

@@ -75,6 +75,15 @@ namespace Core
     }
 
     template<unsigned int M>
+    const float angle(const Vector<float, M> &v1, const Vector<float, M> &v2)
+    {
+        Vector<float, M> v1_unit = unitary(v1);
+        Vector<float, M> v2_unit = unitary(v2);
+
+        return acosf(v1_unit.dotProduct(v2_unit));
+    }
+
+    template<unsigned int M>
     const Matrix<float, M, 1> toMatrix(const Vector<float, M> &vec)
     {
         Matrix<float, M, 1> res;
