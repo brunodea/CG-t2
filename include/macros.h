@@ -14,7 +14,6 @@
 
 #define MY_PI 3.14159265f
 
-#define TEX_NORMAL_SHOT 0
-#define TEX_PLAYER 1
+#define TEXTURES TextureID::m_sTextureID
 
 #endif

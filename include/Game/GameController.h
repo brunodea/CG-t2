@@ -13,13 +13,13 @@ namespace Game
     public:
         ~GameController();
         static GameController &instance();
-
         void run();
 
         /* Callbacks. */
         void mousePosEvent(int x, int y);
         void mouseButtonEvent(int button, int action);
         void keyEvent(int key, int state);
+
     private:
         static GameController *m_sInstance;
 

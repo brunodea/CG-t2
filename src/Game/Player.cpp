@@ -3,8 +3,9 @@
 #include "Core/matrix_functions.hpp"
 #include "functions.hpp"
 #include "Game/Shot.hpp"
-#include "Game/GameController.h"
+#include "Game/TextureID.hpp"
 #include "macros.h"
+#include "functions.hpp"
 
 #include <iostream>
 
@@ -31,8 +32,7 @@ void Player::init()
     v[0] = 0.f;
     v[1] = -1.f;
     setDirection(v);
-
-    m_iImage = loadTexture("resources/player_ship.tga");
+    m_iImage = TextureID::m_sTextureID[TEX_PLAYER];
 
     float w = 71/3;
     float h = 46/3;

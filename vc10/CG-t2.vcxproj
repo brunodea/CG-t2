@@ -84,6 +84,7 @@
     <ClInclude Include="..\include\Game\Player.h" />
     <ClInclude Include="..\include\Game\Ship.hpp" />
     <ClInclude Include="..\include\Game\Shot.hpp" />
+    <ClInclude Include="..\include\Game\TextureID.hpp" />
     <ClInclude Include="..\include\macros.h" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +93,7 @@
     <ClCompile Include="..\src\Game\GameController.cpp" />
     <ClCompile Include="..\src\Game\GameObject.cpp" />
     <ClCompile Include="..\src\Game\Player.cpp" />
+    <ClCompile Include="..\src\Game\Ship.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

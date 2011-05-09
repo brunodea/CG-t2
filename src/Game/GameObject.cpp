@@ -31,8 +31,6 @@ GameObject::GameObject(const Core::Vector3 &dir, float speed, const Core::Vector
 
 GameObject::~GameObject()
 {
-    if(m_iImage > -1)
-        glDeleteTextures(1, &m_iImage);
 }
     
 void GameObject::render()

@@ -121,4 +121,3 @@ void GameController::mouseButtonEvent(int button, int action)
 {
     m_pPlayer->onMouseButtonEvent(button, action);
 }
-

@@ -3,6 +3,7 @@
 
 #include "Game/GameObject.hpp"
 #include "Core/matrix_functions.hpp"
+#include "Game/TextureID.hpp"
 #include "macros.h"
 #include "functions.hpp"
 
@@ -47,8 +48,8 @@ namespace Game
     struct NormalShot : public Shot
     {
         NormalShot() : Shot(1, Shot::NORMAL) 
-        { 
-            m_iImage = loadTexture("resources/shot_ball.tga");
+        {
+            m_iImage = TextureID::m_sTextureID[TEX_NORMAL_SHOT];
 
             initVertices(13/3, 11/3);
         }

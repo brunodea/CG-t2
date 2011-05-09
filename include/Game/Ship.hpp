@@ -25,12 +25,12 @@ namespace Game
         virtual void onCollision(GameObject *obj) = 0;
         virtual void onKeyEvent(int key, int state) {/**/}
 
-        /* true se o tiro foi dado. */
-        inline bool shoot(Shot *s);
-
         /* Setters & Getters */
 
         inline void setShotsPerSecond(unsigned int sps) { m_iShotsPerSecond = sps; }
+    protected:
+        /* true se o tiro foi dado. */
+        bool shoot(Shot *s);
 
     protected:
         std::vector<Shot *> *m_vpShots;

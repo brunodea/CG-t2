@@ -1,5 +1,6 @@
 #include "Game/Ship.hpp"
 #include "Core/matrix_functions.hpp"
+
 using namespace Game;
 
 Ship::Ship(Type type) 

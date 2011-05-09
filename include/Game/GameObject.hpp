@@ -120,6 +120,8 @@ namespace Game
 
         inline bool isVisible() { return m_bVisible; }
         inline void setVisible(bool visible) { m_bVisible = visible; }
+
+        inline void setTexture(GLuint id) { m_iImage = id; }
     protected:
         Core::Vector3 m_vDirection3;
         Core::Vector3 m_vPosition3;

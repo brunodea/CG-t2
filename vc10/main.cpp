@@ -4,6 +4,9 @@
 #include "macros.h"
 #include "Game/GameController.h"
 #include "Game/Shot.hpp"
+#include "Game/TextureID.hpp"
+
+GLuint Game::TextureID::m_sTextureID[SIZE];
 
 /*
  * Callback functions
@@ -55,16 +58,19 @@ int main()
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
+
     handleResize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     glDisable(GL_DEPTH_TEST);
     glClearColor(0.f, 0.f, 0.f, 1.f);
-
+    
+    Game::TextureID::initTextures();
     setCallBacks();
-
+    
     GAME.run();
     delete GAME_FPS;
 
+    Game::TextureID::clear();
     glfwTerminate();
     exit(EXIT_SUCCESS);
 }
