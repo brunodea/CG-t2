@@ -36,7 +36,6 @@ GameController &GameController::instance()
     return *m_sInstance;
 }
 
-
 //Game Loop.
 void GameController::run()
 {

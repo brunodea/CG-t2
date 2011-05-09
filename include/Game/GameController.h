@@ -4,6 +4,8 @@
 #include "Game/Enemy.h"
 #include "Game/Player.h"
 
+#include <vector>
+
 namespace Game
 {
     class GameController
@@ -13,11 +15,12 @@ namespace Game
         static GameController &instance();
 
         void run();
-
     private:
         static GameController *m_sInstance;
 
         int m_iIsRunning;
+        Player *m_pPlayer;
+        Mouse m_Mouse;
 
     private:
         GameController();
@@ -33,8 +36,7 @@ namespace Game
         static void mousePosCallback(int x, int y);
         static void mouseButtonCallback(int button, int action);
 
-        Player *m_pPlayer;
-        Mouse m_Mouse;
+        void initTextures();
 
     }; //end of class GameController.
 

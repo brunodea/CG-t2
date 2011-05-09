@@ -12,5 +12,4 @@
 #define SKIP_TICKS 1/60
 #define MAX_FRAMESKIP  5
 
-
 #endif

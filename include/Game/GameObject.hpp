@@ -15,20 +15,20 @@ namespace Game
         
         inline Core::Vector2 &toVector2()
         {
-            Core::Vector2 v;
+            Core::Vector2 *v = new Core::Vector2();
             v[0] = (float)x;
             v[1] = (float)y;
 
-            return v;
+            return *v;
         }
 
         inline Core::Vector3 &toVector3()
         {
-            Core::Vector3 v;
+            Core::Vector3 *v = new Core::Vector3(1);
             v[0] = (float)x;
             v[1] = (float)y;
 
-            return v;
+            return *v;
         }
 
         inline bool isInsideWindow()

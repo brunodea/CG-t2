@@ -25,17 +25,17 @@ Player::Player(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos)
 void Player::init()
 {
     setVisible(true);
-    m_fAcceleration = 0.003f;
-    m_fMaxSpeed = .01f;
+    m_fAcceleration = .3;
+    m_fMaxSpeed = 2;
     Core::Vector3 v(1);
     v[0] = 0.f;
     v[1] = 1.f;
     setDirection(v);
 
-    m_iImage = loadTexture("resources/aircraft.tga");
+    m_iImage = loadTexture("resources/player_ship.tga");
 
-    float w = .71f/5;
-    float h = .46f/5;
+    float w = 71/3;
+    float h = 46/3;
     initVertices(w, h);
     m_vShotPos3[0] = m_vPosition3[0];
     m_vShotPos3[1] = m_vPosition3[1] + h;
@@ -48,6 +48,7 @@ void Player::onCollision(GameObject *obj)
 
 void Player::update()
 {
+    std::cout << m_vPosition3[0] << ", " << m_vPosition3[1] << std::endl;
     //followMouse();
 
     int toRotate = 0;
@@ -108,16 +109,16 @@ void Player::onKeyEvent(int key, int state)
     {
         if(state == GLFW_PRESS)
         {
-            NormalShot *s = new NormalShot();
-            Core::Vector3 v = m_vShotPos3;
+            //NormalShot *s = new NormalShot();
+            /*Core::Vector3 v = m_vShotPos3;
             v += m_vPosition3;
             v[2] = 1;
             s->setPos(v);
             s->setDirection(m_vDirection3);
             s->setSpeed(.03f);
             setShotsPerSecond(2);
-            if(!shoot(s))
-                delete s;
+            if(!shoot(s))*/
+            //    delete s;
         }
     }
 }
