@@ -48,7 +48,7 @@ namespace Game
     {
         NormalShot() : Shot(1, Shot::NORMAL) 
         { 
-            m_iImage = loadTexture("shot_ball.tga");
+            m_iImage = loadTexture("resources/shot_ball.tga");
 
             initVertices(13/3, 11/3);
         }
