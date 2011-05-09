@@ -8,6 +8,37 @@
 #include <vector>
 namespace Game
 {
+    struct Mouse
+    {
+        int x;
+        int y;
+        
+        inline Core::Vector2 &toVector2()
+        {
+            Core::Vector2 v;
+            v[0] = (float)x;
+            v[1] = (float)y;
+
+            return v;
+        }
+
+        inline Core::Vector3 &toVector3()
+        {
+            Core::Vector3 v;
+            v[0] = (float)x;
+            v[1] = (float)y;
+
+            return v;
+        }
+
+        inline bool isInsideWindow()
+        {
+            if(x <= 5 || x >= WINDOW_WIDTH-5 || y <= 5 || y >= WINDOW_HEIGHT-5)
+                return false;
+            return true;
+        }
+    }; //end of class mouse.
+
     class GameObject
     {
     public:
@@ -100,6 +131,12 @@ namespace Game
         virtual void onUpdate() = 0;
         virtual void onCollision(GameObject *obj) = 0;
         virtual void onKeyEvent(int key, int state) {/**/}
+        virtual void onMousePosEvent(int x, int y) 
+        {
+            m_Mouse.x = x;
+            m_Mouse.y = y;
+        }
+        virtual void onMouseButtonEvent(int button, int action) {/**/}
 
         /*************************
          *  Setters & Getters    *
@@ -134,7 +171,8 @@ namespace Game
         int m_iType;
         bool m_bVisible;
         unsigned int m_iLifes;
-        
+        Mouse m_Mouse;
+
         GLuint m_iImage;
 
     protected:
@@ -178,11 +216,6 @@ namespace Game
         {
             if(angle == 0)
                 return;
-            Core::Vector3 orig;
-            orig[0] = -m_vPosition3[0];
-            orig[1] = -m_vPosition3[1];
-            orig[2] = 1.f;
-
             Core::Matrix3 rot = Core::rotate(angle);
 
             Core::Vector3 n_dir = m_vDirection3;
@@ -191,6 +224,29 @@ namespace Game
             
             Core::Matrix3 mat = rot; //Como os vertices ja estao em relação à origem, não precisa transladar para a origem e depois para o lugar certo.
             adjustVertices(mat);
+        }
+
+        /* rotaciona em direção ao ponto dot. */
+        float rotateTo(Core::Vector2 &dot)
+        {
+            Core::Vector2 dir;
+            dir[0] = m_vDirection3[0];
+            dir[1] = m_vDirection3[1];
+
+            Core::Vector2 pos;
+            pos[0] = -m_vPosition3[0];
+            pos[1] = -m_vPosition3[1];
+            dot -= pos;
+
+            float ang = Core::angle(dot, dir);
+
+            if(ang != 0)
+            {
+                rotate(ang);
+            }
+            //else if(ang > .3f)
+            //    rotate(-.03f);
+            return ang;
         }
 
     private:

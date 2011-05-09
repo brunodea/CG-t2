@@ -61,7 +61,7 @@ namespace Core
         float sum = 0.f;
         for(unsigned int i = 0; i < M; i++)
             sum += (vec(i,0)*vec(i,0));
-        return sqrt(sum);
+        return sqrt((float)sum);
     }
 
     template<unsigned int M>
@@ -75,12 +75,22 @@ namespace Core
     }
 
     template<unsigned int M>
+    bool isUnitary(const Vector<float, M> &vec)
+    {
+        return norm(vec) == 1.f;
+    }
+
+    template<unsigned int M>
     const float angle(const Vector<float, M> &v1, const Vector<float, M> &v2)
     {
-        Vector<float, M> v1_unit = unitary(v1);
-        Vector<float, M> v2_unit = unitary(v2);
-
-        return acosf(v1_unit.dotProduct(v2_unit));
+        Vector<float, M> v1_unit = v1;
+        Vector<float, M> v2_unit = v2;
+        if(!isUnitary(v1))
+            v1_unit = unitary(v1);
+        if(!isUnitary(v2))
+            v2_unit = unitary(v2);
+        float v = v1_unit.dotProduct(v2_unit);
+        return acosf(v);
     }
 
     template<unsigned int M>

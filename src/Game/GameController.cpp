@@ -112,6 +112,14 @@ void GameController::keyEvent(int key, int state)
 
 void GameController::mousePosEvent(int x, int y)
 {
+    if(x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+        return;
+    m_pPlayer->onMousePosEvent(x, y);
+}
+
+void GameController::mouseButtonEvent(int button, int action)
+{
+    m_pPlayer->onMouseButtonEvent(button, action);
 }
 
 /*
@@ -125,4 +133,9 @@ void GLFWCALL GameController::keyEventCallback(int key, int state)
 void GLFWCALL GameController::mousePosCallback(int x, int y)
 {
     m_sInstance->mousePosEvent(x, y);
+}
+
+void GLFWCALL GameController::mouseButtonCallback(int button, int action)
+{
+    m_sInstance->mouseButtonEvent(button, action);
 }

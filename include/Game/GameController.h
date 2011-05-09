@@ -26,12 +26,15 @@ namespace Game
         void update();
 
         void mousePosEvent(int x, int y);
+        void mouseButtonEvent(int button, int action);
         void keyEvent(int key, int state);
 
         static void keyEventCallback(int key, int state);
         static void mousePosCallback(int x, int y);
+        static void mouseButtonCallback(int button, int action);
 
         Player *m_pPlayer;
+        Mouse m_Mouse;
 
     }; //end of class GameController.
 

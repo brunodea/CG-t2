@@ -15,12 +15,16 @@ namespace Game
         void update();
         void onCollision(GameObject *obj);
         void onKeyEvent(int key, int state);
+        void onMousePosEvent(int x, int y);
+        void onMouseButtonEvent(int button, int action);
     private:
         Core::Vector3 m_vShotPos3; //lugar de onde o tiro vai sair.
+        bool m_bAccelerate;
 
     private:
         void init();
-
+        void accelerate();
+        void followMouse();
     }; //end of class Player.
 } //end of namespace Player.
 

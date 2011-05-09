@@ -42,15 +42,6 @@ namespace Game
             }
         }
 
-        void adjustVerticesAngle()
-        {
-            Core::Vector3 v(1);
-            v[0] = 0.f;
-
-            Core::Matrix3 mat = Core::rotate(Core::angle(m_vDirection3, v));
-            //mat.print();
-            adjustVertices(mat);
-        }
     private:
         unsigned int m_iDamage;
     }; //end of class Shot.
@@ -59,9 +50,9 @@ namespace Game
     {
         NormalShot() : Shot(1, Shot::NORMAL) 
         { 
-            m_iImage = loadTexture("resources/shot_laser.tga");
+            m_iImage = loadTexture("resources/shot_ball.tga");
 
-            initVertices(.04f/5, .39f/5);
+            initVertices(.13f/5, .11f/5);
         }
 
     }; //end of struct NormalShot.

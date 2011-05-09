@@ -15,14 +15,20 @@ namespace Game
         Ship(Type type) 
             : GameObject(GameObject::SHIP | type), m_dLastShot(0), m_fAcceleration(0), m_fMaxSpeed(0), m_iShotsPerSecond(2)
         {
+            m_vpShots = new std::vector<Shot *>();
         }
         Ship(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, Type type)
             : GameObject(dir, speed, pos, GameObject::SHIP & type), m_dLastShot(0), m_fAcceleration(0), m_fMaxSpeed(0), m_iShotsPerSecond(2)
         {
+            m_vpShots = new std::vector<Shot *>();
         }
 
         ~Ship()
         {
+            for(unsigned int i = 0; i < m_vpShots->size(); i++)
+                delete m_vpShots->at(i);
+            m_vpShots->clear();
+            delete m_vpShots;
         }
 
         /*************************/
@@ -32,32 +38,25 @@ namespace Game
         /* Função chamada após a renderização básica. */
         virtual void onRender()
         {
-            std::vector<Shot>::iterator it;
-            for(it = m_vpShots.begin(); it != m_vpShots.end(); it++)
+            for(unsigned int i = 0; i < m_vpShots->size(); i++)
             {
-                Shot *s = &(*it);
+                Shot *s = m_vpShots->at(i);
                 if(s->isAlive())
                     s->render();
             }
         }
         void onUpdate()
         {
-            std::vector<std::vector<Shot>::iterator> shots_to_remove;
-            for(std::vector<Shot>::iterator it = m_vpShots.begin(); it != m_vpShots.end(); it++)
+            for(std::vector<Shot *>::iterator it = m_vpShots->begin(); it != m_vpShots->end(); it++)
             {
-                Shot *s = &(*it);
-                if(!s->isAlive()) //se o tiro não existir mais, ele é removido do vetor de tiros.
-                {
-                    //m_vpShots.erase(it);
-                    shots_to_remove.push_back(it);
-                }
-                else
+                Shot *s = *it;
+                if(s->isAlive())
                     s->onUpdate();
+                //else //se o tiro não existir mais, ele é removido do vetor de tiros.
+                //    m_vpShots->erase(it);
+                //if(m_vpShots->empty())
+                //    break;
             }
-
-            for(unsigned int i = 0; i < shots_to_remove.size(); i++)
-                m_vpShots.erase(shots_to_remove.at(i));
-
             update();
         }
 
@@ -66,14 +65,14 @@ namespace Game
         virtual void onKeyEvent(int key, int state) {/**/}
 
         /* true se o tiro foi dado. */
-        inline bool shoot(Shot &s) 
+        inline bool shoot(Shot *s) 
         { 
             double time = glfwGetTime();
-            if(time - m_dLastShot > 1.f/m_iShotsPerSecond) //2tiros por segundo no máximo.
+            if(time - m_dLastShot > 1.f/m_iShotsPerSecond) //m_iShotsPerSecond por segundo no máximo.
             {
                 m_dLastShot = time;
 
-                s.setVisible(true);
+                s->setVisible(true);
                 addShot(s);
                 return true;
             }
@@ -89,7 +88,7 @@ namespace Game
 
         inline void setShotsPerSecond(unsigned int sps) { m_iShotsPerSecond = sps; }
     protected:
-        std::vector<Shot> m_vpShots;
+        std::vector<Shot *> *m_vpShots;
         double m_dLastShot;
         unsigned int m_iShotsPerSecond; //numero máximo de tiros por segundo.
 
@@ -97,7 +96,7 @@ namespace Game
         float m_fMaxSpeed;
     private:
         
-        inline void addShot(Shot &shot) { m_vpShots.push_back(shot); }
+        inline void addShot(Shot *shot) { m_vpShots->push_back(shot); }
     }; //end of class Ship.
 
 } //end of namespace Game.
