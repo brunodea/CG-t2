@@ -19,6 +19,10 @@ GameController::GameController()
     glfwSetMousePosCallback(mousePosCallback);
 
     m_pPlayer = new Player();
+    Core::Vector3 pos(1);
+    pos[0] = WINDOW_WIDTH/2.f;
+    pos[1] = WINDOW_HEIGHT - 40;
+    m_pPlayer->setPos(pos);
 }
 
 GameController::~GameController()

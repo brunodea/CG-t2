@@ -85,10 +85,15 @@ namespace Core
     {
         Vector<float, M> v1_unit = v1;
         Vector<float, M> v2_unit = v2;
-        if(!isUnitary(v1))
+
+        std::cout << "dot: " << v1_unit[0] << ", " << v1_unit[1] << std::endl;
+        std::cout << "dir: " << v2_unit[0] << ", " << v2_unit[1] << std::endl;
+        //if(!isUnitary(v1))
             v1_unit = unitary(v1);
-        if(!isUnitary(v2))
+        //if(!isUnitary(v2))
             v2_unit = unitary(v2);
+        std::cout << "udot: " << v1_unit[0] << ", " << v1_unit[1] << std::endl;
+        std::cout << "udir: " << v2_unit[0] << ", " << v2_unit[1] << std::endl << std::endl;
         float v = v1_unit.dotProduct(v2_unit);
         return acosf(v);
     }

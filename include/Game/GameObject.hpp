@@ -80,13 +80,22 @@ namespace Game
         }
 
         inline bool isAlive() { return m_iLifes > 0; }
+        inline bool isInsideWindow()
+        {
+            int width;
+            int height;
+            glfwGetWindowSize(&width, &height);
+            if(m_vPosition3[0] < 0 || m_vPosition3[0] > width || m_vPosition3[1] < 0 || m_vPosition3[1] > height)
+                return false;
+            return true;
+        }
+
 
         void render()
         {
             if(!isVisible())
                 return;
 
-            //glColor4f(m_vColor4[0], m_vColor4[1], m_vColor4[2], m_vColor4[3]);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -179,20 +188,20 @@ namespace Game
         void initVertices(float width, float height)
         {
             Core::Vector3 v1(1);
-            v1[0] = -width;
-            v1[1] = -height;
+            v1[0] = width;
+            v1[1] = height;
 
             Core::Vector3 v2(1);
-            v2[0] = -width;
-            v2[1] = height;
+            v2[0] = width;
+            v2[1] = -height;
 
             Core::Vector3 v3(1);
-            v3[0] = width;
-            v3[1] = height;
+            v3[0] = -width;
+            v3[1] = -height;
 
             Core::Vector3 v4(1);
-            v4[0] = width;
-            v4[1] = -height;
+            v4[0] = -width;
+            v4[1] = height;
     
             std::vector<Core::Vector3> *vec = new std::vector<Core::Vector3>();
             vec->push_back(v1);
@@ -234,8 +243,8 @@ namespace Game
             dir[1] = m_vDirection3[1];
 
             Core::Vector2 pos;
-            pos[0] = -m_vPosition3[0];
-            pos[1] = -m_vPosition3[1];
+            pos[0] = m_vPosition3[0];
+            pos[1] = m_vPosition3[1];
             dot -= pos;
 
             float ang = Core::angle(dot, dir);

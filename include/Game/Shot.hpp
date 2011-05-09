@@ -26,9 +26,7 @@ namespace Game
         {
             if(isVisible())
             {
-                float f = 1.f;
-                if(m_vPosition3[0] < -f || m_vPosition3[0] >= f ||
-                   m_vPosition3[1] < -f || m_vPosition3[1] >= f)
+                if(!isInsideWindow())
                     setLifes(0);
                 move();
             }
@@ -52,7 +50,7 @@ namespace Game
         { 
             m_iImage = loadTexture("shot_ball.tga");
 
-            initVertices(.13f/5, .11f/5);
+            initVertices(13/3, 11/3);
         }
 
     }; //end of struct NormalShot.

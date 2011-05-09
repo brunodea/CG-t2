@@ -29,7 +29,7 @@ void Player::init()
     m_fMaxSpeed = 2;
     Core::Vector3 v(1);
     v[0] = 0.f;
-    v[1] = 1.f;
+    v[1] = -1.f;
     setDirection(v);
 
     m_iImage = loadTexture("resources/player_ship.tga");
@@ -48,15 +48,14 @@ void Player::onCollision(GameObject *obj)
 
 void Player::update()
 {
-    std::cout << m_vPosition3[0] << ", " << m_vPosition3[1] << std::endl;
     //followMouse();
 
     int toRotate = 0;
     float intertia = 0.f;
     if(glfwGetKey(GLFW_KEY_RIGHT))
-        toRotate = -1;
-    else if(glfwGetKey(GLFW_KEY_LEFT))
         toRotate = 1;
+    else if(glfwGetKey(GLFW_KEY_LEFT))
+        toRotate = -1;
     if(glfwGetKey(GLFW_KEY_UP))
     {
         m_bAccelerate = true;
@@ -109,25 +108,18 @@ void Player::onKeyEvent(int key, int state)
     {
         if(state == GLFW_PRESS)
         {
-            //NormalShot *s = new NormalShot();
-            /*Core::Vector3 v = m_vShotPos3;
+            NormalShot *s = new NormalShot();
+            Core::Vector3 v = m_vShotPos3;
             v += m_vPosition3;
             v[2] = 1;
             s->setPos(v);
             s->setDirection(m_vDirection3);
-            s->setSpeed(.03f);
+            s->setSpeed(3);
             setShotsPerSecond(2);
-            if(!shoot(s))*/
-            //    delete s;
+            if(!shoot(s))
+                delete s;
         }
     }
-}
-
-void Player::accelerate()
-{
-    setSpeed(getSpeed() + getAcceleration());
-    if(getSpeed() > getMaxSpeed())
-        setSpeed(getMaxSpeed());
 }
 
 void Player::onMousePosEvent(int x, int y)
@@ -153,4 +145,11 @@ void Player::followMouse()
     }
     else
         m_bAccelerate = false;
+}
+
+void Player::accelerate()
+{
+    setSpeed(getSpeed() + getAcceleration());
+    if(getSpeed() > getMaxSpeed())
+        setSpeed(getMaxSpeed());
 }
