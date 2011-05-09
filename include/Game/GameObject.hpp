@@ -230,14 +230,15 @@ namespace Game
             Core::Vector3 n_dir = m_vDirection3;
             n_dir = rot*n_dir;
             setDirection(n_dir);
-            
-            Core::Matrix3 mat = rot; //Como os vertices ja estao em relação à origem, não precisa transladar para a origem e depois para o lugar certo.
-            adjustVertices(mat);
+            //Como os vertices ja estao em relação à origem, não precisa transladar para a origem e depois para o lugar certo.
+            adjustVertices(rot);
         }
 
         /* rotaciona em direção ao ponto dot. */
         float rotateTo(Core::Vector2 &dot)
         {
+            Core::Vector2 orig(0);
+
             Core::Vector2 dir;
             dir[0] = m_vDirection3[0];
             dir[1] = m_vDirection3[1];
@@ -245,10 +246,15 @@ namespace Game
             Core::Vector2 pos;
             pos[0] = m_vPosition3[0];
             pos[1] = m_vPosition3[1];
+
             dot -= pos;
+            dot = Core::unitary(dot);
 
-            float ang = Core::angle(dot, dir);
+            std::cout << std::endl << "dot: " << dot[0] << ", " << dot[1] << std::endl;
+            std::cout << "dir: " << dir[0] << ", " << dir[1] << std::endl;
 
+            float ang = Core::angle(dir, dot);
+            std::cout << "ang: " << ang << std::endl << std::endl;
             if(ang != 0)
             {
                 rotate(ang);

@@ -12,4 +12,6 @@
 #define SKIP_TICKS 1/60
 #define MAX_FRAMESKIP  5
 
+#define MY_PI 3.14159265f
+
 #endif

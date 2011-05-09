@@ -26,7 +26,7 @@ void Player::init()
 {
     setVisible(true);
     m_fAcceleration = .3;
-    m_fMaxSpeed = 2;
+    m_fMaxSpeed = 5;
     Core::Vector3 v(1);
     v[0] = 0.f;
     v[1] = -1.f;
@@ -38,7 +38,7 @@ void Player::init()
     float h = 46/3;
     initVertices(w, h);
     m_vShotPos3[0] = m_vPosition3[0];
-    m_vShotPos3[1] = m_vPosition3[1] + h;
+    m_vShotPos3[1] = m_vPosition3[1] - h;
     m_bAccelerate = false;
 }
 
@@ -60,38 +60,42 @@ void Player::update()
     {
         m_bAccelerate = true;
     }
-    else if(glfwGetKey(GLFW_KEY_DOWN))
+    else if(glfwGetKey(GLFW_KEY_DOWN)) //para diminuir a velocidade da nave.
     {
+        setSpeed(getSpeed()-getAcceleration());
+        if(getSpeed() < 0)
+            setSpeed(0);
+        m_bAccelerate = false;
+    }
+    else if(glfwGetKey('S')) //para parar a nave.
+    {
+        intertia = getSpeed() / 50.f;
         m_bAccelerate = false;
     }
 
-    if(toRotate != 0)
+
+    /*if(glfwGetKey(GLFW_KEY_SPACE))
+        rotate(3.14159265f/);*/
+
+    if(toRotate != 0 && m_fSpeed > 0)
     {
-        float angle = .03f;
+        Core::Vector3 perp;
+        perp = Core::rotate(MY_PI/2.f)*m_vDirection3; //vetor perpendicular ao vetor direção.
 
-        /*Core::Vector3 v = m_vDirection3;
-        if(m_fSpeed != 0)
-            v *= m_fSpeed;
+        Core::Vector3 speed;
+        speed = m_vDirection3*m_fSpeed;
 
-        Core::Vector3 v2(1);
-        v2[1] = 0.f;
+        Core::Vector3 sum;
+        sum = speed + perp;
 
-        float ang_2 = Core::angle(v, v2);
-        v2 = Core::rotate(toRotate*ang_2)*v2;
-
-        Core::Vector3 v3 = v;
-        v3 += v2;
-
-        angle = Core::angle(v, v3); */
-
-        rotate(toRotate*angle);
-        m_vShotPos3 = Core::rotate(toRotate*angle)*m_vShotPos3;
+        float angle = toRotate*Core::angle(m_vDirection3, Core::unitary(sum))/10.f;
+        std::cout << "ANGULO: " << angle << std::endl;
+        rotate(angle);
+        m_vShotPos3 = Core::rotate(angle)*m_vShotPos3;
     }
 
     if(m_bAccelerate)
         accelerate();
-    else
-        intertia = getSpeed() / 50.f;
 
     if(m_fSpeed > 0.f)
     {
