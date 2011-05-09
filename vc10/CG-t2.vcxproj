@@ -90,6 +90,7 @@
     <ClCompile Include="..\src\Core\shape_functions.cpp" />
     <ClCompile Include="..\src\FPS.cpp" />
     <ClCompile Include="..\src\Game\GameController.cpp" />
+    <ClCompile Include="..\src\Game\GameObject.cpp" />
     <ClCompile Include="..\src\Game\Player.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
