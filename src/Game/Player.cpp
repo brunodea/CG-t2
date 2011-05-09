@@ -50,60 +50,23 @@ void Player::update()
 {
     //followMouse();
 
-    int toRotate = 0;
-    float intertia = 0.f;
+    float rotateAngle = 0.f;
     if(glfwGetKey(GLFW_KEY_RIGHT))
-        toRotate = 1;
+        rotateAngle = rotateToDir(true);
     else if(glfwGetKey(GLFW_KEY_LEFT))
-        toRotate = -1;
+        rotateAngle = rotateToDir(false);
     if(glfwGetKey(GLFW_KEY_UP))
-    {
-        m_bAccelerate = true;
-    }
+        accelerate(true);
     else if(glfwGetKey(GLFW_KEY_DOWN)) //para diminuir a velocidade da nave.
     {
-        setSpeed(getSpeed()-getAcceleration());
-        if(getSpeed() < 0)
-            setSpeed(0);
-        m_bAccelerate = false;
-    }
-    else if(glfwGetKey('S')) //para parar a nave.
-    {
-        intertia = getSpeed() / 50.f;
-        m_bAccelerate = false;
+        accelerate(false);
     }
 
-
-    /*if(glfwGetKey(GLFW_KEY_SPACE))
-        rotate(3.14159265f/);*/
-
-    if(toRotate != 0 && m_fSpeed > 0)
-    {
-        Core::Vector3 perp;
-        perp = Core::rotate(MY_PI/2.f)*m_vDirection3; //vetor perpendicular ao vetor direção.
-
-        Core::Vector3 speed;
-        speed = m_vDirection3*m_fSpeed;
-
-        Core::Vector3 sum;
-        sum = speed + perp;
-
-        float angle = toRotate*Core::angle(m_vDirection3, Core::unitary(sum))/10.f;
-        std::cout << "ANGULO: " << angle << std::endl;
-        rotate(angle);
-        m_vShotPos3 = Core::rotate(angle)*m_vShotPos3;
-    }
-
-    if(m_bAccelerate)
-        accelerate();
-
+    if(rotateAngle != 0)
+        m_vShotPos3 = Core::rotate(rotateAngle)*m_vShotPos3;
+    
     if(m_fSpeed > 0.f)
-    {
         move();
-        setSpeed(getSpeed() - intertia);
-    }
-    else
-       m_fSpeed = 0.f;
 }
 
 void Player::onKeyEvent(int key, int state)
@@ -118,7 +81,7 @@ void Player::onKeyEvent(int key, int state)
             v[2] = 1;
             s->setPos(v);
             s->setDirection(m_vDirection3);
-            s->setSpeed(3);
+            s->setSpeed(10);
             setShotsPerSecond(2);
             if(!shoot(s))
                 delete s;
@@ -149,11 +112,4 @@ void Player::followMouse()
     }
     else
         m_bAccelerate = false;
-}
-
-void Player::accelerate()
-{
-    setSpeed(getSpeed() + getAcceleration());
-    if(getSpeed() > getMaxSpeed())
-        setSpeed(getMaxSpeed());
 }

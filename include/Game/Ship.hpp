@@ -112,6 +112,27 @@ namespace Game
             return false;
         }
 
+        /* Ângulo de rotação varia de acordo com a velocidade. */
+        float rotateToDir(bool right)
+        {
+            int toRotate = 1;
+            if(!right)
+                toRotate *= -1;
+            Core::Vector3 perp;
+            perp = Core::rotate(MY_PI/2.f)*m_vDirection3; //vetor perpendicular ao vetor direção.
+
+            Core::Vector3 speed;
+            speed = m_vDirection3*m_fSpeed;
+
+            Core::Vector3 sum;
+            sum = speed + perp;
+
+            float angle = toRotate*Core::angle(m_vDirection3, Core::unitary(sum))/10.f;
+            rotate(angle);
+
+            return angle;
+        }
+
         /* Setters & Getters */
         inline float getAcceleration() { return m_fAcceleration; }
         inline void setAcceleration(float acc) { m_fAcceleration = acc; }
@@ -120,6 +141,20 @@ namespace Game
         inline void setMaxSpeed(float max_speed) { m_fMaxSpeed = max_speed; }
 
         inline void setShotsPerSecond(unsigned int sps) { m_iShotsPerSecond = sps; }
+    protected:
+        void accelerate(bool up)
+        {
+            float v = 1;
+            if(!up)
+                v *= 1/(-7.f);
+
+            setSpeed(getSpeed() + (v*getAcceleration()));
+            if(getSpeed() > getMaxSpeed())
+                setSpeed(getMaxSpeed());
+            else if(getSpeed() < 0.f)
+                setSpeed(0.f);
+        }
+
     protected:
         std::vector<Shot *> *m_vpShots;
         double m_dLastShot;

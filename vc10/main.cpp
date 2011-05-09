@@ -5,6 +5,24 @@
 #include "Game/GameController.h"
 #include "Game/Shot.hpp"
 
+/*
+ * Callback functions
+ */
+void GLFWCALL keyEventCallback(int key, int state)
+{
+    GAME.keyEvent(key, state);
+}
+
+void GLFWCALL mousePosCallback(int x, int y)
+{
+    GAME.mousePosEvent(x, y);
+}
+
+void GLFWCALL mouseButtonCallback(int button, int action)
+{
+    GAME.mouseButtonEvent(button, action);
+}
+
 void GLFWCALL handleResize(int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -14,8 +32,15 @@ void GLFWCALL handleResize(int width, int height)
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    // Displacement trick for exact pixelization
-    //glTranslatef(0.375, 0.375, 0);
+}
+
+void setCallBacks()
+{
+    glfwSetKeyCallback(keyEventCallback);
+    glfwSetMousePosCallback(mousePosCallback);
+    glfwSetMouseButtonCallback(mouseButtonCallback);
+
+    glfwSetWindowSizeCallback(handleResize);
 }
 
 int main()
@@ -31,10 +56,11 @@ int main()
         exit(EXIT_FAILURE);
     }
     handleResize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
     glDisable(GL_DEPTH_TEST);
     glClearColor(0.f, 0.f, 0.f, 1.f);
 
-    glfwSetWindowSizeCallback(handleResize);
+    setCallBacks();
 
     GAME.run();
     delete GAME_FPS;

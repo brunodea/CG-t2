@@ -237,8 +237,6 @@ namespace Game
         /* rotaciona em direção ao ponto dot. */
         float rotateTo(Core::Vector2 &dot)
         {
-            Core::Vector2 orig(0);
-
             Core::Vector2 dir;
             dir[0] = m_vDirection3[0];
             dir[1] = m_vDirection3[1];
@@ -250,6 +248,11 @@ namespace Game
             dot -= pos;
             dot = Core::unitary(dot);
 
+            dir = Core::translate(pos)*dir;
+            dir -= pos;
+
+            dir = Core::unitary(dir);
+
             std::cout << std::endl << "dot: " << dot[0] << ", " << dot[1] << std::endl;
             std::cout << "dir: " << dir[0] << ", " << dir[1] << std::endl;
 
@@ -257,7 +260,7 @@ namespace Game
             std::cout << "ang: " << ang << std::endl << std::endl;
             if(ang != 0)
             {
-                rotate(ang);
+                rotate((MY_PI/2.f)/10.f);
             }
             //else if(ang > .3f)
             //    rotate(-.03f);

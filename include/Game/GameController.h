@@ -15,6 +15,11 @@ namespace Game
         static GameController &instance();
 
         void run();
+
+        /* Callbacks. */
+        void mousePosEvent(int x, int y);
+        void mouseButtonEvent(int button, int action);
+        void keyEvent(int key, int state);
     private:
         static GameController *m_sInstance;
 
@@ -27,17 +32,6 @@ namespace Game
 
         void render();
         void update();
-
-        void mousePosEvent(int x, int y);
-        void mouseButtonEvent(int button, int action);
-        void keyEvent(int key, int state);
-
-        static void keyEventCallback(int key, int state);
-        static void mousePosCallback(int x, int y);
-        static void mouseButtonCallback(int button, int action);
-
-        void initTextures();
-
     }; //end of class GameController.
 
 } //end of namespace Game.

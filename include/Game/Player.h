@@ -23,7 +23,6 @@ namespace Game
 
     private:
         void init();
-        void accelerate();
         void followMouse();
     }; //end of class Player.
 } //end of namespace Player.

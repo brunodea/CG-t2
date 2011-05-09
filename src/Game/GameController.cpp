@@ -15,9 +15,6 @@ GameController *GameController::m_sInstance = NULL;
 GameController::GameController()
     : m_iIsRunning(GL_TRUE)
 {
-    glfwSetKeyCallback(keyEventCallback);
-    glfwSetMousePosCallback(mousePosCallback);
-
     m_pPlayer = new Player();
     Core::Vector3 pos(1);
     pos[0] = WINDOW_WIDTH/2.f;
@@ -125,20 +122,3 @@ void GameController::mouseButtonEvent(int button, int action)
     m_pPlayer->onMouseButtonEvent(button, action);
 }
 
-/*
- * Callback functions
- */
-void GLFWCALL GameController::keyEventCallback(int key, int state)
-{
-    m_sInstance->keyEvent(key, state);
-}
-
-void GLFWCALL GameController::mousePosCallback(int x, int y)
-{
-    m_sInstance->mousePosEvent(x, y);
-}
-
-void GLFWCALL GameController::mouseButtonCallback(int button, int action)
-{
-    m_sInstance->mouseButtonEvent(button, action);
-}
