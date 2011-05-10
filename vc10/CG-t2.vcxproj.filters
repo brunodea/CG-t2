@@ -63,9 +63,6 @@
     <ClInclude Include="..\include\Game\Ship.hpp">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\FPS.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Game\Player.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
@@ -94,9 +91,6 @@
     </ClCompile>
     <ClCompile Include="..\src\Core\shape_functions.cpp">
       <Filter>Source Files\Core\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\FPS.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Game\Player.cpp">
       <Filter>Source Files\Game</Filter>

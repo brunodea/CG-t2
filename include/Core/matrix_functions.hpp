@@ -85,8 +85,6 @@ namespace Core
     {
         Vector<float, M> v1_unit = normalize(v1);
         Vector<float, M> v2_unit = normalize(v2);
-        v1_unit.print();
-        v2_unit.print();
 
         float ang = acos(v1_unit.dotProduct(v2_unit));
         return ang;

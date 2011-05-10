@@ -36,14 +36,10 @@ GameObject::~GameObject()
 void GameObject::render()
 {
     if(!isVisible())
-        return;
-    
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glClear(GL_COLOR_BUFFER_BIT);
-    
+        return;    
 
-    glBegin(GL_LINES);
+    //Descomentar para desenhar o vetor direção e a linha da ponta do mouse à posição do GameObject.
+    /*glBegin(GL_LINES);
         glColor4f(1.f, 1.f, 1.f, 1.f);
         glVertex2f(m_vPosition3[0], m_vPosition3[1]);
         glVertex2f(m_Mouse.x,  m_Mouse.y);
@@ -52,7 +48,7 @@ void GameObject::render()
         glVertex2f(m_vPosition3[0], m_vPosition3[1]);
         glVertex2f(m_vPosition3[0]+m_vDirection3[0]*100, m_vPosition3[1]+m_vDirection3[1]*100);
 
-    glEnd();
+    glEnd();*/
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

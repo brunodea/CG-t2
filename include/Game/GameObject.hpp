@@ -4,8 +4,8 @@
 #include "Core/matrix_functions.hpp"
 #include "glfw.h"
 
-#include "FPS.h"
 #include <vector>
+
 namespace Game
 {
     struct Mouse
@@ -60,7 +60,7 @@ namespace Game
 
         inline void move()
         {
-            Core::Vector3 pos = toVector(m_vDirection3*(m_fSpeed/**GAME_FPS->getFPS()*/));
+            Core::Vector3 pos = toVector(m_vDirection3*m_fSpeed);
             m_vPosition3 += pos;
         }
 

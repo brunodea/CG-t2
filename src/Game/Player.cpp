@@ -46,8 +46,6 @@ void Player::onCollision(GameObject *obj)
 
 void Player::update()
 {
-    //followMouse();
-
     float rotateAngle = 0.f;
     if(glfwGetKey(GLFW_KEY_RIGHT))
         rotateAngle = rotateToDir(true);
@@ -89,7 +87,6 @@ void Player::onMousePosEvent(int x, int y)
 {
     m_Mouse.x = x;
     m_Mouse.y = y;
-
     followMouse();
 }
 
@@ -104,7 +101,11 @@ void Player::followMouse()
         Core::Vector2 v;
         v[0] = m_Mouse.x;
         v[1] = m_Mouse.y;
+        
         float ang = rotateTo(v);
+        if(ang <= 0.001f)
+            return;
+
         rotate(ang);
         if(rotateTo(v) > 0.001f) //0.001f é uma taxa de erro.
         {

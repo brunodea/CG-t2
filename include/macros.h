@@ -6,8 +6,6 @@
 
 #define GAME Game::GameController::instance()
 
-#define GAME_FPS FPS::instance()
-
 #define TICKS_PER_SECOND 60
 #define SKIP_TICKS 1/60
 #define MAX_FRAMESKIP  5
