@@ -23,7 +23,7 @@ namespace Game
 
     private:
         void init();
-        void followMouse();
+        void afterRotate(float angle);
     }; //end of class Player.
 } //end of namespace Player.
 

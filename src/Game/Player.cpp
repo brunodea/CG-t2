@@ -56,10 +56,7 @@ void Player::update()
         accelerate(true);
     else if(glfwGetKey(GLFW_KEY_DOWN)) //para diminuir a velocidade da nave.
         accelerate(false);
-
-    if(rotateAngle != 0)
-        m_vShotPos3 = Core::rotate(rotateAngle)*m_vShotPos3;
-    
+        
     if(m_fSpeed > 0.f)
         move();
 }
@@ -95,31 +92,7 @@ void Player::onMouseButtonEvent(int button, int action)
 {
 }
 
-void Player::followMouse()
+void Player::afterRotate(float angle)
 {
-    if(m_Mouse.isInsideWindow())
-    {
-        Core::Vector2 v;
-        v[0] = m_Mouse.x;
-        v[1] = m_Mouse.y;
-        
-        float ang = rotateTo(v);
-        if(ang <= 0.001f)
-            return;
-
-        rotate(ang);
-        float n_ang = rotateTo(v);
-        rotate(-ang);
-        float latency = 20.f;
-        if(n_ang > 0.001f) //0.001f é uma taxa de erro.
-            latency *= -1;
-
-        ang /= latency;
-        rotate(ang);
-
-        m_vShotPos3 = Core::rotate(ang)*m_vShotPos3;
-        accelerate(true);
-    }
-    else
-        accelerate(false);
+    m_vShotPos3 = Core::rotate(angle)*m_vShotPos3;
 }

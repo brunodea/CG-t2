@@ -142,6 +142,8 @@ void GameObject::rotate(float angle)
     setDirection(n_dir);
     //Como os vertices ja estao em relação à origem, não precisa transladar para a origem e depois para o lugar certo.
     adjustVertices(rot);
+
+    afterRotate(angle);
 }
 
 float GameObject::rotateTo(Core::Vector2 &dot)
@@ -157,4 +159,32 @@ float GameObject::rotateTo(Core::Vector2 &dot)
     pos = dot-pos;
 
     return Core::angle(dir, pos);
+}
+
+void GameObject::followMouse()
+{
+    if(m_Mouse.isInsideWindow())
+    {
+        Core::Vector2 v;
+        v[0] = m_Mouse.x;
+        v[1] = m_Mouse.y;
+        
+        float ang = rotateTo(v);
+        if(ang <= 0.001f)
+            return;
+
+        rotate(ang);
+        float n_ang = rotateTo(v);
+        rotate(-ang);
+        float latency = 20.f;
+        if(n_ang > 0.001f) //0.001f é uma taxa de erro.
+            latency *= -1;
+
+        ang /= latency;
+        rotate(ang);
+
+        accelerate(true);
+    }
+    else
+        accelerate(false);
 }

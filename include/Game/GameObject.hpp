@@ -65,6 +65,8 @@ namespace Game
             m_vPosition3 += pos;
         }
 
+        void followMouse();
+
         /***********************
          *  Virtual Functions  *
          ***********************/
@@ -144,9 +146,11 @@ namespace Game
         }
 
         void rotate(float angle);
-
         /* rotaciona em direção ao ponto dot. */
         float rotateTo(Core::Vector2 &dot);
+
+        /* Funções virtuais */
+        virtual inline void afterRotate(float angle) {/**/} //chamada após rotacionar os elementos básicos do GameObject.
 
     private:
         inline void init()
