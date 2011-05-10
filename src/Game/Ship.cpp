@@ -29,6 +29,7 @@ Ship::~Ship()
 
 void Ship::onRender()
 {
+    /* Faz a renderizacao de todos os tiros. */
     for(unsigned int i = 0; i < m_vpShots->size(); i++)
     {
         Shot *s = m_vpShots->at(i);
@@ -43,6 +44,7 @@ void Ship::onUpdate()
     int w;
     int h;
     glfwGetWindowSize(&w, &h);
+    /* Se a nave chega em um extremo da tela, ela vai exatamente para o extremo oposto. */
     if(m_vPosition3[0] < 0)
         m_vPosition3[0] = w+c;
     else if(m_vPosition3[0] > w)
@@ -52,6 +54,7 @@ void Ship::onUpdate()
     else if(m_vPosition3[1] > h)
         m_vPosition3[1] = -c;
 
+    //Update nos tiros.
     for(std::vector<Shot *>::iterator it = m_vpShots->begin(); it != m_vpShots->end(); it++)
     {
         Shot *s = *it;
@@ -65,9 +68,10 @@ void Ship::onUpdate()
         }
     }
     
-    update();
+    update(); //funcao virtual que eh chamada por cada tipo especifico de nave para fazer suas proprias acoes especificas.
 }
 
+//Funcao de dar o tiro.
 bool Ship::shoot(Shot *s)
 { 
     double time = glfwGetTime();
