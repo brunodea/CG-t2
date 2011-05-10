@@ -39,32 +39,18 @@ void Ship::onRender()
 
 void Ship::onUpdate()
 {
-    bool toRotate = false;
-    float pi = 3.14159265f;
-    int c = 0;
+    int c = 3;
     int w;
     int h;
     glfwGetWindowSize(&w, &h);
     if(m_vPosition3[0] < 0)
-    {
-        m_vPosition3[0] = w-c;
-        toRotate = true;
-    }
+        m_vPosition3[0] = w+c;
     else if(m_vPosition3[0] > w)
-    {
-        m_vPosition3[0] = c;
-        toRotate = true;
-    }
+        m_vPosition3[0] = -c;
     if(m_vPosition3[1] < 0)
-    {
-        m_vPosition3[1] = h-c;
-        toRotate = true;
-    }
+        m_vPosition3[1] = h+c;
     else if(m_vPosition3[1] > h)
-    {
-        m_vPosition3[1] = c;
-        toRotate = true;
-    }
+        m_vPosition3[1] = -c;
 
     for(std::vector<Shot *>::iterator it = m_vpShots->begin(); it != m_vpShots->end(); it++)
     {
