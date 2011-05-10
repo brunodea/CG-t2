@@ -39,6 +39,7 @@ GameController &GameController::instance()
 //Game Loop.
 void GameController::run()
 {
+    /* Ajustes do FPS. */
     double start_time = glfwGetTime();
     double current_time = 0;
     double frame_inter = 1.f/60.f;
@@ -46,19 +47,13 @@ void GameController::run()
     double diff_time = 0;
     double last_time = 0;
     int frames = 0;
+
+    double init_fps_time = 0;
     while(m_iIsRunning)
     {        
         current_time = glfwGetTime();
         diff_time = current_time - start_time;
-        if(diff_time >= 1 || frames == 0) //1segundo.
-        {
-            std::stringstream ss;
-            ss << "CG - t2. FPS: " << frames;
-            glfwSetWindowTitle(ss.str().c_str());
-            
-            frames = 0;
-        }
-        
+
         if(diff_time > update_inter)
             update();
 
@@ -67,9 +62,19 @@ void GameController::run()
             render();
             start_time = glfwGetTime();
         }
-        
-        frames++;
         glfwSleep(update_inter - (current_time + glfwGetTime()));
+
+        /* Ajusta o FPS no titulo da janela. */
+        if(glfwGetTime() - init_fps_time >= 1)
+        {
+            std::stringstream ss;
+            ss << "CG - t2. FPS: " << frames;
+            glfwSetWindowTitle(ss.str().c_str());
+            
+            init_fps_time = glfwGetTime();   
+            frames = 0;
+        }
+        frames++;
     }
 }
 
