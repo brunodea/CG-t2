@@ -6,8 +6,7 @@
  * Singleton.
  */
 
-#include "Game/Enemy.h"
-#include "Game/Player.h"
+#include "Game/GameObject.hpp"
 
 #include <vector>
 
@@ -19,6 +18,7 @@ namespace Game
         ~GameController();
         static GameController &instance();
         void run();
+        void initGameObjects();
 
         /* Callbacks. */
         void mousePosEvent(int x, int y);
@@ -29,14 +29,16 @@ namespace Game
         static GameController *m_sInstance;
 
         int m_iIsRunning;
-        Player *m_pPlayer;
         Mouse m_Mouse;
+
+        std::vector<GameObject *> *m_vpGameObjects;
 
     private:
         GameController();
 
         void render();
         void update();
+        void initPlayer();
     }; //end of class GameController.
 
 } //end of namespace Game.

@@ -1,4 +1,5 @@
 #include "Game/GameController.h"
+#include "Game/Player.h"
 #include "glfw.h"
 
 #include "macros.h"
@@ -14,17 +15,15 @@ GameController *GameController::m_sInstance = NULL;
 GameController::GameController()
     : m_iIsRunning(GL_TRUE)
 {
-    m_pPlayer = new Player();
-    Core::Vector3 pos(1);
-    pos[0] = WINDOW_WIDTH/2.f;
-    pos[1] = WINDOW_HEIGHT - 40;
-    m_pPlayer->setPos(pos);
 }
 
 GameController::~GameController()
 {
     glfwSetKeyCallback(NULL);
-    delete m_pPlayer;
+    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
+        delete m_vpGameObjects->at(i);
+    m_vpGameObjects->clear();
+    delete m_vpGameObjects;
 }
 
 GameController &GameController::instance()
@@ -39,6 +38,7 @@ GameController &GameController::instance()
 //Game Loop.
 void GameController::run()
 {
+    initPlayer();
     /* Ajustes do FPS. */
     double start_time = glfwGetTime();
     double current_time = 0;
@@ -81,7 +81,9 @@ void GameController::run()
 void GameController::update()
 {
     m_iIsRunning = glfwGetWindowParam(GLFW_OPENED);
-    m_pPlayer->onUpdate();
+
+    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
+        m_vpGameObjects->at(i)->onUpdate();
 }
 
 void GameController::render()
@@ -90,26 +92,48 @@ void GameController::render()
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
 
-    m_pPlayer->render();
+    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
+        m_vpGameObjects->at(i)->render();
 
     glfwSwapBuffers();
+}
+
+void GameController::initGameObjects()
+{
+    std::vector<GameObject *> *m_vpGameObjects = new std::vector<GameObject *>();
+    initPlayer();
+}
+
+void GameController::initPlayer()
+{
+    GameObject *player = new Player();
+    Core::Vector3 pos(1);
+    pos[0] = WINDOW_WIDTH/2.f;
+    pos[1] = WINDOW_HEIGHT - 40;
+    player->setPos(pos);
+
+    m_vpGameObjects->push_back(player);
 }
 
 void GameController::keyEvent(int key, int state)
 {
     if(key == GLFW_KEY_ESC)
         m_iIsRunning = GL_FALSE;
-    m_pPlayer->onKeyEvent(key, state);
+
+    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
+        m_vpGameObjects->at(i)->onKeyEvent(key, state);
 }
 
 void GameController::mousePosEvent(int x, int y)
 {
     if(x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
         return;
-    m_pPlayer->onMousePosEvent(x, y);
+    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
+        m_vpGameObjects->at(i)->onMousePosEvent(x, y);
 }
 
 void GameController::mouseButtonEvent(int button, int action)
 {
-    m_pPlayer->onMouseButtonEvent(button, action);
+    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
+        m_vpGameObjects->at(i)->onMouseButtonEvent(button, action);
 }
