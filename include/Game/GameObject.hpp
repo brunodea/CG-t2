@@ -15,7 +15,10 @@ namespace Game
         
         inline bool isInsideWindow()
         {
-            if(x <= 5 || x >= WINDOW_WIDTH-5 || y <= 5 || y >= WINDOW_HEIGHT-5)
+            int w;
+            int h;
+            glfwGetWindowSize(&w, &h);
+            if(x <= 5 || x >= w-5 || y <= 5 || y >= h-5)
                 return false;
             return true;
         }
