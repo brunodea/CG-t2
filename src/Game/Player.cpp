@@ -108,18 +108,14 @@ void Player::followMouse()
             return;
 
         rotate(ang);
-        if(rotateTo(v) > 0.001f) //0.001f é uma taxa de erro.
-        {
-            rotate(-ang);
-            ang /= -10.f;
-            rotate(ang);
-        }
-        else
-        {
-            rotate(-ang);
-            ang /= 10.f;
-            rotate(ang);
-        }
+        float n_ang = rotateTo(v);
+        rotate(-ang);
+        float latency = 20.f;
+        if(n_ang > 0.001f) //0.001f é uma taxa de erro.
+            latency *= -1;
+
+        ang /= latency;
+        rotate(ang);
 
         m_vShotPos3 = Core::rotate(ang)*m_vShotPos3;
         accelerate(true);
