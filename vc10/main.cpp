@@ -17,9 +17,9 @@ void printMenu()
     std::cout << "|                 Help                   |" << std::endl;
     std::cout << "------------------------------------------" << std::endl;
     std::cout << "1) Para atirar, aperte o left ctrl. " << std::endl;
-    std::cout << "2) Se o mouse estiver em cima da tela, a nave segue ele." << std::endl;
+    std::cout << "2) Segurar barra de espaco para a nave seguir o mouse." << std::endl;
     std::cout << "3) Setas para os lados rotacionam a nave." << std::endl;
-    std::cout << "4) Seta para cima acelera positivamente. Seta para baixo freia." << std::endl;
+    std::cout << "4) Seta para cima acelera. Seta para baixo freia." << std::endl;
     std::cout << "5) " << std::endl;
     std::cout << "6) " << std::endl;
     std::cout << "7) " << std::endl;

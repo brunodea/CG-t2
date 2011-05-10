@@ -46,7 +46,11 @@ void Player::onCollision(GameObject *obj)
 
 void Player::update()
 {
-    followMouse();
+    if(glfwGetKey(GLFW_KEY_SPACE))
+        followMouse();
+    else
+        accelerate(false);
+
     float rotateAngle = 0.f;
     if(glfwGetKey(GLFW_KEY_RIGHT))
         rotateAngle = rotateToDir(true);
@@ -73,7 +77,7 @@ void Player::onKeyEvent(int key, int state)
             v[2] = 1;
             s->setPos(v);
             s->setDirection(m_vDirection3);
-            s->setSpeed(10);
+            s->setSpeed(5);
             setShotsPerSecond(6);
             if(!shoot(s))
                 delete s;
@@ -85,7 +89,6 @@ void Player::onMousePosEvent(int x, int y)
 {
     m_Mouse.x = x;
     m_Mouse.y = y;
-    //followMouse();
 }
 
 void Player::onMouseButtonEvent(int button, int action)
