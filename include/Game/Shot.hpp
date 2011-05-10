@@ -1,6 +1,10 @@
 #ifndef _BRUNODEA_CG_T2_SHOT_HPP_
 #define _BRUNODEA_CG_T2_SHOT_HPP_
 
+/*
+ * Interface Shot. Lida com os tipos de tiro.
+ */
+
 #include "Game/GameObject.hpp"
 #include "Core/matrix_functions.hpp"
 #include "Game/TextureID.hpp"
@@ -26,7 +30,7 @@ namespace Game
         {
             if(isVisible())
             {
-                if(!isInsideWindow())
+                if(!isInsideWindow()) //se o tiro saiu da tela, marcar ele como morto para ser removido depois.
                     setLifes(0);
                 move();
             }
@@ -41,14 +45,16 @@ namespace Game
         }
 
     private:
-        unsigned int m_iDamage;
+        unsigned int m_iDamage; //quanto de dano o tiro causa.
     }; //end of class Shot.
 
+
+    /* Tiro Comum. */
     struct NormalShot : public Shot
     {
         NormalShot() : Shot(1, Shot::NORMAL) 
         {
-            m_iImage = TextureID::m_sTextureID[TEX_NORMAL_SHOT];
+            m_iImage = TEXTURES[TEX_NORMAL_SHOT];
 
             initVertices(13/3, 11/3);
         }

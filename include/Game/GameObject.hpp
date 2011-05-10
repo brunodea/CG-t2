@@ -70,7 +70,7 @@ namespace Game
             m_vPosition3 += pos;
         }
 
-        void followMouse();
+        void followMouse(); //faz o gameobject se mover em direcao ao mouse.
 
         /***********************
          *  Virtual Functions  *
@@ -155,6 +155,7 @@ namespace Game
         virtual inline void afterRotate(float angle) {/**/} //chamada após rotacionar os elementos básicos do GameObject.
 
     private:
+        //inicializacao basica.
         inline void init()
         {
             Core::Vector3 v_init(0);

@@ -74,7 +74,6 @@
     <ClInclude Include="..\include\Core\ColShape.h" />
     <ClInclude Include="..\include\Core\Matrix.hpp" />
     <ClInclude Include="..\include\Core\matrix_functions.hpp" />
-    <ClInclude Include="..\include\Core\shape_functions.h" />
     <ClInclude Include="..\include\Core\Vector.hpp" />
     <ClInclude Include="..\include\functions.hpp" />
     <ClInclude Include="..\include\Game\Enemy.h" />

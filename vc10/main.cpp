@@ -8,7 +8,7 @@
 
 GLuint Game::TextureID::m_sTextureID[SIZE];
 
-
+//da um print de ajuda.
 void printMenu()
 {
     std::cout << "******************************************" << std::endl;
@@ -20,9 +20,6 @@ void printMenu()
     std::cout << "2) Segurar barra de espaco para a nave seguir o mouse." << std::endl;
     std::cout << "3) Setas para os lados rotacionam a nave." << std::endl;
     std::cout << "4) Seta para cima acelera. Seta para baixo freia." << std::endl;
-    std::cout << "5) " << std::endl;
-    std::cout << "6) " << std::endl;
-    std::cout << "7) " << std::endl;
 }
 
 
@@ -86,7 +83,7 @@ int main()
     printMenu();
     setCallBacks();
     
-    GAME.run();
+    GAME.run(); //inicializa o jogo.
 
     Game::TextureID::clear();
     glfwTerminate();

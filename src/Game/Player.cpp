@@ -30,7 +30,7 @@ void Player::init()
     v[0] = 0.f;
     v[1] = -1.f;
     setDirection(v);
-    m_iImage = TextureID::m_sTextureID[TEX_PLAYER];
+    m_iImage = TEXTURES[TEX_PLAYER];
 
     float w = 71/3;
     float h = 46/3;
