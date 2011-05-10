@@ -59,6 +59,7 @@ void Ship::onUpdate()
             s->onUpdate();
         else
         {
+            delete *it;
             m_vpShots->erase(it);
             break;
         }
