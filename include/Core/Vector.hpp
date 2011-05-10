@@ -1,6 +1,10 @@
 #ifndef _BRUNODEA_CG_T2_VECTOR3_H_
 #define _BRUNODEA_CG_T2_VECTOR3_H_
 
+/*
+ * Classe vector lida com vetores. Eh apenas uma epecificacao da classe Matrix.
+ */
+
 #include "Core/Matrix.hpp"
 
 namespace Core
@@ -14,6 +18,7 @@ namespace Core
             this->clear(val);
         }
 
+        /* Produto Escalar. */
         inline float dotProduct(Vector<T, M> &vec)
         {
             float res = 0.f;
@@ -23,6 +28,7 @@ namespace Core
             return res;
         }
 
+        /* Produto vetorial. */
         inline Vector<T, 3> crossProduct(Vector<T, 3> &vec)
         {
             Vector<T, 3> res;
