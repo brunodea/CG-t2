@@ -37,6 +37,22 @@ void GameObject::render()
 {
     if(!isVisible())
         return;
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+
+    glBegin(GL_LINES);
+        glColor4f(1.f, 1.f, 1.f, 1.f);
+        glVertex2f(m_vPosition3[0], m_vPosition3[1]);
+        glVertex2f(m_Mouse.x,  m_Mouse.y);
+
+        glColor4f(1.f, 0.f, 0.f, 1.f);
+        glVertex2f(m_vPosition3[0], m_vPosition3[1]);
+        glVertex2f(m_vPosition3[0]+m_vDirection3[0]*100, m_vPosition3[1]+m_vDirection3[1]*100);
+
+    glEnd();
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -44,29 +60,19 @@ void GameObject::render()
     glColor4f(1.f, 1.f, 1.f, 1.f);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, m_iImage);
-    glBegin(GL_QUADS); //quadrado
-        for(unsigned int i = 0; i < m_vVertices.size(); i++)
-        {
-            Core::Vector3 vec(1);
-            vec[0] = (m_vVertices.at(i)+m_vPosition3)(0,0);
-            vec[1] = (m_vVertices.at(i)+m_vPosition3)(1,0);
-            
-            if(m_iImage >= 0)
-            {
-                if(i == 0)
-                    glTexCoord2f(0.f, 0.f);
-                else if(i == 1)
-                    glTexCoord2f(0.f, 1.f);
-                else if(i == 2)
-                    glTexCoord2f(1.f, 1.f);
-                else if(i == 3)
-                    glTexCoord2f(1.f, 0.f);
-            }
-            glVertex2f(vec[0], vec[1]);
-        }
+    glBegin(GL_QUADS);
+            glTexCoord2f(0.f, 0.f);
+            glVertex2f((m_vVertices.at(0)+m_vPosition3)(0,0), (m_vVertices.at(0)+m_vPosition3)(1,0));
+            glTexCoord2f(0.f, 1.f);
+            glVertex2f((m_vVertices.at(1)+m_vPosition3)(0,0), (m_vVertices.at(1)+m_vPosition3)(1,0));
+            glTexCoord2f(1.f, 1.f);
+            glVertex2f((m_vVertices.at(2)+m_vPosition3)(0,0), (m_vVertices.at(2)+m_vPosition3)(1,0));
+            glTexCoord2f(1.f, 0.f);
+            glVertex2f((m_vVertices.at(3)+m_vPosition3)(0,0), (m_vVertices.at(3)+m_vPosition3)(1,0));
     glEnd();
 
     onRender();
+    glDisable(GL_TEXTURE_2D);
 }
 
 float GameObject::rotateToDir(bool right)
@@ -83,7 +89,7 @@ float GameObject::rotateToDir(bool right)
     Core::Vector3 sum;
     sum = speed + perp;
 
-    float angle = toRotate*Core::angle(m_vDirection3, Core::unitary(sum))/10.f;
+    float angle = toRotate*Core::angle(m_vDirection3, sum)/10.f;
     rotate(angle);
 
     return angle;
@@ -152,24 +158,7 @@ float GameObject::rotateTo(Core::Vector2 &dot)
     pos[0] = m_vPosition3[0];
     pos[1] = m_vPosition3[1];
 
-    dot -= pos;
-    dot = Core::unitary(dot);
+    pos = dot-pos;
 
-    dir = Core::translate(pos)*dir;
-    dir -= pos;
-
-    dir = Core::unitary(dir);
-
-    std::cout << std::endl << "dot: " << dot[0] << ", " << dot[1] << std::endl;
-    std::cout << "dir: " << dir[0] << ", " << dir[1] << std::endl;
-
-    float ang = Core::angle(dir, dot);
-    std::cout << "ang: " << ang << std::endl << std::endl;
-    if(ang != 0)
-    {
-        rotate((MY_PI/2.f)/10.f);
-    }
-    //else if(ang > .3f)
-    //    rotate(-.03f);
-    return ang;
+    return Core::angle(dir, pos);
 }

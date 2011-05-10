@@ -99,7 +99,6 @@ void GameController::render()
 
     m_pPlayer->render();
 
-    glFlush();
     glfwSwapBuffers();
 }
 

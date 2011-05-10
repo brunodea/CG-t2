@@ -65,7 +65,7 @@ namespace Core
     }
 
     template<unsigned int M>
-    const Core::Vector<float, M>unitary(const Vector<float, M> &vec)
+    const Core::Vector<float, M>normalize(const Vector<float, M> &vec)
     {
         Core::Vector<float, M> res;
         float n = norm(vec);
@@ -77,16 +77,19 @@ namespace Core
     template<unsigned int M>
     bool isUnitary(const Vector<float, M> &vec)
     {
-        return norm(vec) == 1.f;
+        return false;//norm(vec) >= -1.f || norm(vec) <= 1.f;
     }
 
     template<unsigned int M>
     const float angle(const Vector<float, M> &v1, const Vector<float, M> &v2)
     {
-        Vector<float, M> v1_unit = v1;
-        Vector<float, M> v2_unit = v2;
-        float v = v1_unit.dotProduct(v2_unit);
-        return acosf(v);
+        Vector<float, M> v1_unit = normalize(v1);
+        Vector<float, M> v2_unit = normalize(v2);
+        v1_unit.print();
+        v2_unit.print();
+
+        float ang = acos(v1_unit.dotProduct(v2_unit));
+        return ang;
     }
 
     template<unsigned int M>

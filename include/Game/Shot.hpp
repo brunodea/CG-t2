@@ -5,7 +5,6 @@
 #include "Core/matrix_functions.hpp"
 #include "Game/TextureID.hpp"
 #include "macros.h"
-#include "functions.hpp"
 
 namespace Game
 {

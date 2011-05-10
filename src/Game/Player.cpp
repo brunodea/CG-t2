@@ -1,11 +1,9 @@
 #include "Game/Player.h"
 #include "glfw.h"
 #include "Core/matrix_functions.hpp"
-#include "functions.hpp"
 #include "Game/Shot.hpp"
 #include "Game/TextureID.hpp"
 #include "macros.h"
-#include "functions.hpp"
 
 #include <iostream>
 
@@ -106,8 +104,11 @@ void Player::followMouse()
     if(m_Mouse.isInsideWindow())
     {
         //m_bAccelerate = true;
-        Core::Vector2 v = m_Mouse.toVector2();
+        Core::Vector2 v;
+        v[0] = m_Mouse.x;
+        v[1] = m_Mouse.y;
         float ang = rotateTo(v);
+        rotate(ang);
         m_vShotPos3 = Core::rotate(ang)*m_vShotPos3;
     }
     else

@@ -19,6 +19,7 @@ namespace Game
             v[0] = (float)x;
             v[1] = (float)y;
 
+            std::cout << "mx: " << x << " my:" << y << std::endl;
             return *v;
         }
 
@@ -97,7 +98,7 @@ namespace Game
          *  Setters & Getters    *
          *************************/
 
-        inline void setDirection(const Core::Vector3 &dir) { m_vDirection3 = Core::unitary(dir); }
+        inline void setDirection(const Core::Vector3 &dir) { m_vDirection3 = dir; }
         inline Core::Vector3 &getDirection() { return m_vDirection3; }
         
         inline void setSpeed(float speed) { m_fSpeed = speed; }

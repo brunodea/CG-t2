@@ -3,7 +3,6 @@
 
 #include "glfw.h"
 #include "macros.h"
-#include "functions.hpp"
 
 namespace Game
 {
