@@ -1,9 +1,10 @@
 #ifndef _BRUNODEA_CG_T2_CORE_MATRIX_H_
 #define _BRUNODEA_CG_T2_CORE_MATRIX_H_
 
+/* Classe com as funcionalidades basicas de uma Matrix. */
+
 #include "macros.h"
 #include <iostream>
-#include <cassert>
 
 namespace Core
 {
