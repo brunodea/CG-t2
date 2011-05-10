@@ -160,5 +160,9 @@ float GameObject::rotateTo(Core::Vector2 &dot)
 
     pos = dot-pos;
 
-    return Core::angle(dir, pos);
+    float angle = Core::angle(dir, pos);
+
+    std::cout << "angle: " << angle << std::endl;
+
+    return angle;
 }

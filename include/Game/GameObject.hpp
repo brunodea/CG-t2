@@ -13,25 +13,6 @@ namespace Game
         int x;
         int y;
         
-        inline Core::Vector2 &toVector2()
-        {
-            Core::Vector2 *v = new Core::Vector2();
-            v[0] = (float)x;
-            v[1] = (float)y;
-
-            std::cout << "mx: " << x << " my:" << y << std::endl;
-            return *v;
-        }
-
-        inline Core::Vector3 &toVector3()
-        {
-            Core::Vector3 *v = new Core::Vector3(1);
-            v[0] = (float)x;
-            v[1] = (float)y;
-
-            return *v;
-        }
-
         inline bool isInsideWindow()
         {
             if(x <= 5 || x >= WINDOW_WIDTH-5 || y <= 5 || y >= WINDOW_HEIGHT-5)

@@ -109,6 +109,12 @@ void Player::followMouse()
         v[1] = m_Mouse.y;
         float ang = rotateTo(v);
         rotate(ang);
+        if(rotateTo(v) != 0)
+        {
+            ang *= -2;
+            rotate(ang);
+        }
+
         m_vShotPos3 = Core::rotate(ang)*m_vShotPos3;
     }
     else
