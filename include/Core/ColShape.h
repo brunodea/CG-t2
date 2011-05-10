@@ -1,15 +1,19 @@
 #ifndef _BRUNODEA_CG_T2_COL_SHAPE_H_
 #define _BRUNODEA_CG_T2_COL_SHAPE_H_
 
+/*
+ * Classe que controla as shapes de colisao de cada GameObject.
+ */
+
+
 #include "Core/matrix_functions.hpp"
-//#include "Core/shape_functions.h"
 
 namespace Core
 {
     class ColShape;
     class CircleShape;
 
-    inline bool circToCircCol(CircleShape *circA, CircleShape *circB);
+    inline bool circToCircCol(CircleShape *circA, CircleShape *circB); //true se tem uma colisao entre os dois circleshapes.
     inline float pointsDistance(Vector2 &dotA, Vector2 &dotB);
 
     class ColShape
@@ -37,6 +41,8 @@ namespace Core
     }; //end of class ColShape.
 
 
+    /* Tipo de shape de colisao (circulo). */
+
     class CircleShape : public ColShape
     {
     public:
@@ -62,6 +68,8 @@ namespace Core
 
         return false;
     }
+
+    /* Funcoes auxiliares. */
 
     inline bool circToCircCol(CircleShape *circA, CircleShape *circB)
     {
