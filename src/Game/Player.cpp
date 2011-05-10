@@ -24,8 +24,8 @@ Player::Player(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos)
 void Player::init()
 {
     setVisible(true);
-    m_fAcceleration = .3;
-    m_fMaxSpeed = 5;
+    m_fAcceleration = .1;
+    m_fMaxSpeed = 2;
     Core::Vector3 v(1);
     v[0] = 0.f;
     v[1] = -1.f;
@@ -46,6 +46,7 @@ void Player::onCollision(GameObject *obj)
 
 void Player::update()
 {
+    followMouse();
     float rotateAngle = 0.f;
     if(glfwGetKey(GLFW_KEY_RIGHT))
         rotateAngle = rotateToDir(true);
@@ -76,7 +77,7 @@ void Player::onKeyEvent(int key, int state)
             s->setPos(v);
             s->setDirection(m_vDirection3);
             s->setSpeed(10);
-            setShotsPerSecond(2);
+            setShotsPerSecond(6);
             if(!shoot(s))
                 delete s;
         }
@@ -87,7 +88,7 @@ void Player::onMousePosEvent(int x, int y)
 {
     m_Mouse.x = x;
     m_Mouse.y = y;
-    followMouse();
+    //followMouse();
 }
 
 void Player::onMouseButtonEvent(int button, int action)
@@ -109,7 +110,14 @@ void Player::followMouse()
         rotate(ang);
         if(rotateTo(v) > 0.001f) //0.001f é uma taxa de erro.
         {
-            ang *= -2;
+            rotate(-ang);
+            ang /= -10.f;
+            rotate(ang);
+        }
+        else
+        {
+            rotate(-ang);
+            ang /= 10.f;
             rotate(ang);
         }
 
