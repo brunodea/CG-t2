@@ -1,6 +1,11 @@
 #ifndef _BRUNODEA_CG_T2_GAME_H_
 #define _BRUNODEA_CG_T2_GAME_H_
 
+/* 
+ * Classe que controla o game como um todo.
+ * Singleton.
+ */
+
 #include "Game/Enemy.h"
 #include "Game/Player.h"
 
