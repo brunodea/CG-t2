@@ -18,7 +18,8 @@ namespace Game
             int w;
             int h;
             glfwGetWindowSize(&w, &h);
-            if(x <= 5 || x >= w-5 || y <= 5 || y >= h-5)
+            int offset = 5;
+            if(x <= offset || x >= w-offset || y <= offset || y >= h-offset)
                 return false;
             return true;
         }
