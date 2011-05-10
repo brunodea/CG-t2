@@ -1,6 +1,10 @@
 #ifndef _BRUNODEA_CG_T2_MATRIX_FUNCTIONS_HPP_
 #define _BRUNODEA_CG_T2_MATRIX_FUNCTIONS_HPP_
 
+/*
+ * Funcoes auxiliares relacionado a matrizes a vetores.
+ */
+
 #include "Core/Matrix.hpp"
 #include "Core/Vector.hpp"
 
@@ -15,6 +19,7 @@ namespace Core
     typedef Matrix<float, 3> Matrix3;
     typedef Matrix<float, 2> Matrix2;
 
+    /* Retorna a matriz identidade de tamanho M. */
     template<unsigned int M>
     const Matrix<float, M> identity()
     {
@@ -77,7 +82,7 @@ namespace Core
     template<unsigned int M>
     bool isUnitary(const Vector<float, M> &vec)
     {
-        return false;//norm(vec) >= -1.f || norm(vec) <= 1.f;
+        return norm(vec) >= .5f || norm(vec) <= 1.5f; //com margem de erro .5 pra mais ou pra menos.
     }
 
     template<unsigned int M>
