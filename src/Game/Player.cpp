@@ -24,8 +24,8 @@ Player::Player(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos)
 void Player::init()
 {
     setVisible(true);
-    m_fAcceleration = .1;
-    m_fMaxSpeed = 2;
+    m_fAcceleration = .3;
+    m_fMaxSpeed = 5;
     Core::Vector3 v(1);
     v[0] = 0.f;
     v[1] = -1.f;
@@ -77,7 +77,7 @@ void Player::onKeyEvent(int key, int state)
             v[2] = 1;
             s->setPos(v);
             s->setDirection(m_vDirection3);
-            s->setSpeed(5);
+            s->setSpeed(10);
             setShotsPerSecond(6);
             if(!shoot(s))
                 delete s;
@@ -95,6 +95,7 @@ void Player::onMouseButtonEvent(int button, int action)
 {
 }
 
+//funcao chamada depois de o GameObject (no caso o player) ter sido chamado.
 void Player::afterRotate(float angle)
 {
     m_vShotPos3 = Core::rotate(angle)*m_vShotPos3;

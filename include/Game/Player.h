@@ -1,6 +1,11 @@
 #ifndef _BRUNODEA_CG_T2_PLAYER_H_
 #define _BRUNODEA_CG_T2_PLAYER_H_
 
+/*
+ * Classe do jogador. Eh apenas uma especificacao da classe ship.
+ * a diferenca eh que o usuario pode mover a nave.
+ */
+
 #include "Game/Ship.hpp"
 
 namespace Game
