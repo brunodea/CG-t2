@@ -66,22 +66,18 @@ void Ship::onUpdate()
         toRotate = true;
     }
 
-    std::vector<std::vector<Shot *>::iterator> deadShots;
     for(std::vector<Shot *>::iterator it = m_vpShots->begin(); it != m_vpShots->end(); it++)
     {
         Shot *s = *it;
         if(s->isAlive())
             s->onUpdate();
         else
-            deadShots.push_back(it);
-        //else //se o tiro não existir mais, ele é removido do vetor de tiros.
-        //    m_vpShots->erase(it);
-        //if(m_vpShots->empty())
-        //    break;
+        {
+            m_vpShots->erase(it);
+            break;
+        }
     }
-    for(unsigned int i = 0; i < deadShots.size(); i++)
-        m_vpShots->erase(deadShots.at(i));
-
+    
     update();
 }
 
