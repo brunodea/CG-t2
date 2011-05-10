@@ -1,10 +1,12 @@
 #ifndef _BRUNODEA_CG_T2_ENEMY_H_
 #define _BRUNODEA_CG_T2_ENEMY_H_
 
+/*
+ * Interface Enemy.
+ */
+
 #include "glfw.h"
 #include "Game/Ship.hpp"
-
-#include <iostream>
 
 namespace Game
 {

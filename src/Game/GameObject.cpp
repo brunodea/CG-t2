@@ -19,12 +19,6 @@ GameObject::GameObject(const Core::Vector3 &dir, float speed, const Core::Vector
     : m_vDirection3(dir), m_fSpeed(speed), m_vPosition3(pos), m_iType(type)
 {
     m_iLifes = 1;
-
-    m_vColor4[0] = 1.f;
-    m_vColor4[1] = 0.f;
-    m_vColor4[2] = 0.f;
-    m_vColor4[3] = 1.f;
-            
     m_iImage = -1;
     m_bVisible = true;
 }
@@ -85,7 +79,7 @@ float GameObject::rotateToDir(bool right)
     Core::Vector3 sum;
     sum = speed + perp;
 
-    float angle = toRotate*Core::angle(m_vDirection3, sum)/20.f;
+    float angle = toRotate*Core::angle(m_vDirection3, sum)/15.f;
     rotate(angle);
 
     return angle;

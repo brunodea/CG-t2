@@ -29,6 +29,7 @@ Ship::~Ship()
 
 void Ship::onRender()
 {
+    /* Faz a renderizacao de todos os tiros. */
     for(unsigned int i = 0; i < m_vpShots->size(); i++)
     {
         Shot *s = m_vpShots->at(i);
@@ -39,52 +40,38 @@ void Ship::onRender()
 
 void Ship::onUpdate()
 {
-    bool toRotate = false;
-    float pi = 3.14159265f;
-    int c = 0;
+    int c = 3;
     int w;
     int h;
     glfwGetWindowSize(&w, &h);
+    /* Se a nave chega em um extremo da tela, ela vai exatamente para o extremo oposto. */
     if(m_vPosition3[0] < 0)
-    {
-        m_vPosition3[0] = w-c;
-        toRotate = true;
-    }
+        m_vPosition3[0] = w+c;
     else if(m_vPosition3[0] > w)
-    {
-        m_vPosition3[0] = c;
-        toRotate = true;
-    }
+        m_vPosition3[0] = -c;
     if(m_vPosition3[1] < 0)
-    {
-        m_vPosition3[1] = h-c;
-        toRotate = true;
-    }
+        m_vPosition3[1] = h+c;
     else if(m_vPosition3[1] > h)
-    {
-        m_vPosition3[1] = c;
-        toRotate = true;
-    }
+        m_vPosition3[1] = -c;
 
-    std::vector<std::vector<Shot *>::iterator> deadShots;
+    //Update nos tiros.
     for(std::vector<Shot *>::iterator it = m_vpShots->begin(); it != m_vpShots->end(); it++)
     {
         Shot *s = *it;
         if(s->isAlive())
             s->onUpdate();
         else
-            deadShots.push_back(it);
-        //else //se o tiro não existir mais, ele é removido do vetor de tiros.
-        //    m_vpShots->erase(it);
-        //if(m_vpShots->empty())
-        //    break;
+        {
+            delete *it;
+            m_vpShots->erase(it);
+            break;
+        }
     }
-    for(unsigned int i = 0; i < deadShots.size(); i++)
-        m_vpShots->erase(deadShots.at(i));
-
-    update();
+    
+    update(); //funcao virtual que eh chamada por cada tipo especifico de nave para fazer suas proprias acoes especificas.
 }
 
+//Funcao de dar o tiro.
 bool Ship::shoot(Shot *s)
 { 
     double time = glfwGetTime();

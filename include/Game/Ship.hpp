@@ -1,6 +1,11 @@
 #ifndef _BRUNODEA_CG_T2_SHIP_HPP_
 #define _BRUNODEA_CG_T2_SHIP_HPP_
 
+/*
+ * Interface base para qualquer nave.
+ * No fim, eh apenas um gameobject que pode dar tiro.
+ */
+
 #include "Game/GameObject.hpp"
 #include "Game/Shot.hpp"
 #include "Core/matrix_functions.hpp"
@@ -33,7 +38,7 @@ namespace Game
         bool shoot(Shot *s);
 
     protected:
-        std::vector<Shot *> *m_vpShots;
+        std::vector<Shot *> *m_vpShots; //vetor de tiros.
         double m_dLastShot;
         unsigned int m_iShotsPerSecond; //numero máximo de tiros por segundo.
 

@@ -1,6 +1,10 @@
 #ifndef _BRUNODEA_CG_T2_GAME_OBJECT_HPP_
 #define _BRUNODEA_CG_T2_GAME_OBJECT_HPP_
 
+/*
+ * Interface que lida com todo o tipo de GameObject no jogo. 
+ */
+
 #include "Core/matrix_functions.hpp"
 #include "glfw.h"
 
@@ -8,6 +12,7 @@
 
 namespace Game
 {
+    //Guarda as informacoes do mouse.
     struct Mouse
     {
         int x;
@@ -28,6 +33,7 @@ namespace Game
     class GameObject
     {
     public:
+        /* Tipos de GameObject. */
         enum Type
         {
             ENEMY = 0x00000000,
@@ -40,7 +46,6 @@ namespace Game
     public:
         GameObject();
         GameObject(int type);
-
         GameObject(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, int type);
 
         ~GameObject();
@@ -65,7 +70,7 @@ namespace Game
             m_vPosition3 += pos;
         }
 
-        void followMouse();
+        void followMouse(); //faz o gameobject se mover em direcao ao mouse.
 
         /***********************
          *  Virtual Functions  *
@@ -118,25 +123,22 @@ namespace Game
         float m_fAcceleration;
         float m_fMaxSpeed;
 
-        Core::Vector4 m_vColor4;
-
-        std::vector<Core::Vector3> m_vVertices;
+        std::vector<Core::Vector3> m_vVertices; //sempre eh um retangulo onde fica a texture.
 
         int m_iType;
         bool m_bVisible;
         unsigned int m_iLifes;
         Mouse m_Mouse;
 
-        GLuint m_iImage;
+        GLuint m_iImage; //id da textura do gameobject.
 
     protected:
-        /* Ângulo de rotação varia de acordo com a velocidade. */
-        float rotateToDir(bool right);
-        void accelerate(bool up);
+        float rotateToDir(bool right); /* Ângulo de rotação varia de acordo com a velocidade. */
+        void accelerate(bool up); //acelera/freia o gameobject
 
         void initVertices(float width, float height);
 
-        inline void adjustVertices(Core::Matrix3 &mat)
+        inline void adjustVertices(Core::Matrix3 &mat) //ajusta os verttices de acordo com a matriz de transformacao mat.
         {
             for(unsigned int i = 0; i < m_vVertices.size(); i++)
             {
@@ -153,6 +155,7 @@ namespace Game
         virtual inline void afterRotate(float angle) {/**/} //chamada após rotacionar os elementos básicos do GameObject.
 
     private:
+        //inicializacao basica.
         inline void init()
         {
             Core::Vector3 v_init(0);
@@ -162,10 +165,6 @@ namespace Game
             setPos(v_init);
 
             m_iLifes = 1;
-            m_vColor4[0] = 1.f;
-            m_vColor4[1] = 0.f;
-            m_vColor4[2] = 0.f;
-            m_vColor4[3] = 1.f;
             
             m_iImage = -1;
             m_bVisible = true;

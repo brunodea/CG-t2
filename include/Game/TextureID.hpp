@@ -1,12 +1,16 @@
 #ifndef _BRUNODEA_CG_T2_TEXTURE_ID_HPP_
 #define _BRUNODEA_CG_T2_TEXTURE_ID_HPP_
 
+/*
+ * Classe usada apenas para carregar texturas e guardar suas ids em um vetor estatico.
+ */
+
 #include "glfw.h"
 #include "macros.h"
 
 namespace Game
 {
-    enum TexID
+    enum TexID //ID da textura.
     {
         TEX_PLAYER = 0,
         TEX_NORMAL_SHOT = 1,
@@ -16,7 +20,7 @@ namespace Game
     class TextureID
     {
     public:
-        static GLuint m_sTextureID[SIZE];
+        static GLuint m_sTextureID[SIZE]; //vetor com a id das texturas.
 
         static void initTextures()
         {
