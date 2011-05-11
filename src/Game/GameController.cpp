@@ -3,6 +3,7 @@
 #include "glfw.h"
 
 #include "macros.h"
+#include "Game/NormalEnemy.h"
 
 #include <string>
 #include <sstream>
@@ -20,10 +21,10 @@ GameController::GameController()
 GameController::~GameController()
 {
     glfwSetKeyCallback(NULL);
-    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
-        delete m_vpGameObjects->at(i);
-    m_vpGameObjects->clear();
-    delete m_vpGameObjects;
+    for(unsigned int i = 0; i < m_vNormalEnemies.size(); i++)
+        delete m_vNormalEnemies.at(i);
+    m_vNormalEnemies.clear();
+    delete m_pPlayer;
 }
 
 GameController &GameController::instance()
@@ -38,7 +39,6 @@ GameController &GameController::instance()
 //Game Loop.
 void GameController::run()
 {
-    initPlayer();
     /* Ajustes do FPS. */
     double start_time = glfwGetTime();
     double current_time = 0;
@@ -82,8 +82,9 @@ void GameController::update()
 {
     m_iIsRunning = glfwGetWindowParam(GLFW_OPENED);
 
-    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
-        m_vpGameObjects->at(i)->onUpdate();
+    for(unsigned int i = 0; i < m_vNormalEnemies.size(); i++)
+        m_vNormalEnemies.at(i)->onUpdate();
+    m_pPlayer->onUpdate();
 }
 
 void GameController::render()
@@ -92,27 +93,38 @@ void GameController::render()
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
-        m_vpGameObjects->at(i)->render();
+    for(unsigned int i = 0; i < m_vNormalEnemies.size(); i++)
+        m_vNormalEnemies.at(i)->render();
+    m_pPlayer->render();
 
     glfwSwapBuffers();
 }
 
 void GameController::initGameObjects()
 {
-    std::vector<GameObject *> *m_vpGameObjects = new std::vector<GameObject *>();
+    std::vector<NormalEnemy *> *m_vNormalEnemies = new std::vector<NormalEnemy *>();
     initPlayer();
+    initEnemies();
+}
+
+void GameController::initEnemies()
+{
+    NormalEnemy *normal_enemy = new NormalEnemy();
+    Core::Vector3 pos(1);
+    pos[0] = WINDOW_WIDTH/2.f;
+    pos[1] = 30;
+    normal_enemy->setPos(pos);
+    normal_enemy->setVictim(m_pPlayer);
+    m_vNormalEnemies.push_back(normal_enemy);
 }
 
 void GameController::initPlayer()
 {
-    GameObject *player = new Player();
+    m_pPlayer = new Player();
     Core::Vector3 pos(1);
     pos[0] = WINDOW_WIDTH/2.f;
     pos[1] = WINDOW_HEIGHT - 40;
-    player->setPos(pos);
-
-    m_vpGameObjects->push_back(player);
+    m_pPlayer->setPos(pos);
 }
 
 void GameController::keyEvent(int key, int state)
@@ -120,20 +132,23 @@ void GameController::keyEvent(int key, int state)
     if(key == GLFW_KEY_ESC)
         m_iIsRunning = GL_FALSE;
 
-    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
-        m_vpGameObjects->at(i)->onKeyEvent(key, state);
+    for(unsigned int i = 0; i < m_vNormalEnemies.size(); i++)
+        m_vNormalEnemies.at(i)->onKeyEvent(key, state);
+    m_pPlayer->onKeyEvent(key, state);
 }
 
 void GameController::mousePosEvent(int x, int y)
 {
     if(x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
         return;
-    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
-        m_vpGameObjects->at(i)->onMousePosEvent(x, y);
+    for(unsigned int i = 0; i < m_vNormalEnemies.size(); i++)
+        m_vNormalEnemies.at(i)->onMousePosEvent(x, y);
+    m_pPlayer->onMousePosEvent(x, y);
 }
 
 void GameController::mouseButtonEvent(int button, int action)
 {
-    for(unsigned int i = 0; i < m_vpGameObjects->size(); i++)
-        m_vpGameObjects->at(i)->onMouseButtonEvent(button, action);
+    for(unsigned int i = 0; i < m_vNormalEnemies.size(); i++)
+        m_vNormalEnemies.at(i)->onMouseButtonEvent(button, action);
+    m_pPlayer->onMouseButtonEvent(button, action);
 }

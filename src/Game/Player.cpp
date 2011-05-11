@@ -30,14 +30,13 @@ void Player::init()
     v[0] = 0.f;
     v[1] = -1.f;
     setDirection(v);
-    m_iImage = TEXTURES[TEX_PLAYER];
+    m_iImage = TextureID::m_sTextureID[TEX_PLAYER];
 
     float w = 71/3;
     float h = 46/3;
     initVertices(w, h);
     m_vShotPos3[0] = m_vPosition3[0];
     m_vShotPos3[1] = m_vPosition3[1] - h;
-    m_bAccelerate = false;
 }
 
 void Player::onCollision(GameObject *obj)
@@ -47,7 +46,7 @@ void Player::onCollision(GameObject *obj)
 void Player::update()
 {
     if(glfwGetKey(GLFW_KEY_SPACE))
-        followMouse();
+        rotateInDirectionOf(m_Mouse);
     else
         accelerate(false);
 
@@ -85,18 +84,7 @@ void Player::onKeyEvent(int key, int state)
     }
 }
 
-void Player::onMousePosEvent(int x, int y)
-{
-    m_Mouse.x = x;
-    m_Mouse.y = y;
-}
-
 void Player::onMouseButtonEvent(int button, int action)
 {
 }
 
-//funcao chamada depois de o GameObject (no caso o player) ter sido chamado.
-void Player::afterRotate(float angle)
-{
-    m_vShotPos3 = Core::rotate(angle)*m_vShotPos3;
-}

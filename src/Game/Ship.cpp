@@ -4,7 +4,7 @@
 using namespace Game;
 
 Ship::Ship(Type type) 
-    : GameObject(GameObject::SHIP | type), m_dLastShot(0), m_iShotsPerSecond(2)
+    : GameObject(GameObject::SHIP | type), m_dLastShot(0), m_iShotsPerSecond(2), m_vShotPos3(m_vPosition3)
 {
     m_fAcceleration = 0;
     m_fMaxSpeed = 0;
@@ -12,7 +12,7 @@ Ship::Ship(Type type)
 }
 
 Ship::Ship(const Core::Vector3 &dir, float speed, const Core::Vector3 &pos, Type type)
-    : GameObject(dir, speed, pos, GameObject::SHIP & type), m_dLastShot(0), m_iShotsPerSecond(2)
+    : GameObject(dir, speed, pos, GameObject::SHIP & type), m_dLastShot(0), m_iShotsPerSecond(2), m_vShotPos3(m_vPosition3)
 {
     m_fAcceleration = 0;
     m_fMaxSpeed = 0;
@@ -40,7 +40,7 @@ void Ship::onRender()
 
 void Ship::onUpdate()
 {
-    int c = 3;
+    int c = 0;
     int w;
     int h;
     glfwGetWindowSize(&w, &h);
@@ -84,4 +84,10 @@ bool Ship::shoot(Shot *s)
         return true;
     }
     return false;
+}
+
+//funcao chamada depois de o GameObject (no caso o player) ter sido chamado.
+void Ship::afterRotate(float angle)
+{
+    m_vShotPos3 = Core::rotate(angle)*m_vShotPos3;
 }

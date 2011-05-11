@@ -30,7 +30,7 @@ namespace Game
         {
             if(isVisible())
             {
-                if(!isInsideWindow()) //se o tiro saiu da tela, marcar ele como morto para ser removido depois.
+                if(!isInsideWindow(m_vPosition3)) //se o tiro saiu da tela, marcar ele como morto para ser removido depois.
                     setLifes(0);
                 move();
             }
@@ -44,6 +44,8 @@ namespace Game
             }
         }
 
+        virtual void onRender() {/**/}
+
     private:
         unsigned int m_iDamage; //quanto de dano o tiro causa.
     }; //end of class Shot.
@@ -54,8 +56,7 @@ namespace Game
     {
         NormalShot() : Shot(1, Shot::NORMAL) 
         {
-            m_iImage = TEXTURES[TEX_NORMAL_SHOT];
-
+            m_iImage = TextureID::m_sTextureID[TEX_NORMAL_SHOT]-1;
             initVertices(13/3, 11/3);
         }
 

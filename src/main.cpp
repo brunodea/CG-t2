@@ -79,11 +79,11 @@ int main()
     glClearColor(0.f, 0.f, 0.f, 1.f);
     
     Game::TextureID::initTextures();
-    GAME.initGameObjects();
-
     printMenu();
+    GAME.initGameObjects();
     setCallBacks();
-    GAME.run(); //inicializa o jogo.
+
+    GAME.run(); //roda o jogo.
 
     Game::TextureID::clear();
     glfwTerminate();

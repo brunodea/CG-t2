@@ -14,7 +14,8 @@ namespace Game
     {
         TEX_PLAYER = 0,
         TEX_NORMAL_SHOT = 1,
-        SIZE //tamanho do vetor (numero de texturas).
+        TEX_NORMAL_ENEMY = 2,
+        SIZE = 3 //tamanho do vetor (numero de texturas).
     };
 
     class TextureID
@@ -25,7 +26,8 @@ namespace Game
         static void initTextures()
         {
             m_sTextureID[TEX_PLAYER] = loadTexture("resources/player_ship.tga");
-            m_sTextureID[TEX_NORMAL_SHOT] = loadTexture("resources/normal_shot_ball.tga");
+            m_sTextureID[TEX_NORMAL_SHOT] = loadTexture("resources/normal_shot_ball.tga")+1;
+            m_sTextureID[TEX_NORMAL_ENEMY] = loadTexture("resources/normal_enemy.tga")+1;
         }
 
         static void clear()

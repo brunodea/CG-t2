@@ -7,6 +7,8 @@
  */
 
 #include "Game/GameObject.hpp"
+#include "Game/Player.h"
+#include "Game/NormalEnemy.h"
 
 #include <vector>
 
@@ -20,6 +22,8 @@ namespace Game
         void run();
         void initGameObjects();
 
+        inline Player *getPlayer() { return m_pPlayer; }
+
         /* Callbacks. */
         void mousePosEvent(int x, int y);
         void mouseButtonEvent(int button, int action);
@@ -29,9 +33,9 @@ namespace Game
         static GameController *m_sInstance;
 
         int m_iIsRunning;
-        Mouse m_Mouse;
 
-        std::vector<GameObject *> *m_vpGameObjects;
+        Player *m_pPlayer;
+        std::vector<NormalEnemy *> m_vNormalEnemies;
 
     private:
         GameController();
@@ -39,6 +43,7 @@ namespace Game
         void render();
         void update();
         void initPlayer();
+        void initEnemies();
     }; //end of class GameController.
 
 } //end of namespace Game.

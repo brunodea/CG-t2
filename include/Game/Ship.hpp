@@ -41,11 +41,12 @@ namespace Game
         std::vector<Shot *> *m_vpShots; //vetor de tiros.
         double m_dLastShot;
         unsigned int m_iShotsPerSecond; //numero máximo de tiros por segundo.
+        Core::Vector3 m_vShotPos3; //lugar de onde o tiro vai sair.
 
     private:
-        
         virtual void update() = 0; //chamada no fim da função membro onUpdate que faz o update básico.
         inline void addShot(Shot *shot) { m_vpShots->push_back(shot); }
+        virtual void afterRotate(float angle);
     }; //end of class Ship.
 
 } //end of namespace Game.

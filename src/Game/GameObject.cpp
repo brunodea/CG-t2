@@ -36,7 +36,7 @@ void GameObject::render()
     /*glBegin(GL_LINES);
         glColor4f(1.f, 1.f, 1.f, 1.f);
         glVertex2f(m_vPosition3[0], m_vPosition3[1]);
-        glVertex2f(m_Mouse.x,  m_Mouse.y);
+        glVertex2f(m_Mouse[0],  m_Mouse[1]);
 
         glColor4f(1.f, 0.f, 0.f, 1.f);
         glVertex2f(m_vPosition3[0], m_vPosition3[1]);
@@ -155,30 +155,55 @@ float GameObject::rotateTo(Core::Vector2 &dot)
     return Core::angle(dir, pos);
 }
 
-void GameObject::followMouse()
+void GameObject::rotateInDirectionOf(const Core::Vector2 &vec)
 {
-    if(m_Mouse.isInsideWindow())
-    {
-        Core::Vector2 v;
-        v[0] = m_Mouse.x;
-        v[1] = m_Mouse.y;
+    Core::Vector2 v;
+    v[0] = vec(0, 0);
+    v[1] = vec(1, 0);
         
-        float ang = rotateTo(v);
-        if(ang <= 0.001f)
-            return;
+    float ang = rotateTo(v);
+    if(ang <= 0.001f)
+        return;
 
-        rotate(ang);
-        float n_ang = rotateTo(v);
-        rotate(-ang);
-        float latency = 20.f;
-        if(n_ang > 0.001f) //0.001f é uma taxa de erro.
-            latency *= -1;
+    rotate(ang);
+    float n_ang = rotateTo(v);
+    rotate(-ang);
+    float latency = 20.f;
+    if(n_ang > 0.001f) //0.001f é uma taxa de erro.
+        latency *= -1;
 
-        ang /= latency;
-        rotate(ang);
+    ang /= latency;
+    rotate(ang);
 
-        accelerate(true);
-    }
-    else
-        accelerate(false);
+    accelerate(true);
 }
+
+bool GameObject::isInSight(const Core::Vector2 &vec)
+{
+    Core::Vector2 dir;
+    dir[0] = m_vDirection3[0];
+    dir[1] = m_vDirection3[1];
+
+    Core::Vector2 orig(0);
+    Core::Vector2 v = vec;
+    v -= orig;
+    dir -= orig;
+
+    if(Core::angle(dir, v) <= 0.03f) //0.0003 de margem de erro.
+    {
+        /* Verifica se estao no mesmo quadrante. */
+        bool same_x_signal = false;
+        if(dir[0] > 0 && v[0] > 0) same_x_signal = true;
+        if(dir[0] < 0 && v[0] < 0) same_x_signal = true;
+        if(dir[0] == 0 && v[0] == 0) same_x_signal = true;
+
+        if(same_x_signal)
+        {
+            if(dir[1] > 0 && v[1] > 0) return true;
+            if(dir[1] < 0 && v[1] < 0) return true;
+            if(dir[1] == 0 && v[1] == 0) return true;
+        }
+    }
+    return false;
+}
+

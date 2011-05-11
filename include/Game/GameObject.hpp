@@ -12,24 +12,6 @@
 
 namespace Game
 {
-    //Guarda as informacoes do mouse.
-    struct Mouse
-    {
-        int x;
-        int y;
-        
-        inline bool isInsideWindow()
-        {
-            int w;
-            int h;
-            glfwGetWindowSize(&w, &h);
-            int offset = 5;
-            if(x <= offset || x >= w-offset || y <= offset || y >= h-offset)
-                return false;
-            return true;
-        }
-    }; //end of class mouse.
-
     class GameObject
     {
     public:
@@ -51,16 +33,6 @@ namespace Game
         ~GameObject();
 
         inline bool isAlive() { return m_iLifes > 0; }
-        inline bool isInsideWindow()
-        {
-            int width;
-            int height;
-            glfwGetWindowSize(&width, &height);
-            if(m_vPosition3[0] < 0 || m_vPosition3[0] > width || m_vPosition3[1] < 0 || m_vPosition3[1] > height)
-                return false;
-            return true;
-        }
-
 
         void render();
 
@@ -70,19 +42,20 @@ namespace Game
             m_vPosition3 += pos;
         }
 
-        void followMouse(); //faz o gameobject se mover em direcao ao mouse.
+        void rotateInDirectionOf(const Core::Vector2 &vec); //faz o gameobject se rotacionar na direção de vec com uma latencia.
+        bool isInSight(const Core::Vector2 &vec); //true se vec está na mira.
 
         /***********************
          *  Virtual Functions  *
          ***********************/
-        virtual void onRender() {/**/}
+        virtual void onRender() = 0;
         virtual void onUpdate() = 0;
         virtual void onCollision(GameObject *obj) = 0;
         virtual void onKeyEvent(int key, int state) {/**/}
         virtual void onMousePosEvent(int x, int y) 
         {
-            m_Mouse.x = x;
-            m_Mouse.y = y;
+            m_Mouse[0] = x;
+            m_Mouse[1] = y;
         }
         virtual void onMouseButtonEvent(int button, int action) {/**/}
 
@@ -115,6 +88,7 @@ namespace Game
         inline void setVisible(bool visible) { m_bVisible = visible; }
 
         inline void setTexture(GLuint id) { m_iImage = id; }
+        inline int getType() { return m_iType; }
     protected:
         Core::Vector3 m_vDirection3;
         Core::Vector3 m_vPosition3;
@@ -128,7 +102,7 @@ namespace Game
         int m_iType;
         bool m_bVisible;
         unsigned int m_iLifes;
-        Mouse m_Mouse;
+        Core::Vector2 m_Mouse;
 
         GLuint m_iImage; //id da textura do gameobject.
 
@@ -170,6 +144,25 @@ namespace Game
             m_bVisible = true;
         }
     }; //end of class GameObject.
+    
+
+    inline bool isInsideWindow(Core::Vector2 &v)
+    {
+        int width;
+        int height;
+        glfwGetWindowSize(&width, &height);
+        if(v[0] < 0 || v[0] > width || v[1] < 0 || v[1] > height)
+            return false;
+        return true;
+    }
+    inline bool isInsideWindow(Core::Vector3 &vec)
+    {
+        Core::Vector2 v;
+        v[0] = vec[0];
+        v[1] = vec[1];
+        return isInsideWindow(v);
+    }
+
 } //end of namespace Game.
 
 #endif

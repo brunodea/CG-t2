@@ -75,6 +75,9 @@
     <ClInclude Include="..\include\Game\TextureID.hpp">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Game\NormalEnemy.h">
+      <Filter>Header Files\Game\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Game\GameController.cpp">
