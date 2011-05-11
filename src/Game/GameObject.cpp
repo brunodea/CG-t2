@@ -180,31 +180,33 @@ void GameObject::rotateInDirectionOf(const Core::Vector2 &vec)
     accelerate(true);
 }
 
-bool GameObject::isInSight(const Core::Vector2 &vec)
+bool GameObject::isInSight(const Core::Vector2 &pos)
 {
     Core::Vector2 dir;
     dir[0] = m_vDirection3[0];
     dir[1] = m_vDirection3[1];
 
-    Core::Vector2 orig(0);
-    Core::Vector2 v = vec;
-    v -= orig;
-    dir -= orig;
+    Core::Vector2 this_pos2;
+    this_pos2[0] = m_vPosition3[0];
+    this_pos2[1] = m_vPosition3[1];
 
-    //verifica se são colineares.
-    if(Core::angle(dir, v) <= 0.03f) //0.003 de margem de erro.
+    this_pos2 = pos-this_pos2;
+
+    if(Core::angle(dir, this_pos2) <= 0.03f) //0.003 de margem de erro.
     {
+        dir = Core::normalize(dir);
+        this_pos2 = Core::normalize(this_pos2);
         /* Verifica se estao no mesmo quadrante. */
         bool same_x_signal = false;
-        if(dir[0] > 0 && v[0] > 0) same_x_signal = true;
-        if(dir[0] < 0 && v[0] < 0) same_x_signal = true;
-        if(dir[0] == 0 && v[0] == 0) same_x_signal = true;
+        if(dir[0] > 0 && this_pos2[0] > 0) same_x_signal = true;
+        if(dir[0] < 0 && this_pos2[0] < 0) same_x_signal = true;
+        if(dir[0] == 0 && this_pos2[0] == 0) same_x_signal = true;
 
         if(same_x_signal)
         {
-            if(dir[1] > 0 && v[1] > 0) return true;
-            if(dir[1] < 0 && v[1] < 0) return true;
-            if(dir[1] == 0 && v[1] == 0) return true;
+            if(dir[1] > 0 && this_pos2[1] > 0) return true;
+            if(dir[1] < 0 && this_pos2[1] < 0) return true;
+            if(dir[1] == 0 && this_pos2[1] == 0) return true;
         }
     }
     return false;
