@@ -1,6 +1,7 @@
 #include "Game/GameController.h"
 #include "Game/Player.h"
 #include "glfw.h"
+#include "FPS.hpp"
 
 #include "macros.h"
 #include "Game/NormalEnemy.h"
@@ -40,41 +41,48 @@ GameController &GameController::instance()
 void GameController::run()
 {
     /* Ajustes do FPS. */
-    double start_time = glfwGetTime();
+    double next_game_tick = glfwGetTime();
+    int loops = 0;
     double current_time = 0;
-    double frame_inter = 1.f/60.f;
-    double update_inter = 1.f/90.f;
     double diff_time = 0;
     double last_time = 0;
-    int frames = 0;
 
     double init_fps_time = 0;
     while(m_iIsRunning)
-    {        
-        current_time = glfwGetTime();
-        diff_time = current_time - start_time;
-
-        if(diff_time > update_inter)
+    {
+        loops = 0;
+        while(glfwGetTime() > next_game_tick && loops < MAX_FRAMESKIP)
+        {
             update();
-
-        if(diff_time > frame_inter)
-        {
-            render();
-            start_time = glfwGetTime();
+            next_game_tick += SKIP_TICKS;
+            loops++;
         }
-        glfwSleep(update_inter - (current_time + glfwGetTime()));
+        FPS::instance().setInterpolation(float(glfwGetTime() + SKIP_TICKS - next_game_tick)/float(SKIP_TICKS));
+        render();
+        //current_time = glfwGetTime();
+        //diff_time = current_time - start_time;
 
-        /* Ajusta o FPS no titulo da janela. */
-        if(glfwGetTime() - init_fps_time >= 1)
-        {
-            std::stringstream ss;
-            ss << "CG - t2. FPS: " << frames;
-            glfwSetWindowTitle(ss.str().c_str());
-            
-            init_fps_time = glfwGetTime();   
-            frames = 0;
-        }
-        frames++;
+        //if(diff_time > update_inter)
+        //    update();
+
+        //if(diff_time > frame_inter)
+        //{
+        //    render();
+        //    start_time = glfwGetTime();
+        //}
+        //glfwSleep(update_inter - (current_time + glfwGetTime()));
+
+        ///* Ajusta o FPS no titulo da janela. */
+        //if(glfwGetTime() - init_fps_time >= 1)
+        //{
+        //    std::stringstream ss;
+        //    ss << "CG - t2. FPS: " << frames;
+        //    glfwSetWindowTitle(ss.str().c_str());
+        //    
+        //    init_fps_time = glfwGetTime();   
+        //    frames = 0;
+        //}
+        //frames++;
     }
 }
 

@@ -4,6 +4,7 @@
 #include "Game/Shot.hpp"
 #include "Game/TextureID.hpp"
 #include "macros.h"
+#include "Game/GameController.h"
 
 #include <iostream>
 
@@ -60,7 +61,7 @@ void Player::update()
     else if(glfwGetKey(GLFW_KEY_DOWN)) //para diminuir a velocidade da nave.
         accelerate(false);
         
-    if(m_fSpeed > 0.f)
+    if(m_fSpeed*FPS::instance().getInterpolation() > 0.f)
         move();
 }
 

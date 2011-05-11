@@ -7,6 +7,7 @@
 
 #include "Core/matrix_functions.hpp"
 #include "glfw.h"
+#include "FPS.hpp"
 
 #include <vector>
 
@@ -38,7 +39,7 @@ namespace Game
 
         inline void move()
         {
-            Core::Vector3 pos = toVector(m_vDirection3*m_fSpeed);
+            Core::Vector3 pos = toVector(m_vDirection3*m_fSpeed*FPS::instance().getInterpolation());
             m_vPosition3 += pos;
         }
 

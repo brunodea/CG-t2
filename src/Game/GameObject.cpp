@@ -1,5 +1,6 @@
 #include "Game/GameObject.hpp"
 #include "Core/matrix_functions.hpp"
+#include "Game/GameController.h"
 
 using namespace Game;
 
@@ -74,7 +75,7 @@ float GameObject::rotateToDir(bool right)
     perp = Core::rotate(MY_PI/2.f)*m_vDirection3; //vetor perpendicular ao vetor direção.
 
     Core::Vector3 speed;
-    speed = m_vDirection3*m_fSpeed;
+    speed = m_vDirection3*m_fSpeed*FPS::instance().getInterpolation();
 
     Core::Vector3 sum;
     sum = speed + perp;

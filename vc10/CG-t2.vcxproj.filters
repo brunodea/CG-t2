@@ -78,6 +78,9 @@
     <ClInclude Include="..\include\Game\NormalEnemy.h">
       <Filter>Header Files\Game\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\FPS.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Game\GameController.cpp">

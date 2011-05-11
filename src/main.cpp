@@ -5,8 +5,10 @@
 #include "Game/GameController.h"
 #include "Game/Shot.hpp"
 #include "Game/TextureID.hpp"
+#include "FPS.hpp"
 
 GLuint Game::TextureID::m_sTextureID[SIZE];
+FPS *FPS::m_sInstance = NULL;
 
 //da um print de ajuda.
 void printMenu()
