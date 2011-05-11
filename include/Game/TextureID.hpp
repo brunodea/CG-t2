@@ -26,8 +26,8 @@ namespace Game
         static void initTextures()
         {
             m_sTextureID[TEX_PLAYER] = loadTexture("resources/player_ship.tga");
-            m_sTextureID[TEX_NORMAL_SHOT] = loadTexture("resources/normal_shot_ball.tga")+1;
-            m_sTextureID[TEX_NORMAL_ENEMY] = loadTexture("resources/normal_enemy.tga")+1;
+            m_sTextureID[TEX_NORMAL_SHOT] = loadTexture("resources/normal_shot_ball.tga");
+            m_sTextureID[TEX_NORMAL_ENEMY] = loadTexture("resources/normal_enemy.tga");
         }
 
         static void clear()

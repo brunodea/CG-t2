@@ -56,7 +56,7 @@ namespace Game
     {
         NormalShot() : Shot(1, Shot::NORMAL) 
         {
-            m_iImage = TextureID::m_sTextureID[TEX_NORMAL_SHOT]-1;
+            m_iImage = TextureID::m_sTextureID[TEX_NORMAL_SHOT];
             initVertices(13/3, 11/3);
         }
 

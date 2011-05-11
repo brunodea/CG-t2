@@ -25,7 +25,7 @@ void Player::init()
 {
     setVisible(true);
     m_fAcceleration = .3;
-    m_fMaxSpeed = 5;
+    m_fMaxSpeed = 10;
     Core::Vector3 v(1);
     v[0] = 0.f;
     v[1] = -1.f;

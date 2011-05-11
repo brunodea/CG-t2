@@ -79,7 +79,7 @@ float GameObject::rotateToDir(bool right)
     Core::Vector3 sum;
     sum = speed + perp;
 
-    float angle = toRotate*Core::angle(m_vDirection3, sum)/15.f;
+    float angle = toRotate*Core::angle(m_vDirection3, sum)/5.f;
     rotate(angle);
 
     return angle;
