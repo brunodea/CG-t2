@@ -1,3 +1,12 @@
+/*
+ * Bruno Romero de Azevedo. 2910098
+ * Quesitos implementados:
+ * Classes em C++ para Vetores, Matrizes e transformações geométricas.
+ * Sistema de controle do veículo: Via setas e mouse.
+ * Possível dar tiros.
+ * Naves inimigas que atiram no jogador.
+ */
+
 #include "glfw.h"
 #include <cstdlib>
 

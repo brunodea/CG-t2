@@ -94,7 +94,15 @@ void GameController::initEnemies()
     pos[1] = 30;
     normal_enemy->setPos(pos);
     normal_enemy->setVictim(m_pPlayer);
+
+    NormalEnemy *normal_enemy2 = new NormalEnemy();
+    pos[0] = WINDOW_WIDTH - 30.f;
+    pos[1] = WINDOW_HEIGHT/2.f;
+    normal_enemy2->setPos(pos);
+    normal_enemy2->setVictim(m_pPlayer);
+
     m_vNormalEnemies.push_back(normal_enemy);
+    m_vNormalEnemies.push_back(normal_enemy2);
 }
 
 void GameController::initPlayer()
