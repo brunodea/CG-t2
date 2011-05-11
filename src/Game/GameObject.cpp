@@ -64,6 +64,7 @@ void GameObject::render()
 
     onRender();
     glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
 }
 
 float GameObject::rotateToDir(bool right)
