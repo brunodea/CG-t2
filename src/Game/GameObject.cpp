@@ -191,7 +191,8 @@ bool GameObject::isInSight(const Core::Vector2 &vec)
     v -= orig;
     dir -= orig;
 
-    if(Core::angle(dir, v) <= 0.03f) //0.0003 de margem de erro.
+    //verifica se são colineares.
+    if(Core::angle(dir, v) <= 0.03f) //0.003 de margem de erro.
     {
         /* Verifica se estao no mesmo quadrante. */
         bool same_x_signal = false;

@@ -77,8 +77,8 @@ void Player::onKeyEvent(int key, int state)
             v[2] = 1;
             s->setPos(v);
             s->setDirection(m_vDirection3);
-            s->setSpeed(10);
-            setShotsPerSecond(6);
+            s->setSpeed(15);
+            setShotsPerSecond(3);
             if(!shoot(s))
                 delete s;
         }

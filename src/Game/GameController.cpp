@@ -43,11 +43,6 @@ void GameController::run()
     /* Ajustes do FPS. */
     double next_game_tick = glfwGetTime();
     int loops = 0;
-    double current_time = 0;
-    double diff_time = 0;
-    double last_time = 0;
-
-    double init_fps_time = 0;
     while(m_iIsRunning)
     {
         loops = 0;
@@ -59,30 +54,6 @@ void GameController::run()
         }
         FPS::instance().setInterpolation(float(glfwGetTime() + SKIP_TICKS - next_game_tick)/float(SKIP_TICKS));
         render();
-        //current_time = glfwGetTime();
-        //diff_time = current_time - start_time;
-
-        //if(diff_time > update_inter)
-        //    update();
-
-        //if(diff_time > frame_inter)
-        //{
-        //    render();
-        //    start_time = glfwGetTime();
-        //}
-        //glfwSleep(update_inter - (current_time + glfwGetTime()));
-
-        ///* Ajusta o FPS no titulo da janela. */
-        //if(glfwGetTime() - init_fps_time >= 1)
-        //{
-        //    std::stringstream ss;
-        //    ss << "CG - t2. FPS: " << frames;
-        //    glfwSetWindowTitle(ss.str().c_str());
-        //    
-        //    init_fps_time = glfwGetTime();   
-        //    frames = 0;
-        //}
-        //frames++;
     }
 }
 
